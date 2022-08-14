@@ -7,13 +7,19 @@
     * {
       margin: 0;
       padding: 0;
+      text-align: center;
     }
     body {
       background-color: gray;
     }
     header {
-      background-color: gray;
+      background-color: lightgray;
       height: 3rem;
+      margin-bottom: 1rem;
+    }
+    header div {
+      margin: auto;
+      font-size: 2rem;
     }
     main {
       max-width: 30rem;
@@ -26,24 +32,21 @@
     main article section {
       width: 100%;
     }
+    #controler {
+      display: flex;
+    }
     #controler button {
+      margin: 1rem;
       width: 100%;
+      height: 48px;
     }
   </style>
   <title>PCCS</title>
 </head>
 <body>
   <header class="navbar navbar-expand navbar-dark bg-dark mb-3">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">PCCS</a>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">#</a>
-          </li>
-        </ul>
-      </div>
-      <span class="navber-text"></span>
+    <div class="container-fluid" style="display: flex;">
+      <div class="navbar-brand">PCCS</div>
     </div>
   </header>
   <main class="container">
@@ -60,10 +63,12 @@
       <section class="col"></section>
     </article>
     <article class="row">
+      <section class="col"></section>
       <section id="light" class="col">light</section>
       <section id="soft" class="col">soft</section>
       <section id="dull" class="col">dull</section>
       <section id="dark" class="col">dark</section>
+      <section class="col"></section>
     </article>
     <article class="row">
       <section id="pale" class="col">pale</section>
@@ -71,13 +76,28 @@
       <section id="grayish" class="col">grayish</section>
       <section id="darkgrayish" class="col">darkgrayish</section>
     </article>
-    <article id="controler" class="">
+    <div id="controler" class="">
       <button id="up">→</button>
       <button id="down">←</button>
-    </article>
+    </div>
   </main>
   <script type="text/javascript">
     var hue = new URLSearchParams(location.search).get('hue');
+    if (hue > 360) {
+      location.search = "?hue=" + (hue - 360);
+    }
+    if (hue < 0) {
+      location.search = "?hue=" + (hue - -360);
+    }
+
+    if (hue > 60 && hue < 240) {
+      document.getElementById('down').style.backgroundColor = "yellow";
+      document.getElementById('up').style.backgroundColor = "blue";
+    } else {
+      document.getElementById('up').style.backgroundColor = "yellow";
+      document.getElementById('down').style.backgroundColor = "blue";
+    }
+
     document.getElementById('vivid').style.backgroundColor = "hsl("+hue+", 90%, 50%)";
 
     document.getElementById('bright').style.backgroundColor = "hsl("+hue+", 80%, 75%)";
