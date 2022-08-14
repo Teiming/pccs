@@ -50,6 +50,7 @@ main.square article section {
 }
 footer a {
   text-decoration: none;
+  color: #CCF
 }
 #controler {
   display: flex;

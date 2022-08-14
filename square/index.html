@@ -4,11 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../pccs.css">
-  <style>
-    article section:last-child {
-      display: none !important;
-    }
-  </style>
   <title>PCCS square</title>
 </head>
 <body>
@@ -26,7 +21,6 @@
       <section id="1_7"></section>
       <section id="1_8"></section>
       <section id="1_9"></section>
-      <section id="1_0"></section>
     </article>
     <article>
       <section id="2_1"></section>
@@ -38,7 +32,6 @@
       <section id="2_7"></section>
       <section id="2_8"></section>
       <section id="2_9"></section>
-      <section id="2_0"></section>
     </article>
     <article>
       <section id="3_1"></section>
@@ -50,7 +43,6 @@
       <section id="3_7"></section>
       <section id="3_8"></section>
       <section id="3_9"></section>
-      <section id="3_0"></section>
     </article>
     <article>
       <section id="4_1"></section>
@@ -62,7 +54,6 @@
       <section id="4_7"></section>
       <section id="4_8"></section>
       <section id="4_9"></section>
-      <section id="4_0"></section>
     </article>
     <article>
       <section id="5_1"></section>
@@ -74,7 +65,6 @@
       <section id="5_7"></section>
       <section id="5_8"></section>
       <section id="5_9"></section>
-      <section id="5_0"></section>
     </article>
     <article>
       <section id="6_1"></section>
@@ -86,7 +76,6 @@
       <section id="6_7"></section>
       <section id="6_8"></section>
       <section id="6_9"></section>
-      <section id="6_0"></section>
     </article>
     <article>
       <section id="7_1"></section>
@@ -98,7 +87,6 @@
       <section id="7_7"></section>
       <section id="7_8"></section>
       <section id="7_9"></section>
-      <section id="7_0"></section>
     </article>
     <article>
       <section id="8_1"></section>
@@ -110,7 +98,6 @@
       <section id="8_7"></section>
       <section id="8_8"></section>
       <section id="8_9"></section>
-      <section id="8_0"></section>
     </article>
     <article>
       <section id="9_1"></section>
@@ -122,19 +109,6 @@
       <section id="9_7"></section>
       <section id="9_8"></section>
       <section id="9_9"></section>
-      <section id="9_0"></section>
-    </article>
-    <article>
-      <section id="0_1"></section>
-      <section id="0_2"></section>
-      <section id="0_3"></section>
-      <section id="0_4"></section>
-      <section id="0_5"></section>
-      <section id="0_6"></section>
-      <section id="0_7"></section>
-      <section id="0_8"></section>
-      <section id="0_9"></section>
-      <section id="0_0"></section>
     </article>
     <div id="controler" class="">
       <div id="upup"><h2>&plus;&plus;</h2></div>
@@ -145,20 +119,9 @@
     <div id="popup"></div>
   </main>
   <footer>
-    <a class="" href="" target="_blank">참고:</a>
+    <a href="https://gall.dcinside.com/p_color/78162" target="_blank">Reference</a>
   </footer>
   <script type="text/javascript">
-    const box_0_0 = document.getElementById('0_0');
-    const box_0_1 = document.getElementById('0_1');
-    const box_0_2 = document.getElementById('0_2');
-    const box_0_3 = document.getElementById('0_3');
-    const box_0_4 = document.getElementById('0_4');
-    const box_0_5 = document.getElementById('0_5');
-    const box_0_6 = document.getElementById('0_6');
-    const box_0_7 = document.getElementById('0_7');
-    const box_0_8 = document.getElementById('0_8');
-    const box_0_9 = document.getElementById('0_9');
-    const box_1_0 = document.getElementById('1_0');
     const box_1_1 = document.getElementById('1_1');
     const box_1_2 = document.getElementById('1_2');
     const box_1_3 = document.getElementById('1_3');
@@ -168,7 +131,6 @@
     const box_1_7 = document.getElementById('1_7');
     const box_1_8 = document.getElementById('1_8');
     const box_1_9 = document.getElementById('1_9');
-    const box_2_0 = document.getElementById('2_0');
     const box_2_1 = document.getElementById('2_1');
     const box_2_2 = document.getElementById('2_2');
     const box_2_3 = document.getElementById('2_3');
@@ -178,7 +140,6 @@
     const box_2_7 = document.getElementById('2_7');
     const box_2_8 = document.getElementById('2_8');
     const box_2_9 = document.getElementById('2_9');
-    const box_3_0 = document.getElementById('3_0');
     const box_3_1 = document.getElementById('3_1');
     const box_3_2 = document.getElementById('3_2');
     const box_3_3 = document.getElementById('3_3');
@@ -198,7 +159,6 @@
     const box_4_7 = document.getElementById('4_7');
     const box_4_8 = document.getElementById('4_8');
     const box_4_9 = document.getElementById('4_9');
-    const box_5_0 = document.getElementById('5_0');
     const box_5_1 = document.getElementById('5_1');
     const box_5_2 = document.getElementById('5_2');
     const box_5_3 = document.getElementById('5_3');
@@ -267,106 +227,87 @@
     down.style.backgroundColor = "hsl(" + (hue - 16) + ", 100%, 50%)";
     downdown.style.backgroundColor = "hsl(" + (hue - 32) + ", 100%, 50%)";
 
-    box_1_1.style.backgroundColor = "hsl(" + hue + ", 9%, 09%)";
-    box_1_2.style.backgroundColor = "hsl(" + hue + ", 9%, 18%)";
-    box_1_3.style.backgroundColor = "hsl(" + hue + ", 9%, 27%)";
-    box_1_4.style.backgroundColor = "hsl(" + hue + ", 9%, 36%)";
-    box_1_5.style.backgroundColor = "hsl(" + hue + ", 9%, 45%)";
-    box_1_6.style.backgroundColor = "hsl(" + hue + ", 9%, 54%)";
-    box_1_7.style.backgroundColor = "hsl(" + hue + ", 9%, 63%)";
-    box_1_8.style.backgroundColor = "hsl(" + hue + ", 9%, 72%)";
-    box_1_9.style.backgroundColor = "hsl(" + hue + ", 9%, 81%)";
-    box_1_0.style.backgroundColor = "hsl(" + hue + ", 9%, 90%)";
-    box_2_1.style.backgroundColor = "hsl(" + hue + ", 18%, 09%)";
-    box_2_2.style.backgroundColor = "hsl(" + hue + ", 18%, 18%)";
-    box_2_3.style.backgroundColor = "hsl(" + hue + ", 18%, 27%)";
-    box_2_4.style.backgroundColor = "hsl(" + hue + ", 18%, 36%)";
-    box_2_5.style.backgroundColor = "hsl(" + hue + ", 18%, 45%)";
-    box_2_6.style.backgroundColor = "hsl(" + hue + ", 18%, 54%)";
-    box_2_7.style.backgroundColor = "hsl(" + hue + ", 18%, 63%)";
-    box_2_8.style.backgroundColor = "hsl(" + hue + ", 18%, 72%)";
-    box_2_9.style.backgroundColor = "hsl(" + hue + ", 18%, 81%)";
-    box_2_0.style.backgroundColor = "hsl(" + hue + ", 18%, 90%)";
-    box_3_1.style.backgroundColor = "hsl(" + hue + ", 27%, 09%)";
-    box_3_2.style.backgroundColor = "hsl(" + hue + ", 27%, 18%)";
-    box_3_3.style.backgroundColor = "hsl(" + hue + ", 27%, 27%)";
-    box_3_4.style.backgroundColor = "hsl(" + hue + ", 27%, 36%)";
-    box_3_5.style.backgroundColor = "hsl(" + hue + ", 27%, 45%)";
-    box_3_6.style.backgroundColor = "hsl(" + hue + ", 27%, 54%)";
-    box_3_7.style.backgroundColor = "hsl(" + hue + ", 27%, 63%)";
-    box_3_8.style.backgroundColor = "hsl(" + hue + ", 27%, 72%)";
-    box_3_9.style.backgroundColor = "hsl(" + hue + ", 27%, 81%)";
-    box_3_0.style.backgroundColor = "hsl(" + hue + ", 27%, 90%)";
-    box_4_1.style.backgroundColor = "hsl(" + hue + ", 36%, 09%)";
-    box_4_2.style.backgroundColor = "hsl(" + hue + ", 36%, 18%)";
-    box_4_3.style.backgroundColor = "hsl(" + hue + ", 36%, 27%)";
-    box_4_4.style.backgroundColor = "hsl(" + hue + ", 36%, 36%)";
-    box_4_5.style.backgroundColor = "hsl(" + hue + ", 36%, 45%)";
-    box_4_6.style.backgroundColor = "hsl(" + hue + ", 36%, 54%)";
-    box_4_7.style.backgroundColor = "hsl(" + hue + ", 36%, 63%)";
-    box_4_8.style.backgroundColor = "hsl(" + hue + ", 36%, 72%)";
-    box_4_9.style.backgroundColor = "hsl(" + hue + ", 36%, 81%)";
-    box_4_0.style.backgroundColor = "hsl(" + hue + ", 36%, 90%)";
-    box_5_1.style.backgroundColor = "hsl(" + hue + ", 45%, 09%)";
-    box_5_2.style.backgroundColor = "hsl(" + hue + ", 45%, 18%)";
-    box_5_3.style.backgroundColor = "hsl(" + hue + ", 45%, 27%)";
-    box_5_4.style.backgroundColor = "hsl(" + hue + ", 45%, 36%)";
-    box_5_5.style.backgroundColor = "hsl(" + hue + ", 45%, 45%)";
-    box_5_6.style.backgroundColor = "hsl(" + hue + ", 45%, 54%)";
-    box_5_7.style.backgroundColor = "hsl(" + hue + ", 45%, 63%)";
-    box_5_8.style.backgroundColor = "hsl(" + hue + ", 45%, 72%)";
-    box_5_9.style.backgroundColor = "hsl(" + hue + ", 45%, 81%)";
-    box_5_0.style.backgroundColor = "hsl(" + hue + ", 45%, 90%)";
-    box_6_1.style.backgroundColor = "hsl(" + hue + ", 54%, 09%)";
-    box_6_2.style.backgroundColor = "hsl(" + hue + ", 54%, 18%)";
-    box_6_3.style.backgroundColor = "hsl(" + hue + ", 54%, 27%)";
-    box_6_4.style.backgroundColor = "hsl(" + hue + ", 54%, 36%)";
-    box_6_5.style.backgroundColor = "hsl(" + hue + ", 54%, 45%)";
-    box_6_6.style.backgroundColor = "hsl(" + hue + ", 54%, 54%)";
-    box_6_7.style.backgroundColor = "hsl(" + hue + ", 54%, 63%)";
-    box_6_8.style.backgroundColor = "hsl(" + hue + ", 54%, 72%)";
-    box_6_9.style.backgroundColor = "hsl(" + hue + ", 54%, 81%)";
-    box_6_0.style.backgroundColor = "hsl(" + hue + ", 54%, 90%)";
-    box_7_1.style.backgroundColor = "hsl(" + hue + ", 63%, 09%)";
-    box_7_2.style.backgroundColor = "hsl(" + hue + ", 63%, 18%)";
-    box_7_3.style.backgroundColor = "hsl(" + hue + ", 63%, 27%)";
-    box_7_4.style.backgroundColor = "hsl(" + hue + ", 63%, 36%)";
-    box_7_5.style.backgroundColor = "hsl(" + hue + ", 63%, 45%)";
-    box_7_6.style.backgroundColor = "hsl(" + hue + ", 63%, 54%)";
-    box_7_7.style.backgroundColor = "hsl(" + hue + ", 63%, 63%)";
-    box_7_8.style.backgroundColor = "hsl(" + hue + ", 63%, 72%)";
-    box_7_9.style.backgroundColor = "hsl(" + hue + ", 63%, 81%)";
-    box_7_0.style.backgroundColor = "hsl(" + hue + ", 63%, 90%)";
-    box_8_1.style.backgroundColor = "hsl(" + hue + ", 72%, 09%)";
-    box_8_2.style.backgroundColor = "hsl(" + hue + ", 72%, 18%)";
-    box_8_3.style.backgroundColor = "hsl(" + hue + ", 72%, 27%)";
-    box_8_4.style.backgroundColor = "hsl(" + hue + ", 72%, 36%)";
-    box_8_5.style.backgroundColor = "hsl(" + hue + ", 72%, 45%)";
-    box_8_6.style.backgroundColor = "hsl(" + hue + ", 72%, 54%)";
-    box_8_7.style.backgroundColor = "hsl(" + hue + ", 72%, 63%)";
-    box_8_8.style.backgroundColor = "hsl(" + hue + ", 72%, 72%)";
-    box_8_9.style.backgroundColor = "hsl(" + hue + ", 72%, 81%)";
-    box_8_0.style.backgroundColor = "hsl(" + hue + ", 72%, 90%)";
-    box_9_1.style.backgroundColor = "hsl(" + hue + ", 81%, 09%)";
-    box_9_2.style.backgroundColor = "hsl(" + hue + ", 81%, 18%)";
-    box_9_3.style.backgroundColor = "hsl(" + hue + ", 81%, 27%)";
-    box_9_4.style.backgroundColor = "hsl(" + hue + ", 81%, 36%)";
-    box_9_5.style.backgroundColor = "hsl(" + hue + ", 81%, 45%)";
-    box_9_6.style.backgroundColor = "hsl(" + hue + ", 81%, 54%)";
-    box_9_7.style.backgroundColor = "hsl(" + hue + ", 81%, 63%)";
-    box_9_8.style.backgroundColor = "hsl(" + hue + ", 81%, 72%)";
-    box_9_9.style.backgroundColor = "hsl(" + hue + ", 81%, 81%)";
-    box_9_0.style.backgroundColor = "hsl(" + hue + ", 81%, 90%)";
-    box_0_1.style.backgroundColor = "hsl(" + hue + ", 90%, 09%)";
-    box_0_2.style.backgroundColor = "hsl(" + hue + ", 90%, 18%)";
-    box_0_3.style.backgroundColor = "hsl(" + hue + ", 90%, 27%)";
-    box_0_4.style.backgroundColor = "hsl(" + hue + ", 90%, 36%)";
-    box_0_5.style.backgroundColor = "hsl(" + hue + ", 90%, 45%)";
-    box_0_6.style.backgroundColor = "hsl(" + hue + ", 90%, 54%)";
-    box_0_7.style.backgroundColor = "hsl(" + hue + ", 90%, 63%)";
-    box_0_8.style.backgroundColor = "hsl(" + hue + ", 90%, 72%)";
-    box_0_9.style.backgroundColor = "hsl(" + hue + ", 90%, 81%)";
-    box_0_0.style.backgroundColor = "hsl(" + hue + ", 90%, 90%)";
+    box_1_1.style.backgroundColor = "hsl(" + hue + ", 10%, 10%)";
+    box_1_2.style.backgroundColor = "hsl(" + hue + ", 10%, 20%)";
+    box_1_3.style.backgroundColor = "hsl(" + hue + ", 10%, 30%)";
+    box_1_4.style.backgroundColor = "hsl(" + hue + ", 10%, 40%)";
+    box_1_5.style.backgroundColor = "hsl(" + hue + ", 10%, 50%)";
+    box_1_6.style.backgroundColor = "hsl(" + hue + ", 10%, 60%)";
+    box_1_7.style.backgroundColor = "hsl(" + hue + ", 10%, 70%)";
+    box_1_8.style.backgroundColor = "hsl(" + hue + ", 10%, 80%)";
+    box_1_9.style.backgroundColor = "hsl(" + hue + ", 10%, 90%)";
+    box_2_1.style.backgroundColor = "hsl(" + hue + ", 20%, 10%)";
+    box_2_2.style.backgroundColor = "hsl(" + hue + ", 20%, 20%)";
+    box_2_3.style.backgroundColor = "hsl(" + hue + ", 20%, 30%)";
+    box_2_4.style.backgroundColor = "hsl(" + hue + ", 20%, 40%)";
+    box_2_5.style.backgroundColor = "hsl(" + hue + ", 20%, 50%)";
+    box_2_6.style.backgroundColor = "hsl(" + hue + ", 20%, 60%)";
+    box_2_7.style.backgroundColor = "hsl(" + hue + ", 20%, 70%)";
+    box_2_8.style.backgroundColor = "hsl(" + hue + ", 20%, 80%)";
+    box_2_9.style.backgroundColor = "hsl(" + hue + ", 20%, 90%)";
+    box_3_1.style.backgroundColor = "hsl(" + hue + ", 30%, 10%)";
+    box_3_2.style.backgroundColor = "hsl(" + hue + ", 30%, 20%)";
+    box_3_3.style.backgroundColor = "hsl(" + hue + ", 30%, 30%)";
+    box_3_4.style.backgroundColor = "hsl(" + hue + ", 30%, 40%)";
+    box_3_5.style.backgroundColor = "hsl(" + hue + ", 30%, 50%)";
+    box_3_6.style.backgroundColor = "hsl(" + hue + ", 30%, 60%)";
+    box_3_7.style.backgroundColor = "hsl(" + hue + ", 30%, 70%)";
+    box_3_8.style.backgroundColor = "hsl(" + hue + ", 30%, 80%)";
+    box_3_9.style.backgroundColor = "hsl(" + hue + ", 30%, 90%)";
+    box_4_1.style.backgroundColor = "hsl(" + hue + ", 40%, 10%)";
+    box_4_2.style.backgroundColor = "hsl(" + hue + ", 40%, 20%)";
+    box_4_3.style.backgroundColor = "hsl(" + hue + ", 40%, 30%)";
+    box_4_4.style.backgroundColor = "hsl(" + hue + ", 40%, 40%)";
+    box_4_5.style.backgroundColor = "hsl(" + hue + ", 40%, 50%)";
+    box_4_6.style.backgroundColor = "hsl(" + hue + ", 40%, 60%)";
+    box_4_7.style.backgroundColor = "hsl(" + hue + ", 40%, 70%)";
+    box_4_8.style.backgroundColor = "hsl(" + hue + ", 40%, 80%)";
+    box_4_9.style.backgroundColor = "hsl(" + hue + ", 40%, 90%)";
+    box_5_1.style.backgroundColor = "hsl(" + hue + ", 50%, 10%)";
+    box_5_2.style.backgroundColor = "hsl(" + hue + ", 50%, 20%)";
+    box_5_3.style.backgroundColor = "hsl(" + hue + ", 50%, 30%)";
+    box_5_4.style.backgroundColor = "hsl(" + hue + ", 50%, 40%)";
+    box_5_5.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
+    box_5_6.style.backgroundColor = "hsl(" + hue + ", 50%, 60%)";
+    box_5_7.style.backgroundColor = "hsl(" + hue + ", 50%, 70%)";
+    box_5_8.style.backgroundColor = "hsl(" + hue + ", 50%, 80%)";
+    box_5_9.style.backgroundColor = "hsl(" + hue + ", 50%, 90%)";
+    box_6_1.style.backgroundColor = "hsl(" + hue + ", 60%, 10%)";
+    box_6_2.style.backgroundColor = "hsl(" + hue + ", 60%, 20%)";
+    box_6_3.style.backgroundColor = "hsl(" + hue + ", 60%, 30%)";
+    box_6_4.style.backgroundColor = "hsl(" + hue + ", 60%, 40%)";
+    box_6_5.style.backgroundColor = "hsl(" + hue + ", 60%, 50%)";
+    box_6_6.style.backgroundColor = "hsl(" + hue + ", 60%, 60%)";
+    box_6_7.style.backgroundColor = "hsl(" + hue + ", 60%, 70%)";
+    box_6_8.style.backgroundColor = "hsl(" + hue + ", 60%, 80%)";
+    box_6_9.style.backgroundColor = "hsl(" + hue + ", 60%, 90%)";
+    box_7_1.style.backgroundColor = "hsl(" + hue + ", 70%, 10%)";
+    box_7_2.style.backgroundColor = "hsl(" + hue + ", 70%, 20%)";
+    box_7_3.style.backgroundColor = "hsl(" + hue + ", 70%, 30%)";
+    box_7_4.style.backgroundColor = "hsl(" + hue + ", 70%, 40%)";
+    box_7_5.style.backgroundColor = "hsl(" + hue + ", 70%, 50%)";
+    box_7_6.style.backgroundColor = "hsl(" + hue + ", 70%, 60%)";
+    box_7_7.style.backgroundColor = "hsl(" + hue + ", 70%, 70%)";
+    box_7_8.style.backgroundColor = "hsl(" + hue + ", 70%, 80%)";
+    box_7_9.style.backgroundColor = "hsl(" + hue + ", 70%, 90%)";
+    box_8_1.style.backgroundColor = "hsl(" + hue + ", 80%, 10%)";
+    box_8_2.style.backgroundColor = "hsl(" + hue + ", 80%, 20%)";
+    box_8_3.style.backgroundColor = "hsl(" + hue + ", 80%, 30%)";
+    box_8_4.style.backgroundColor = "hsl(" + hue + ", 80%, 40%)";
+    box_8_5.style.backgroundColor = "hsl(" + hue + ", 80%, 50%)";
+    box_8_6.style.backgroundColor = "hsl(" + hue + ", 80%, 60%)";
+    box_8_7.style.backgroundColor = "hsl(" + hue + ", 80%, 70%)";
+    box_8_8.style.backgroundColor = "hsl(" + hue + ", 80%, 80%)";
+    box_8_9.style.backgroundColor = "hsl(" + hue + ", 80%, 90%)";
+    box_9_1.style.backgroundColor = "hsl(" + hue + ", 90%, 10%)";
+    box_9_2.style.backgroundColor = "hsl(" + hue + ", 90%, 20%)";
+    box_9_3.style.backgroundColor = "hsl(" + hue + ", 90%, 30%)";
+    box_9_4.style.backgroundColor = "hsl(" + hue + ", 90%, 40%)";
+    box_9_5.style.backgroundColor = "hsl(" + hue + ", 90%, 50%)";
+    box_9_6.style.backgroundColor = "hsl(" + hue + ", 90%, 60%)";
+    box_9_7.style.backgroundColor = "hsl(" + hue + ", 90%, 70%)";
+    box_9_8.style.backgroundColor = "hsl(" + hue + ", 90%, 80%)";
+    box_9_9.style.backgroundColor = "hsl(" + hue + ", 90%, 90%)";
 
     upup.onclick = function() {
       location.search = "?hue=" + (hue + 8);
