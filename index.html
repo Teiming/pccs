@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr" ondragstart="return false" oncontextmenu="return false" onselectstart="return false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style media="screen">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: gray;
+    }
+    header {
+      background-color: gray;
+      height: 3rem;
+    }
+    main {
+      max-width: 30rem;
+      margin: auto;
+    }
+    main article {
+      height: 8rem;
+      display: flex;
+    }
+    main article section {
+      width: 100%;
+    }
+    #controler button {
+      width: 100%;
+    }
+  </style>
+  <title>PCCS</title>
+</head>
+<body>
+  <header class="navbar navbar-expand navbar-dark bg-dark mb-3">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">PCCS</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">#</a>
+          </li>
+        </ul>
+      </div>
+      <span class="navber-text"></span>
+    </div>
+  </header>
+  <main class="container">
+    <article class="row">
+      <section class="col"></section>
+      <section id="vivid" class="col">vivid</section>
+      <section class="col"></section>
+    </article>
+    <article class="row">
+    <section class="col"></section>
+      <section id="bright" class="col">bright</section>
+      <section id="strong" class="col">strong</section>
+      <section id="deep" class="col">deep</section>
+      <section class="col"></section>
+    </article>
+    <article class="row">
+      <section id="light" class="col">light</section>
+      <section id="soft" class="col">soft</section>
+      <section id="dull" class="col">dull</section>
+      <section id="dark" class="col">dark</section>
+    </article>
+    <article class="row">
+      <section id="pale" class="col">pale</section>
+      <section id="lightgrayish" class="col">lightgrayish</section>
+      <section id="grayish" class="col">grayish</section>
+      <section id="darkgrayish" class="col">darkgrayish</section>
+    </article>
+    <article class="row">
+      <section class="col">
+        asdf
+      </section>
+    </article>
+    <article id="controler" class="">
+      <button id="up">→</button>
+      <button id="down">←</button>
+    </article>
+  </main>
+  <script type="text/javascript">
+    var hue = new URLSearchParams(location.search).get('hue');
+    document.getElementById('vivid').style.backgroundColor = "hsl("+hue+", 90%, 50%)";
+
+    document.getElementById('bright').style.backgroundColor = "hsl("+hue+", 80%, 75%)";
+    document.getElementById('strong').style.backgroundColor = "hsl("+hue+", 80%, 50%)";
+    document.getElementById('deep').style.backgroundColor = "hsl("+hue+", 80%, 25%)";
+
+    document.getElementById('light').style.backgroundColor = "hsl("+hue+", 50%, 80%)";
+    document.getElementById('soft').style.backgroundColor = "hsl("+hue+", 50%, 60%)";
+    document.getElementById('dull').style.backgroundColor = "hsl("+hue+", 50%, 40%)";
+    document.getElementById('dark').style.backgroundColor = "hsl("+hue+", 50%, 20%)";
+
+    document.getElementById('pale').style.backgroundColor = "hsl("+hue+", 20%, 80%)";
+    document.getElementById('lightgrayish').style.backgroundColor = "hsl("+hue+", 20%, 60%)";
+    document.getElementById('grayish').style.backgroundColor = "hsl("+hue+", 20%, 40%)";
+    document.getElementById('darkgrayish').style.backgroundColor = "hsl("+hue+", 20%, 20%)";
+
+    document.getElementById('up').onclick = function() {
+      location.search = "?hue=" + (hue - -8);
+    }
+    document.getElementById('down').onclick = function() {
+      location.search = "?hue=" + (hue - 8);
+    }
+  </script>
+</body>
+</html>
