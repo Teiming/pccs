@@ -13,11 +13,14 @@
       background-color: gray;
     }
     header {
-      background-color: lightgray;
+      background-color: #666;
       height: 3rem;
       margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    header div {
+    header div.title {
       margin: auto;
       font-size: 2rem;
     }
@@ -31,44 +34,55 @@
     }
     main article section {
       width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    footer a {
+      text-decoration: none;
     }
     #controler {
       display: flex;
     }
-    #controler button {
+    #controler div {
       margin: 1rem;
       width: 100%;
       height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1rem;
+    }
+    #controler div:hover {
+      opacity: 80%;
     }
   </style>
   <title>PCCS</title>
 </head>
 <body>
-  <header class="navbar navbar-expand navbar-dark bg-dark mb-3">
-    <div class="container-fluid" style="display: flex;">
-      <div class="navbar-brand">PCCS</div>
-    </div>
+  <header>
+    <div class="title">PCCS-Palette</div>
   </header>
   <main class="container">
-    <article class="row">
-      <section class="col"></section>
-      <section id="vivid" class="col">vivid</section>
-      <section class="col"></section>
+    <article>
+      <section style="width: 24rem;"></section>
+      <section id="vivid">vivid</section>
+      <section style="width: 24rem;"></section>
     </article>
     <article class="row">
-    <section class="col"></section>
+      <section style="width: 16rem;"></section>
       <section id="bright" class="col">bright</section>
       <section id="strong" class="col">strong</section>
       <section id="deep" class="col">deep</section>
-      <section class="col"></section>
+      <section style="width: 16rem;"></section>
     </article>
     <article class="row">
-      <section class="col"></section>
+      <section style="width: 8rem;"></section>
       <section id="light" class="col">light</section>
       <section id="soft" class="col">soft</section>
       <section id="dull" class="col">dull</section>
       <section id="dark" class="col">dark</section>
-      <section class="col"></section>
+      <section style="width: 8rem;"></section>
     </article>
     <article class="row">
       <section id="pale" class="col">pale</section>
@@ -77,15 +91,34 @@
       <section id="darkgrayish" class="col">darkgrayish</section>
     </article>
     <div id="controler" class="">
-      <button id="up">→</button>
-      <button id="down">←</button>
+      <div id="up"><h2>&plus;</h2></div>
+      <div id="down"><h2>&minus;</h2></div>
     </div>
     <div id="popup" style="width: 100%;height: 100%;background-color: white;position: fixed;top: 0;display: none;">
     </div>
   </main>
+  <footer>
+    <a class="" href="" target="_blank">참고:</a>
+  </footer>
   <script type="text/javascript">
-    var hue = new URLSearchParams(location.search).get('hue');
+    const popup = document.getElementById('popup');
+    const up = document.getElementById('up');
+    const down = document.getElementById('down');
 
+    const vivid = document.getElementById('vivid');
+    const bright = document.getElementById('bright');
+    const strong = document.getElementById('strong');
+    const deep = document.getElementById('deep');
+    const light = document.getElementById('light');
+    const soft = document.getElementById('soft');
+    const dull = document.getElementById('dull');
+    const dark = document.getElementById('dark');
+    const pale = document.getElementById('pale');
+    const lightgrayish = document.getElementById('lightgrayish');
+    const grayish = document.getElementById('grayish');
+    const darkgrayish = document.getElementById('darkgrayish');
+
+    var hue = new URLSearchParams(location.search).get('hue');
     if (hue > 360) {
       location.search = "?hue=" + (hue - 360);
     }
@@ -93,56 +126,100 @@
       location.search = "?hue=" + (hue - -360);
     }
 
-    if (hue > 60 && hue < 240) {
-      document.getElementById('down').style.backgroundColor = "yellow";
-      document.getElementById('up').style.backgroundColor = "blue";
-    } else {
-      document.getElementById('up').style.backgroundColor = "yellow";
-      document.getElementById('down').style.backgroundColor = "blue";
-    }
+    // 색상값 설정
+    const v_vivid = "hsl(" + hue + ", 90%, 50%)";
+    const v_bright = "hsl(" + hue + ", 70%, 75%)";
+    const v_strong = "hsl(" + hue + ", 70%, 50%)";
+    const v_deep = "hsl(" + hue + ", 70%, 25%)";
+    const v_light = "hsl(" + hue + ", 50%, 80%)";
+    const v_soft = "hsl(" + hue + ", 50%, 60%)";
+    const v_dull = "hsl(" + hue + ", 50%, 40%)";
+    const v_dark = "hsl(" + hue + ", 50%, 20%)";
+    const v_pale = "hsl(" + hue + ", 17%, 86%)";
+    const v_lightgrayish = "hsl(" + hue + ", 25%, 73%)";
+    const v_grayish = "hsl(" + hue + ", 14%, 47%)";
+    const v_darkgrayish = "hsl(" + hue + ", 5%, 29%)";
 
-    document.getElementById('vivid').style.backgroundColor = "hsl("+hue+", 90%, 50%)";
+    up.style.backgroundColor = "hsl(" + (hue - -24) + ", 100%, 50%)";
+    down.style.backgroundColor = "hsl(" + (hue - 24) + ", 100%, 50%)";
 
-    document.getElementById('bright').style.backgroundColor = "hsl("+hue+", 80%, 75%)";
-    document.getElementById('strong').style.backgroundColor = "hsl("+hue+", 80%, 50%)";
-    document.getElementById('deep').style.backgroundColor = "hsl("+hue+", 80%, 25%)";
+    vivid.style.backgroundColor = v_vivid;
 
-    document.getElementById('light').style.backgroundColor = "hsl("+hue+", 50%, 80%)";
-    document.getElementById('soft').style.backgroundColor = "hsl("+hue+", 50%, 60%)";
-    document.getElementById('dull').style.backgroundColor = "hsl("+hue+", 50%, 40%)";
-    document.getElementById('dark').style.backgroundColor = "hsl("+hue+", 50%, 20%)";
+    bright.style.backgroundColor = v_bright;
+    strong.style.backgroundColor = v_strong;
+    deep.style.backgroundColor = v_deep;
 
-    document.getElementById('pale').style.backgroundColor = "hsl("+hue+", 20%, 80%)";
-    document.getElementById('lightgrayish').style.backgroundColor = "hsl("+hue+", 20%, 60%)";
-    document.getElementById('grayish').style.backgroundColor = "hsl("+hue+", 20%, 40%)";
-    document.getElementById('darkgrayish').style.backgroundColor = "hsl("+hue+", 20%, 20%)";
+    light.style.backgroundColor = v_light;
+    soft.style.backgroundColor = v_soft;
+    dull.style.backgroundColor = v_dull;
+    dark.style.backgroundColor = v_dark;
 
-    document.getElementById('up').onclick = function() {
+    pale.style.backgroundColor = v_pale;
+    lightgrayish.style.backgroundColor = v_lightgrayish;
+    grayish.style.backgroundColor = v_grayish;
+    darkgrayish.style.backgroundColor = v_darkgrayish;
+
+    up.onclick = function() {
       location.search = "?hue=" + (hue - -8);
     }
-    document.getElementById('down').onclick = function() {
+    down.onclick = function() {
       location.search = "?hue=" + (hue - 8);
     }
 
-    document.getElementById('popup').onclick = function() {
-      document.getElementById('popup').style.display = "none";
+    popup.onclick = function() {
+      popup.style.display = "none";
     }
 
-    document.getElementById('vivid').onclick = function() {
-      document.getElementById('popup').style.backgroundColor = "hsl("+hue+", 90%, 50%)";
-      document.getElementById('popup').style.display = "block";
+    function close_popup() {
+      popup.style.display = "block";
     }
-    document.getElementById('bright').onclick = function() {
-      document.getElementById('popup').style.backgroundColor = "hsl("+hue+", 80%, 75%)";
-      document.getElementById('popup').style.display = "block";
+    vivid.onclick = function() {
+      popup.style.backgroundColor = v_vivid;
+      close_popup();
     }
-    document.getElementById('strong').onclick = function() {
-      document.getElementById('popup').style.backgroundColor = "hsl("+hue+", 80%, 50%)";
-      document.getElementById('popup').style.display = "block";
+    bright.onclick = function() {
+      popup.style.backgroundColor = v_bright;
+      close_popup();
     }
-    document.getElementById('deep').onclick = function() {
-      document.getElementById('popup').style.backgroundColor = "hsl("+hue+", 80%, 25%)";
-      document.getElementById('popup').style.display = "block";
+    strong.onclick = function() {
+      popup.style.backgroundColor = v_strong;
+      close_popup();
+    }
+    deep.onclick = function() {
+      popup.style.backgroundColor = v_deep;
+      close_popup();
+    }
+    light.onclick = function() {
+      popup.style.backgroundColor = v_light;
+      close_popup();
+    }
+    soft.onclick = function() {
+      popup.style.backgroundColor = v_soft;
+      close_popup();
+    }
+    dull.onclick = function() {
+      popup.style.backgroundColor = v_dull;
+      close_popup();
+    }
+    dark.onclick = function() {
+      popup.style.backgroundColor = v_dark;
+      close_popup();
+    }
+    pale.onclick = function() {
+      popup.style.backgroundColor = v_pale;
+      close_popup();
+    }
+    lightgrayish.onclick = function() {
+      popup.style.backgroundColor = v_lightgrayish;
+      close_popup();
+    }
+    grayish.onclick = function() {
+      popup.style.backgroundColor = v_grayish;
+      close_popup();
+    }
+    darkgrayish.onclick = function() {
+      popup.style.backgroundColor = v_darkgrayish;
+      close_popup();
     }
   </script>
 </body>
