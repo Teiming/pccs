@@ -80,9 +80,12 @@
       <button id="up">→</button>
       <button id="down">←</button>
     </div>
+    <div id="popup" style="width: 100%;height: 100%;background-color: white;position: fixed;top: 0;display: none;">
+    </div>
   </main>
   <script type="text/javascript">
     var hue = new URLSearchParams(location.search).get('hue');
+
     if (hue > 360) {
       location.search = "?hue=" + (hue - 360);
     }
@@ -119,6 +122,27 @@
     }
     document.getElementById('down').onclick = function() {
       location.search = "?hue=" + (hue - 8);
+    }
+
+    document.getElementById('popup').onclick = function() {
+      document.getElementById('popup').style.display = "none";
+    }
+
+    document.getElementById('vivid').onclick = function() {
+      document.getElementById('popup').style.backgroundColor = "hsl("+hue+", 90%, 50%)";
+      document.getElementById('popup').style.display = "block";
+    }
+    document.getElementById('bright').onclick = function() {
+      document.getElementById('popup').style.backgroundColor = "hsl("+hue+", 80%, 75%)";
+      document.getElementById('popup').style.display = "block";
+    }
+    document.getElementById('strong').onclick = function() {
+      document.getElementById('popup').style.backgroundColor = "hsl("+hue+", 80%, 50%)";
+      document.getElementById('popup').style.display = "block";
+    }
+    document.getElementById('deep').onclick = function() {
+      document.getElementById('popup').style.backgroundColor = "hsl("+hue+", 80%, 25%)";
+      document.getElementById('popup').style.display = "block";
     }
   </script>
 </body>
