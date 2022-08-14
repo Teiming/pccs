@@ -8,9 +8,11 @@
       margin: 0;
       padding: 0;
       text-align: center;
+      font-family: -apple-system, sans-serif;
     }
     body {
       background-color: gray;
+      font-size: 2rem;
     }
     header {
       background-color: #666;
@@ -29,7 +31,7 @@
       margin: auto;
     }
     main article {
-      height: 6rem;
+      height: 7rem;
       display: flex;
     }
     main article section {
@@ -56,6 +58,15 @@
     #controler div:hover {
       opacity: 80%;
     }
+    #popup {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
   </style>
   <title>PCCS</title>
 </head>
@@ -66,36 +77,35 @@
   <main class="container">
     <article>
       <section style="width: 24rem;"></section>
-      <section id="vivid">vivid</section>
+      <section id="vivid">𝑣</section>
       <section style="width: 24rem;"></section>
     </article>
     <article class="row">
       <section style="width: 16rem;"></section>
-      <section id="bright" class="col">bright</section>
-      <section id="strong" class="col">strong</section>
-      <section id="deep" class="col">deep</section>
+      <section id="bright" class="col">𝑏</section>
+      <section id="strong" class="col">𝑠</section>
+      <section id="deep" class="col">𝑑𝑝</section>
       <section style="width: 16rem;"></section>
     </article>
     <article class="row">
       <section style="width: 8rem;"></section>
-      <section id="light" class="col">light</section>
-      <section id="soft" class="col">soft</section>
-      <section id="dull" class="col">dull</section>
-      <section id="dark" class="col">dark</section>
+      <section id="light">𝑙</section>
+      <section id="soft">𝑠𝑓</section>
+      <section id="dull">𝑑</section>
+      <section id="dark">𝑑𝑘</section>
       <section style="width: 8rem;"></section>
     </article>
     <article class="row">
-      <section id="pale" class="col">pale</section>
-      <section id="lightgrayish" class="col">lightgrayish</section>
-      <section id="grayish" class="col">grayish</section>
-      <section id="darkgrayish" class="col">darkgrayish</section>
+      <section id="pale">𝑝</section>
+      <section id="lightgrayish">𝑙𝑡𝑔</section>
+      <section id="grayish">𝑔</section>
+      <section id="darkgrayish">𝑑𝑘𝑔</section>
     </article>
     <div id="controler" class="">
       <div id="up"><h2>&plus;</h2></div>
       <div id="down"><h2>&minus;</h2></div>
     </div>
-    <div id="popup" style="width: 100%;height: 100%;background-color: white;position: fixed;top: 0;display: none;">
-    </div>
+    <div id="popup"></div>
   </main>
   <footer>
     <a class="" href="" target="_blank">참고:</a>
@@ -119,6 +129,9 @@
     const darkgrayish = document.getElementById('darkgrayish');
 
     var hue = new URLSearchParams(location.search).get('hue');
+    if (!hue) {
+      location.search = "?hue=0";
+    }
     if (hue > 360) {
       location.search = "?hue=" + (hue - 360);
     }
@@ -170,56 +183,69 @@
       popup.style.display = "none";
     }
 
-    function close_popup() {
-      popup.style.display = "block";
+    function open_popup() {
+      popup.style.display = "flex";
     }
+
     vivid.onclick = function() {
       popup.style.backgroundColor = v_vivid;
-      close_popup();
+      popup.innerHTML = "<h2>vivid</h2>";
+      open_popup();
     }
     bright.onclick = function() {
       popup.style.backgroundColor = v_bright;
-      close_popup();
+      popup.innerHTML = "<h2>bright</h2>";
+      open_popup();
     }
     strong.onclick = function() {
       popup.style.backgroundColor = v_strong;
-      close_popup();
+      popup.innerHTML = "<h2>strong</h2>";
+      open_popup();
     }
     deep.onclick = function() {
       popup.style.backgroundColor = v_deep;
-      close_popup();
+      popup.innerHTML = "<h2>deep</h2>";
+      open_popup();
     }
     light.onclick = function() {
       popup.style.backgroundColor = v_light;
-      close_popup();
+      popup.innerHTML = "<h2>light</h2>";
+      open_popup();
     }
     soft.onclick = function() {
       popup.style.backgroundColor = v_soft;
-      close_popup();
+      popup.innerHTML = "<h2>soft</h2>";
+      open_popup();
     }
     dull.onclick = function() {
       popup.style.backgroundColor = v_dull;
-      close_popup();
+      popup.innerHTML = "<h2>dull</h2>";
+      open_popup();
     }
     dark.onclick = function() {
       popup.style.backgroundColor = v_dark;
-      close_popup();
+      popup.innerHTML = "<h2>dark</h2>";
+      open_popup();
     }
     pale.onclick = function() {
       popup.style.backgroundColor = v_pale;
-      close_popup();
+      popup.innerHTML = "<h2>pale</h2>";
+      open_popup();
     }
     lightgrayish.onclick = function() {
       popup.style.backgroundColor = v_lightgrayish;
-      close_popup();
+      popup.innerHTML = "<h2>lightgrayish</h2>";
+      open_popup();
     }
     grayish.onclick = function() {
       popup.style.backgroundColor = v_grayish;
-      close_popup();
+      popup.innerHTML = "<h2>grayish</h2>";
+      open_popup();
     }
     darkgrayish.onclick = function() {
       popup.style.backgroundColor = v_darkgrayish;
-      close_popup();
+      popup.innerHTML = "<h2>darkgrayish</h2>";
+      open_popup();
     }
   </script>
 </body>
