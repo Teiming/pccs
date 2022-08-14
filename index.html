@@ -3,82 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style media="screen">
-    * {
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      font-family: -apple-system, sans-serif;
-    }
-    body {
-      background-color: gray;
-      font-size: 2rem;
-    }
-    header {
-      background-color: #666;
-      height: 3rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    header div.title {
-      margin: auto;
-      font-size: 2rem;
-    }
-    main {
-      max-width: 30rem;
-      margin: auto;
-    }
-    main article {
-      height: 7rem;
-      display: flex;
-    }
-    main article section {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    footer a {
-      text-decoration: none;
-    }
-    #controler {
-      display: flex;
-    }
-    #controler div {
-      margin: 1rem;
-      width: 100%;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 1rem;
-    }
-    #controler div:hover {
-      opacity: 80%;
-    }
-    #popup {
-      width: 100%;
-      height: 100%;
-      position: fixed;
-      top: 0;
-      display: none;
-      justify-content: center;
-      align-items: center;
-    }
-  </style>
+  <link rel="stylesheet" href="pccs.css">
   <title>PCCS</title>
 </head>
 <body>
   <header>
     <div class="title">PCCS-Palette</div>
   </header>
-  <main class="container">
-    <article>
-      <section style="width: 24rem;"></section>
+  <main class="triangle">
+    <article style="width: 100%;">
+      <section style="width: 37.5%;"></section>
       <section id="vivid">𝑣</section>
-      <section style="width: 24rem;"></section>
+      <section style="width: 37.5%;"></section>
     </article>
     <article class="row">
       <section style="width: 16rem;"></section>
@@ -102,18 +38,23 @@
       <section id="darkgrayish">𝑑𝑘𝑔</section>
     </article>
     <div id="controler" class="">
+      <div id="upup"><h2>&plus;&plus;</h2></div>
       <div id="up"><h2>&plus;</h2></div>
       <div id="down"><h2>&minus;</h2></div>
+      <div id="downdown"><h2>&minus;&minus;</h2></div>
     </div>
-    <div id="popup"></div>
   </main>
+  <div id="popup"></div>
   <footer>
     <a class="" href="" target="_blank">참고:</a>
   </footer>
   <script type="text/javascript">
     const popup = document.getElementById('popup');
+
+    const upup = document.getElementById('upup');
     const up = document.getElementById('up');
     const down = document.getElementById('down');
+    const downdown = document.getElementById('downdown');
 
     const vivid = document.getElementById('vivid');
     const bright = document.getElementById('bright');
@@ -128,15 +69,15 @@
     const grayish = document.getElementById('grayish');
     const darkgrayish = document.getElementById('darkgrayish');
 
-    var hue = new URLSearchParams(location.search).get('hue');
-    if (!hue) {
+    var hue = parseInt(new URLSearchParams(location.search).get('hue'));
+    if (isNaN(hue)) {
       location.search = "?hue=0";
     }
     if (hue > 360) {
       location.search = "?hue=" + (hue - 360);
     }
     if (hue < 0) {
-      location.search = "?hue=" + (hue - -360);
+      location.search = "?hue=" + (hue + 360);
     }
 
     // 색상값 설정
@@ -153,8 +94,10 @@
     const v_grayish = "hsl(" + hue + ", 14%, 47%)";
     const v_darkgrayish = "hsl(" + hue + ", 5%, 29%)";
 
-    up.style.backgroundColor = "hsl(" + (hue - -24) + ", 100%, 50%)";
-    down.style.backgroundColor = "hsl(" + (hue - 24) + ", 100%, 50%)";
+    upup.style.backgroundColor = "hsl(" + (hue + 32) + ", 80%, 50%)";
+    up.style.backgroundColor = "hsl(" + (hue + 16) + ", 80%, 50%)";
+    down.style.backgroundColor = "hsl(" + (hue - 16) + ", 80%, 50%)";
+    downdown.style.backgroundColor = "hsl(" + (hue - 32) + ", 80%, 50%)";
 
     vivid.style.backgroundColor = v_vivid;
 
@@ -172,10 +115,16 @@
     grayish.style.backgroundColor = v_grayish;
     darkgrayish.style.backgroundColor = v_darkgrayish;
 
+    upup.onclick = function() {
+      location.search = "?hue=" + (hue + 8);
+    }
     up.onclick = function() {
-      location.search = "?hue=" + (hue - -8);
+      location.search = "?hue=" + (hue + 4);
     }
     down.onclick = function() {
+      location.search = "?hue=" + (hue - 4);
+    }
+    downdown.onclick = function() {
       location.search = "?hue=" + (hue - 8);
     }
 
