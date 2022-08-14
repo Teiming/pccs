@@ -5,7 +5,7 @@
   font-family: -apple-system, sans-serif;
 }
 body {
-  background-color: gray;
+  background-color: white;
 }
 header {
   background-color: #666;
@@ -22,35 +22,43 @@ header div.title {
 main {
   max-width: 30rem;
   margin: auto;
+  overflow: hidden;
+}
+main.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 main.triangle article {
   height: 6rem;
   display: flex;
 }
 main.square article {
-  height: 3rem;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+}
+main article section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
 }
 main.triangle article section {
-  width: 100%;
-  display: flex;
-  font-size: 1.5rem;
-  align-items: center;
-  justify-content: center;
   margin: 6px;
-  border-radius: 100%;
+  width: 100%;
+  font-size: 1.5rem;
 }
 main.square article section {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 2px;
-  border-radius: 100%;
+  width: 42px;
+  height: 42px;
+  font-family: serif;
+  font-style: italic;
 }
 footer a {
   text-decoration: none;
-  color: #CCF
+  color: white;
 }
 #controler {
   display: flex;
