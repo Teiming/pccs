@@ -6,8 +6,8 @@
   <link rel="stylesheet" href="../pccs.css">
   <style media="screen">
   main section {
-    width: 27px !important;
-    height: 27px !important;
+    width: 48px !important;
+    height: 48px !important;
     font-size: 0.7rem;
     overflow: hidden;
   }
@@ -16,19 +16,19 @@
     height: 28px !important;
   } */
   </style>
-  <title>16bit Square | PCCS Palette</title>
+  <title>8bit Square | PCCS Palette</title>
 </head>
 <body>
   <header id="title" style="max-width: 30rem;margin: auto;margin-bottom: 1rem;">
-    <div class="title">PCCS-Palette [16bit]</div>
+    <div class="title">PCCS-Palette [8bit]</div>
   </header>
   <main class="square">
     <script type="text/javascript">
-    for (var i = 3; i <= 16; i++) {
+    for (var i = 0; i <= 8; i++) {
       document.write("<article>");
-      for (var j = 2; j < 16; j++) {
-        var i_ = i.toString(16);
-        var j_ = j.toString(16);
+      for (var j = 0; j <= 8; j++) {
+        var i_ = i;
+        var j_ = j;
         document.write('<section id="'+i_+'_'+j_+'" onclick="open_popup(\''+i_+'\',\''+j_+'\')"></section>');
       }
       document.write("</article>");
@@ -43,7 +43,7 @@
   </div>
   <div id="popup"></div>
   <footer>
-    <a href="https://gall.dcinside.com/p_color/78192" target="_blank">→ Reference</a>
+    <a href="https://gall.dcinside.com/p_color/78162" target="_blank">→ Reference</a>
   </footer>
   <script type="text/javascript">
     const box_title = document.getElementById('title');
@@ -63,30 +63,37 @@
 
     // 색상값 설정
 
-    box_title.style.backgroundColor = "hsl(" + hue + ", 70%, 30%)";
-    if (hue > 60 && hue < 240) {
-      box_controler.style.background = "linear-gradient(to right, #44b, #bb4)";
-    } else {
-      box_controler.style.background = "linear-gradient(to left, #44b, #bb4)";
-    }
+    box_title.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
+    box_title.style.color = "hsl(" + hue + ", 30%, 70%)";
+    box_controler.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
 
     upup.style.backgroundColor = "hsl(" + (hue + 20) + ", 80%, 80%)";
     up.style.backgroundColor = "hsl(" + (hue + 10) + ", 80%, 80%)";
     down.style.backgroundColor = "hsl(" + (hue - 10) + ", 80%, 80%)";
     downdown.style.backgroundColor = "hsl(" + (hue - 20) + ", 80%, 80%)";
 
-    for (var i = 3; i <= 16; i++) {
-      for (var j = 2; j < 16; j++) {
-        var v_h = i * 6.25;
-        var v_l = j * 6.25;
-        var h = i.toString(16);
-        var l = j.toString(16);
-        var target = document.getElementById(h+'_'+l);
-        box_popup.innerHTML += "<div id='full_"+h+"_"+l+"' onclick='close_popup(\""+h+"\",\""+l+"\")'></div>";
-        target.style.backgroundColor = "hsl("+hue+","+v_h+"%,"+v_l+"%)";
-        var target_ = document.getElementById('full_'+h+'_'+l);
-        target_.style.backgroundColor = "hsl("+hue+","+v_h+"%,"+v_l+"%)";
-        if (j < 8) {
+    for (var i = 0; i <= 8; i++) {
+      for (var j = 0; j <= 8; j++) {
+        var v_s = i * 12.5;
+        if (v_s < 1) {
+          v_s = 6.25;
+        } else if(v_s > 99) {
+          v_s = 93.75;
+        }
+        var v_l = j * 12.5;
+        if (v_l < 1) {
+          v_l = 6.25;
+        } else if(v_l > 99) {
+          v_l = 93.75;
+        }
+        var s = i;
+        var l = j;
+        var target = document.getElementById(s+'_'+l);
+        box_popup.innerHTML += "<div id='full_"+s+"_"+l+"' onclick='close_popup(\""+s+"\",\""+l+"\")'></div>";
+        target.style.backgroundColor = "hsl("+hue+","+v_s+"%,"+v_l+"%)";
+        var target_ = document.getElementById('full_'+s+'_'+l);
+        target_.style.backgroundColor = "hsl("+hue+","+v_s+"%,"+v_l+"%)";
+        if (j < 4) {
           target.style.color = "white";
           target_.style.color = "white";
         }

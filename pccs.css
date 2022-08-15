@@ -18,6 +18,7 @@ header {
 header div.title {
   margin: auto;
   font-size: 2rem;
+  color: white;
 }
 main {
   max-width: 30rem;
