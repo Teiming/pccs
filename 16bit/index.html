@@ -116,14 +116,14 @@
     value_s.innerText = x;
     value_l.innerText = y;
     share_title.style.backgroundColor = "hsl(" + hue + ", " + x + "%, " + y + "%)";
-    if (hue > 205 && hue < 290) {
-      if (y < 50 + 0.125*x) {
+    if (hue > 200 && hue < 280) {
+      if (y < 50 + 0.16*x) {
         share_title.style.color = "white";
       } else {
         share_title.style.color = "black";
       }
     } else {
-      if (y < 50 - 0.125*x) {
+      if (y < 50 - 0.16*x) {
         share_title.style.color = "white";
       } else {
         share_title.style.color = "black";
@@ -236,12 +236,12 @@
       var target_ = document.getElementById('full_' + i_16 + '_' + j_16);
       target_.style.backgroundColor = color_gen;
       if (hue > 205 && hue < 290) {
-        if (j < 8 + 0.125*i) {
+        if (j < 8 + 0.16*i) {
           target.style.color = "white";
           target_.style.color = "white";
         }
       } else {
-        if (j < 8 - 0.125*i) {
+        if (j < 8 - 0.16*i) {
           target.style.color = "white";
           target_.style.color = "white";
         }
