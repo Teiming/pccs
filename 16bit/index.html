@@ -8,7 +8,7 @@
   main section {
     width: 27px !important;
     height: 27px !important;
-    font-size: 0.7rem;
+    font-size: 0.66rem;
     overflow: hidden;
   }
   /* main section.main_color {
@@ -19,14 +19,19 @@
   <title>16bit Square | PCCS Palette</title>
 </head>
 <body>
+  <script type="text/javascript">
+  if (window.innerWidth > 28*36) {
+    location.href = "../32bit";
+  }
+  </script>
   <header id="title_bar">
     <div id="title_image">N</div>
     <div id="title">PCCS Palette [16bit]</div>
     <div id="indicator">
-      <span id="indicator_">dfsf</span>
+      <span id="indicator_"></span>
     </div>
   </header>
-  <main class="square">
+  <main id="palette" class="square">
     <script type="text/javascript">
     for (var i = 3; i <= 16; i++) {
       document.write("<article>");
@@ -39,29 +44,31 @@
     }
     </script>
   </main>
-  <div id="controler" class="" style="max-width: 30rem;margin: auto;margin-top: 1rem;margin-bottom: 1rem;">
-    <div id="upup" class="multi">
-      <svg xmlns="http://www.w3.org/2000/svg" width="4rem" height="4rem" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-      </svg>
+  <main>
+    <div id="controler" class="" style="max-width: 30rem;margin: auto;margin-top: 1rem;margin-bottom: 1rem;">
+      <div id="upup" class="multi">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+      </div>
+      <div id="up" style="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+      </div>
+      <div id="down" style="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+        </svg>
+      </div>
+      <div id="downdown" class="multi">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+        </svg>
+      </div>
     </div>
-    <div id="up" style="">
-      <svg xmlns="http://www.w3.org/2000/svg" width="3rem" height="3rem" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-      </svg>
-    </div>
-    <div id="down" style="">
-      <svg xmlns="http://www.w3.org/2000/svg" width="3rem" height="3rem" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-      </svg>
-    </div>
-    <div id="downdown" class="multi">
-      <svg xmlns="http://www.w3.org/2000/svg" width="4rem" height="4rem" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-      </svg>
-    </div>
-  </div>
-  <div id="popup"></div>
+    <div id="popup"></div>
+  </main>
   <footer>
     <a href="https://gall.dcinside.com/p_color/78192" target="_blank">→ Reference 1</a>
     <a href="https://gall.dcinside.com/p_color/86472" target="_blank">→ Reference 2</a>
@@ -72,7 +79,7 @@
   const box_controler = document.getElementById('controler');
   const box_indicator = document.getElementById('indicator_');
   const box_popup = document.getElementById('popup');
-
+  
   var hue = parseInt(new URLSearchParams(location.search).get('hue'));
   if (isNaN(hue)) {
     location.search = "?hue=0";
@@ -163,10 +170,10 @@
   document.getElementById('title').style.color = "hsl(" + hue + ", 50%, 20%)";
   box_controler.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
 
-  upup.style.backgroundColor = "hsl(" + (hue + 30) + ", 80%, 80%)";
-  up.style.backgroundColor = "hsl(" + (hue + 15) + ", 80%, 80%)";
-  down.style.backgroundColor = "hsl(" + (hue - 15) + ", 80%, 80%)";
-  downdown.style.backgroundColor = "hsl(" + (hue - 30) + ", 80%, 80%)";
+  upup.style.backgroundColor = "hsl(" + (hue + 30) + ", 66%, 66%)";
+  up.style.backgroundColor = "hsl(" + (hue + 15) + ", 66%, 66%)";
+  down.style.backgroundColor = "hsl(" + (hue - 15) + ", 66%, 66%)";
+  downdown.style.backgroundColor = "hsl(" + (hue - 30) + ", 66%, 66%)";
 
   for (var i = 3; i <= 16; i++) {
     for (var j = 2; j < 16; j++) {
@@ -200,7 +207,11 @@
   }
 
   function open_popup(x,y) {
-    document.getElementById('full_'+x+'_'+y).style.display = "flex";
+    var get_popup = document.getElementById('full_'+x+'_'+y);
+    get_popup.style.display = "flex";
+    if (!isNaN(get_popup.innerText)) {
+      get_popup.innerText = "hsl("+hue+", "+(Number.parseInt(x, 16)*6.25)+"%, "+(Number.parseInt(y, 16)*6.25)+"%)";
+    }
   }
   function close_popup(x,y) {
     document.getElementById('full_'+x+'_'+y).style.display = "none";

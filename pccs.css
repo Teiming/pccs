@@ -68,6 +68,7 @@ footer {
   align-items: center;
   max-width: 30rem;
   margin: auto;
+  padding: 1rem;
 }
 footer a {
   text-decoration: none;
@@ -107,9 +108,6 @@ footer a {
   margin: 1rem;
   padding: 0.25rem;
   border-radius: 0.5rem;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 /* #popup {
   width: 100%;
@@ -126,6 +124,7 @@ footer a {
   height: 100%;
   position: fixed;
   top: 0;
+  left: 0;
   display: none;
   justify-content: center;
   align-items: center;

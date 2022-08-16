@@ -4,12 +4,44 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="pccs.css">
+  <style media="screen">
+  main.pccs-grid {
+    margin: auto;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template: repeat(9, 42px) / repeat(9, 42px);
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .pccs-grid div {
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  </style>
   <title>PCCS</title>
 </head>
 <body>
-  <header>
-    <div class="title">PCCS-Palette</div>
+  <header id="title_bar">
+    <div id="title_image">N</div>
+    <div id="title">PCCS Palette</div>
+    <div id="indicator">
+      <span id="indicator_"></span>
+    </div>
   </header>
+  <main class="pccs-grid">
+    <script type="text/javascript">
+    for (var j = 0; j <= 8; j++) {
+      for (var i = 0; i <= 8; i++) {
+        document.write("<div id='palette_"+i+"_"+(8-j)+"'>"+i+"_"+(8-j)+"</div>");
+      }
+    }
+    </script>
+  </main>
   <main class="triangle">
     <article style="width: 100%;">
       <section style="width: 37.5%;"></section>
@@ -37,165 +69,204 @@
       <section id="grayish">𝑔</section>
       <section id="darkgrayish">𝑑𝑘𝑔</section>
     </article>
-    <div id="controler" class="">
-      <div id="upup"><h2>&plus;&plus;</h2></div>
-      <div id="up"><h2>&plus;</h2></div>
-      <div id="down"><h2>&minus;</h2></div>
-      <div id="downdown"><h2>&minus;&minus;</h2></div>
-    </div>
   </main>
-  <div id="popup"></div>
+  <main>
+    <div id="controler" class="" style="max-width: 30rem;margin: auto;margin-top: 1rem;margin-bottom: 1rem;">
+      <div id="upup" class="multi">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+      </div>
+      <div id="up" style="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+      </div>
+      <div id="down" style="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+        </svg>
+      </div>
+      <div id="downdown" class="multi">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+        </svg>
+      </div>
+    </div>
+    <div id="popup"></div>
+  </main>
   <footer>
     <a href="https://gall.dcinside.com/p_color/78162" target="_blank">→ Reference</a>
   </footer>
   <script type="text/javascript">
-    const popup = document.getElementById('popup');
+  const box_title_bar = document.getElementById('title_bar');
+  const box_title_image = document.getElementById('title_image');
+  const box_controler = document.getElementById('controler');
+  const box_indicator_ = document.getElementById('indicator_');
+  const popup = document.getElementById('popup');
 
-    const upup = document.getElementById('upup');
-    const up = document.getElementById('up');
-    const down = document.getElementById('down');
-    const downdown = document.getElementById('downdown');
+  const upup = document.getElementById('upup');
+  const up = document.getElementById('up');
+  const down = document.getElementById('down');
+  const downdown = document.getElementById('downdown');
 
-    const vivid = document.getElementById('vivid');
-    const bright = document.getElementById('bright');
-    const strong = document.getElementById('strong');
-    const deep = document.getElementById('deep');
-    const light = document.getElementById('light');
-    const soft = document.getElementById('soft');
-    const dull = document.getElementById('dull');
-    const dark = document.getElementById('dark');
-    const pale = document.getElementById('pale');
-    const lightgrayish = document.getElementById('lightgrayish');
-    const grayish = document.getElementById('grayish');
-    const darkgrayish = document.getElementById('darkgrayish');
+  const palette_7_4 = document.getElementById('palette_7_4');
+  const palette_8_4 = document.getElementById('palette_8_4');
+  palette_7_4.innerText = "V"
+  palette_8_4.innerText = "V"
 
-    var hue = parseInt(new URLSearchParams(location.search).get('hue'));
-    if (isNaN(hue)) {
-      location.search = "?hue=0";
-    }
-    if (hue > 360) {
-      location.search = "?hue=" + (hue - 360);
-    }
-    if (hue < 0) {
-      location.search = "?hue=" + (hue + 360);
-    }
+  const vivid = document.getElementById('vivid');
+  const bright = document.getElementById('bright');
+  const strong = document.getElementById('strong');
+  const deep = document.getElementById('deep');
+  const light = document.getElementById('light');
+  const soft = document.getElementById('soft');
+  const dull = document.getElementById('dull');
+  const dark = document.getElementById('dark');
+  const pale = document.getElementById('pale');
+  const lightgrayish = document.getElementById('lightgrayish');
+  const grayish = document.getElementById('grayish');
+  const darkgrayish = document.getElementById('darkgrayish');
 
-    // 색상값 설정
-    const v_vivid = "hsl(" + hue + ", 90%, 50%)";
-    const v_bright = "hsl(" + hue + ", 70%, 75%)";
-    const v_strong = "hsl(" + hue + ", 70%, 50%)";
-    const v_deep = "hsl(" + hue + ", 70%, 25%)";
-    const v_light = "hsl(" + hue + ", 50%, 80%)";
-    const v_soft = "hsl(" + hue + ", 50%, 60%)";
-    const v_dull = "hsl(" + hue + ", 50%, 40%)";
-    const v_dark = "hsl(" + hue + ", 50%, 20%)";
-    const v_pale = "hsl(" + hue + ", 17%, 86%)";
-    const v_lightgrayish = "hsl(" + hue + ", 25%, 73%)";
-    const v_grayish = "hsl(" + hue + ", 14%, 47%)";
-    const v_darkgrayish = "hsl(" + hue + ", 5%, 29%)";
+  var hue = parseInt(new URLSearchParams(location.search).get('hue'));
+  if (isNaN(hue)) {
+    location.search = "?hue=0";
+  }
+  if (hue > 360) {
+    location.search = "?hue=" + (hue - 360);
+  }
+  if (hue < 0) {
+    location.search = "?hue=" + (hue + 360);
+  }
 
-    upup.style.backgroundColor = "hsl(" + (hue + 32) + ", 80%, 50%)";
-    up.style.backgroundColor = "hsl(" + (hue + 16) + ", 80%, 50%)";
-    down.style.backgroundColor = "hsl(" + (hue - 16) + ", 80%, 50%)";
-    downdown.style.backgroundColor = "hsl(" + (hue - 32) + ", 80%, 50%)";
+  // 색상값 설정
+  box_title_bar.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
+  box_title_image.style.backgroundColor = "hsl(" + hue + ", 50%, 20%)";
+  box_title_image.style.color = "hsl(" + hue + ", 50%, 50%)";
+  document.getElementById('title').style.color = "hsl(" + hue + ", 50%, 20%)";
+  box_controler.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
 
-    vivid.style.backgroundColor = v_vivid;
+  for (var i = 0; i <= 8; i++) {
+    for (var j = 0; j <= 8; j++) {
+      document.getElementById('palette_'+i+'_'+(8-j)).style.backgroundColor = "hsl("+hue+", "+(i*12.5)+"%, "+(100-j*12.5)+"%)";
+    }
+  }
 
-    bright.style.backgroundColor = v_bright;
-    strong.style.backgroundColor = v_strong;
-    deep.style.backgroundColor = v_deep;
+  const v_vivid = "hsl(" + hue + ", 90%, 50%)";
+  const v_bright = "hsl(" + hue + ", 70%, 75%)";
+  const v_strong = "hsl(" + hue + ", 70%, 50%)";
+  const v_deep = "hsl(" + hue + ", 70%, 25%)";
+  const v_light = "hsl(" + hue + ", 50%, 80%)";
+  const v_soft = "hsl(" + hue + ", 50%, 60%)";
+  const v_dull = "hsl(" + hue + ", 50%, 40%)";
+  const v_dark = "hsl(" + hue + ", 50%, 20%)";
+  const v_pale = "hsl(" + hue + ", 17%, 86%)";
+  const v_lightgrayish = "hsl(" + hue + ", 25%, 73%)";
+  const v_grayish = "hsl(" + hue + ", 14%, 47%)";
+  const v_darkgrayish = "hsl(" + hue + ", 5%, 29%)";
 
-    light.style.backgroundColor = v_light;
-    soft.style.backgroundColor = v_soft;
-    dull.style.backgroundColor = v_dull;
-    dark.style.backgroundColor = v_dark;
+  upup.style.backgroundColor = "hsl(" + (hue + 32) + ", 80%, 50%)";
+  up.style.backgroundColor = "hsl(" + (hue + 16) + ", 80%, 50%)";
+  down.style.backgroundColor = "hsl(" + (hue - 16) + ", 80%, 50%)";
+  downdown.style.backgroundColor = "hsl(" + (hue - 32) + ", 80%, 50%)";
 
-    pale.style.backgroundColor = v_pale;
-    lightgrayish.style.backgroundColor = v_lightgrayish;
-    grayish.style.backgroundColor = v_grayish;
-    darkgrayish.style.backgroundColor = v_darkgrayish;
+  vivid.style.backgroundColor = v_vivid;
 
-    upup.onclick = function() {
-      location.search = "?hue=" + (hue + 10);
-    }
-    up.onclick = function() {
-      location.search = "?hue=" + (hue + 5);
-    }
-    down.onclick = function() {
-      location.search = "?hue=" + (hue - 5);
-    }
-    downdown.onclick = function() {
-      location.search = "?hue=" + (hue - 10);
-    }
+  bright.style.backgroundColor = v_bright;
+  strong.style.backgroundColor = v_strong;
+  deep.style.backgroundColor = v_deep;
 
-    popup.onclick = function() {
-      popup.style.display = "none";
-    }
+  light.style.backgroundColor = v_light;
+  soft.style.backgroundColor = v_soft;
+  dull.style.backgroundColor = v_dull;
+  dark.style.backgroundColor = v_dark;
 
-    function open_popup() {
-      popup.style.display = "flex";
-    }
+  pale.style.backgroundColor = v_pale;
+  lightgrayish.style.backgroundColor = v_lightgrayish;
+  grayish.style.backgroundColor = v_grayish;
+  darkgrayish.style.backgroundColor = v_darkgrayish;
 
-    vivid.onclick = function() {
-      popup.style.backgroundColor = v_vivid;
-      popup.innerHTML = "<h2>vivid</h2>";
-      open_popup();
-    }
-    bright.onclick = function() {
-      popup.style.backgroundColor = v_bright;
-      popup.innerHTML = "<h2>bright</h2>";
-      open_popup();
-    }
-    strong.onclick = function() {
-      popup.style.backgroundColor = v_strong;
-      popup.innerHTML = "<h2>strong</h2>";
-      open_popup();
-    }
-    deep.onclick = function() {
-      popup.style.backgroundColor = v_deep;
-      popup.innerHTML = "<h2>deep</h2>";
-      open_popup();
-    }
-    light.onclick = function() {
-      popup.style.backgroundColor = v_light;
-      popup.innerHTML = "<h2>light</h2>";
-      open_popup();
-    }
-    soft.onclick = function() {
-      popup.style.backgroundColor = v_soft;
-      popup.innerHTML = "<h2>soft</h2>";
-      open_popup();
-    }
-    dull.onclick = function() {
-      popup.style.backgroundColor = v_dull;
-      popup.innerHTML = "<h2>dull</h2>";
-      open_popup();
-    }
-    dark.onclick = function() {
-      popup.style.backgroundColor = v_dark;
-      popup.innerHTML = "<h2>dark</h2>";
-      open_popup();
-    }
-    pale.onclick = function() {
-      popup.style.backgroundColor = v_pale;
-      popup.innerHTML = "<h2>pale</h2>";
-      open_popup();
-    }
-    lightgrayish.onclick = function() {
-      popup.style.backgroundColor = v_lightgrayish;
-      popup.innerHTML = "<h2>lightgrayish</h2>";
-      open_popup();
-    }
-    grayish.onclick = function() {
-      popup.style.backgroundColor = v_grayish;
-      popup.innerHTML = "<h2>grayish</h2>";
-      open_popup();
-    }
-    darkgrayish.onclick = function() {
-      popup.style.backgroundColor = v_darkgrayish;
-      popup.innerHTML = "<h2>darkgrayish</h2>";
-      open_popup();
-    }
+  upup.onclick = function() {
+    location.search = "?hue=" + (hue + 10);
+  }
+  up.onclick = function() {
+    location.search = "?hue=" + (hue + 5);
+  }
+  down.onclick = function() {
+    location.search = "?hue=" + (hue - 5);
+  }
+  downdown.onclick = function() {
+    location.search = "?hue=" + (hue - 10);
+  }
+
+  popup.onclick = function() {
+    popup.style.display = "none";
+  }
+
+  function open_popup() {
+    popup.style.display = "flex";
+  }
+
+  vivid.onclick = function() {
+    popup.style.backgroundColor = v_vivid;
+    popup.innerHTML = "<h2>vivid</h2>";
+    open_popup();
+  }
+  bright.onclick = function() {
+    popup.style.backgroundColor = v_bright;
+    popup.innerHTML = "<h2>bright</h2>";
+    open_popup();
+  }
+  strong.onclick = function() {
+    popup.style.backgroundColor = v_strong;
+    popup.innerHTML = "<h2>strong</h2>";
+    open_popup();
+  }
+  deep.onclick = function() {
+    popup.style.backgroundColor = v_deep;
+    popup.innerHTML = "<h2>deep</h2>";
+    open_popup();
+  }
+  light.onclick = function() {
+    popup.style.backgroundColor = v_light;
+    popup.innerHTML = "<h2>light</h2>";
+    open_popup();
+  }
+  soft.onclick = function() {
+    popup.style.backgroundColor = v_soft;
+    popup.innerHTML = "<h2>soft</h2>";
+    open_popup();
+  }
+  dull.onclick = function() {
+    popup.style.backgroundColor = v_dull;
+    popup.innerHTML = "<h2>dull</h2>";
+    open_popup();
+  }
+  dark.onclick = function() {
+    popup.style.backgroundColor = v_dark;
+    popup.innerHTML = "<h2>dark</h2>";
+    open_popup();
+  }
+  pale.onclick = function() {
+    popup.style.backgroundColor = v_pale;
+    popup.innerHTML = "<h2>pale</h2>";
+    open_popup();
+  }
+  lightgrayish.onclick = function() {
+    popup.style.backgroundColor = v_lightgrayish;
+    popup.innerHTML = "<h2>lightgrayish</h2>";
+    open_popup();
+  }
+  grayish.onclick = function() {
+    popup.style.backgroundColor = v_grayish;
+    popup.innerHTML = "<h2>grayish</h2>";
+    open_popup();
+  }
+  darkgrayish.onclick = function() {
+    popup.style.backgroundColor = v_darkgrayish;
+    popup.innerHTML = "<h2>darkgrayish</h2>";
+    open_popup();
+  }
   </script>
 </body>
 </html>

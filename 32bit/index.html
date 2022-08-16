@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr" ondragstart="return false" oncontextmenu="return false" onselectstart="return false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../pccs.css">
+  <style media="screen">
+  main section {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 0.66rem;
+    overflow: hidden;
+  }
+  /* main section.main_color {
+  width: 28px !important;
+  height: 28px !important;
+  } */
+  </style>
+  <title>32bit Square | PCCS Palette</title>
+</head>
+<body>
+  <script type="text/javascript">
+  if (window.innerWidth < 28*32) {
+    location.href = "../16bit";
+  }
+  </script>
+  <header id="title_bar" style="max-width: 60rem;">
+    <div id="title_image">N</div>
+    <div id="title">PCCS Palette [32bit]</div>
+    <div id="indicator">
+      <span id="indicator_"></span>
+    </div>
+  </header>
+  <main id="palette" class="square" style="max-width: 60rem;flex-direction: row-reverse">
+    <script type="text/javascript">
+    for (var i = 0; i < 32; i++) {
+      document.write("<article style='flex-direction: column'>");
+      for (var j = 0; j < 32; j++) {
+        document.write('<section id="'+(32-i)+'_'+(32-j)+'" onclick="open_popup(\''+(32-i)+'\',\''+(32-j)+'\')"></section>');
+      }
+      document.write("</article>");
+    }
+    </script>
+  </main>
+  <main style="max-width: 60rem;">
+    <div id="controler" class="" style="margin: auto;margin-top: 1rem;margin-bottom: 1rem;">
+      <div id="upup" style="height: 128px;width: 128px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="128px" height="128px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+      </div>
+      <div id="up" style="height: 64px;width: 64px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+      </div>
+      <div id="down" style="height: 64px;width: 64px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+        </svg>
+      </div>
+      <div id="downdown" style="height: 128px;width: 128px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="128px" height="128px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+        </svg>
+      </div>
+    </div>
+    <div id="popup"></div>
+  </main>
+  <footer style="max-width: 60rem;">
+    <a href="https://gall.dcinside.com/p_color/78192" target="_blank">→ Reference 1</a>
+    <a href="https://gall.dcinside.com/p_color/86472" target="_blank">→ Reference 2</a>
+  </footer>
+  <script type="text/javascript">
+  const box_title = document.getElementById('title_bar');
+  const box_title_image = document.getElementById('title_image');
+  const box_controler = document.getElementById('controler');
+  const box_indicator = document.getElementById('indicator_');
+  const box_popup = document.getElementById('popup');
+
+  if (window.innerWidth > window.innerHeight) {
+    box_controler.style.padding = "0";
+    upup.style.position = "fixed";
+    up.style.position = "fixed";
+    down.style.position = "fixed";
+    downdown.style.position = "fixed";
+    upup.style.bottom = "20rem";
+    up.style.bottom = "15rem";
+    down.style.bottom = "10rem";
+    downdown.style.bottom = "1rem";
+    upup.style.right = "1rem";
+    up.style.right = "3rem";
+    down.style.right = "3rem";
+    downdown.style.right = "1rem";
+  }
+
+  var hue = parseInt(new URLSearchParams(location.search).get('hue'));
+  if (isNaN(hue)) {
+    location.search = "?hue=0";
+  }
+  if (hue > 360) {
+    location.search = "?hue=" + (hue - 360);
+  }
+  if (hue < 0) {
+    location.search = "?hue=" + (hue + 360);
+  }
+
+  //indicator
+  function indic(x, y) {
+    if (x > 0) {
+      box_indicator.innerText = y;
+      box_indicator.style.backgroundColor = "deepskyblue";
+    } else {
+      box_indicator.innerText = y;
+      box_indicator.style.backgroundColor = "yellow";
+    }
+  }
+  switch (true) {
+    case (hue < 18):
+    indic(0, "#웜레드");
+    box_title_image.innerText = "W";
+    break;
+    case (hue < 47):
+    indic(0, "#주황");
+    box_title_image.innerText = "N";
+    break;
+    case (hue < 62):
+    indic(0, "#웜노랑");
+    box_title_image.innerText = "W";
+    break;
+    case (hue < 81):
+    indic(1, "#쿨노랑");
+    box_title_image.innerText = "C";
+    break;
+    case (hue < 164):
+    indic(0, "#웜초록");
+    box_title_image.innerText = "W";
+    break;
+    case (hue < 187):
+    indic(1, "#쿨민트");
+    box_title_image.innerText = "C";
+    break;
+    case (hue < 237):
+    indic(0, "#웜파랑");
+    box_title_image.innerText = "W";
+    break;
+    case (hue < 242):
+    indic(0, "#미지근파랑");
+    box_title_image.innerText = "N";
+    break;
+    case (hue < 273):
+    indic(1, "#쿨파랑");
+    box_title_image.innerText = "C";
+    break;
+    case (hue < 290):
+    indic(0, "#웜보라");
+    box_title_image.innerText = "W";
+    break;
+    case (hue < 322):
+    indic(1, "#쿨보라");
+    box_title_image.innerText = "C";
+    break;
+    case (hue < 332):
+    indic(1, "#쿨핑크");
+    box_title_image.innerText = "C";
+    break;
+    case (hue < 341):
+    indic(0, "#웜핑크");
+    box_title_image.innerText = "W";
+    break;
+    case (hue < 351):
+    indic(0, "#미지근마젠타");
+    box_title_image.innerText = "N";
+    break;
+    default:
+    indic(1,"#쿨레드");
+    box_title_image.innerText = "C";
+  }
+
+  // 색상값 설정
+  box_title.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
+  box_title_image.style.backgroundColor = "hsl(" + hue + ", 50%, 20%)";
+  box_title_image.style.color = "hsl(" + hue + ", 50%, 50%)";
+  document.getElementById('title').style.color = "hsl(" + hue + ", 50%, 20%)";
+  box_controler.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
+
+  upup.style.backgroundColor = "hsl(" + (hue + 30) + ", 80%, 80%)";
+  up.style.backgroundColor = "hsl(" + (hue + 15) + ", 80%, 80%)";
+  down.style.backgroundColor = "hsl(" + (hue - 15) + ", 80%, 80%)";
+  downdown.style.backgroundColor = "hsl(" + (hue - 30) + ", 80%, 80%)";
+
+  for (var i = 0; i < 32; i++) {
+    for (var j = 0; j < 32; j++) {
+      var s = (32-i) * 3.125;
+      var l = (32-j) * 3.125;
+      var get_palette = document.getElementById((32-i)+'_'+(32-j));
+      box_popup.innerHTML += "<div id='full_"+(32-i)+"_"+(32-j)+"' onclick='close_popup(\""+(32-i)+"\",\""+(32-j)+"\")'></div>";
+      get_palette.style.backgroundColor = "hsl("+hue+","+s+"%,"+l+"%)";
+      var get_popup = document.getElementById('full_'+(32-i)+'_'+(32-j));
+      get_popup.style.backgroundColor = "hsl("+hue+","+s+"%,"+l+"%)";
+      if (j > 16) {
+        get_palette.style.color = "white";
+        get_popup.style.color = "white";
+      }
+    }
+  }
+
+  upup.onclick = function() {
+    location.search = "?hue=" + (hue + 10);
+  }
+  up.onclick = function() {
+    location.search = "?hue=" + (hue + 5);
+  }
+  down.onclick = function() {
+    location.search = "?hue=" + (hue - 5);
+  }
+  downdown.onclick = function() {
+    location.search = "?hue=" + (hue - 10);
+  }
+
+  function open_popup(x,y) {
+    var get_popup = document.getElementById('full_'+x+'_'+y);
+    get_popup.style.display = "flex";
+    if (!isNaN(get_popup.innerText)) {
+      get_popup.innerText = "hsl("+hue+", "+(x*3.125)+"%, "+(y*3.125)+"%)";
+    }
+  }
+  function close_popup(x,y) {
+    document.getElementById('full_'+x+'_'+y).style.display = "none";
+  }
+
+  function tag_(s,l,c) {
+    document.getElementById(s+'_'+l).innerText = c;
+    document.getElementById('full_'+s+'_'+l).innerText = c;
+  }
+
+  tag_('7','7','dkg');
+  tag_('8','7','dkg');
+  tag_('9','7','dkg');
+  tag_('10','7','dkg');
+  tag_('11','7','dkg');
+  tag_('12','7','dkg');
+  tag_('13','7','dkg');
+  tag_('14','7','dkg');
+  tag_('15','7','dkg');
+  tag_('16','7','dkg');
+  tag_('21','7','dk:dkg');
+  tag_('22','7','dk:dkg');
+  tag_('23','7','dk:dkg');
+  tag_('24','7','dk:dkg');
+  tag_('27','7','dk');
+  tag_('28','7','dk');
+  tag_('29','7','dk');
+  tag_('30','7','dk');
+  tag_('31','7','dk');
+  tag_('32','7','dk');
+
+  tag_('7','8','dkg');
+  tag_('8','8','dkg');
+  tag_('9','8','dkg');
+  tag_('10','8','dkg');
+  tag_('11','8','dkg');
+  tag_('12','8','dkg');
+  tag_('13','8','dkg');
+  tag_('14','8','dkg');
+  tag_('15','8','dkg');
+  tag_('16','8','dkg');
+  tag_('21','8','dk:dkg');
+  tag_('22','8','dk:dkg');
+  tag_('23','8','dk:dkg');
+  tag_('24','8','dk:dkg');
+  tag_('27','8','dk');
+  tag_('28','8','dk');
+  tag_('29','8','dk');
+  tag_('30','8','dk');
+  tag_('31','8','dk');
+  tag_('32','8','dk');
+
+  tag_('7','9','g:dkg');
+  tag_('8','9','g:dkg');
+  tag_('9','9','g:dkg');
+  tag_('10','9','g:dkg');
+  tag_('11','9','g:dkg');
+  tag_('12','9','g:dkg');
+  tag_('19','9','d');
+  tag_('20','9','d');
+  tag_('21','9','d');
+  tag_('22','9','d');
+  tag_('23','9','d:dk');
+  tag_('24','9','d:dk');
+  tag_('25','9','d:dk');
+  tag_('26','9','d:dk');
+  tag_('27','9','dp:dk');
+  tag_('28','9','dp:dk');
+  tag_('29','9','dp:dk');
+  tag_('30','9','dp:dk');
+  tag_('31','9','dp:dk');
+  tag_('32','9','dp:dk');
+
+  tag_('7','10','g:dkg');
+  tag_('8','10','g:dkg');
+  tag_('9','10','g:dkg');
+  tag_('10','10','g:dkg');
+  tag_('11','10','g:dkg');
+  tag_('12','10','g:dkg');
+  tag_('19','10','d');
+  tag_('20','10','d');
+  tag_('21','10','d');
+  tag_('22','10','d');
+  tag_('23','10','d:dk');
+  tag_('24','10','d:dk');
+  tag_('25','10','d:dk');
+  tag_('26','10','d:dk');
+  tag_('27','10','dp:dk');
+  tag_('28','10','dp:dk');
+  tag_('29','10','dp:dk');
+  tag_('30','10','dp:dk');
+  tag_('31','10','dp:dk');
+  tag_('32','10','dp:dk');
+
+  tag_('7','11','g');
+  tag_('8','11','g');
+  tag_('9','11','g');
+  tag_('10','11','g');
+  tag_('11','11','g');
+  tag_('12','11','g');
+  tag_('13','11','g');
+  tag_('14','11','g');
+  tag_('15','11','d:g');
+  tag_('16','11','d:g');
+  tag_('17','11','d');
+  tag_('18','11','d');
+  tag_('19','11','d');
+  tag_('20','11','d');
+  tag_('21','11','d');
+  tag_('22','11','d');
+  tag_('23','11','d:dp');
+  tag_('24','11','d:dp');
+  tag_('25','11','dp');
+  tag_('26','11','dp');
+  tag_('27','11','dp');
+  tag_('28','11','dp');
+  tag_('29','11','dp');
+  tag_('30','11','dp');
+
+  tag_('7','12','g');
+  tag_('8','12','g');
+  tag_('9','12','g');
+  tag_('10','12','g');
+  tag_('11','12','g');
+  tag_('12','12','g');
+  tag_('13','12','g');
+  tag_('14','12','g');
+  tag_('15','12','d:g');
+  tag_('16','12','d:g');
+  tag_('17','12','d');
+  tag_('18','12','d');
+  tag_('19','12','d');
+  tag_('20','12','d');
+  tag_('21','12','d');
+  tag_('22','12','d');
+  tag_('23','12','d:dp');
+  tag_('24','12','d:dp');
+  tag_('25','12','dp');
+  tag_('26','12','dp');
+  tag_('27','12','dp');
+  tag_('28','12','dp');
+  tag_('29','12','dp');
+  tag_('30','12','dp');
+
+  tag_('7','13','g');
+  tag_('8','13','g');
+  tag_('9','13','g');
+  tag_('10','13','g');
+  tag_('11','13','g');
+  tag_('12','13','g');
+  tag_('15','13','d:g');
+  tag_('16','13','d:g');
+  tag_('17','13','d');
+  tag_('18','13','d');
+  tag_('19','13','d');
+  tag_('20','13','d');
+  tag_('25','13','s:dp');
+  tag_('26','13','s:dp');
+  tag_('27','13','s:dp');
+  tag_('28','13','s:dp');
+  tag_('29','13','v:dp');
+  tag_('30','13','v:dp');
+
+  tag_('7','14','g');
+  tag_('8','14','g');
+  tag_('9','14','g');
+  tag_('10','14','g');
+  tag_('11','14','g');
+  tag_('12','14','g');
+  tag_('15','14','d:g');
+  tag_('16','14','d:g');
+  tag_('17','14','d');
+  tag_('18','14','d');
+  tag_('19','14','d');
+  tag_('20','14','d');
+  tag_('25','14','s:dp');
+  tag_('26','14','s:dp');
+  tag_('27','14','s:dp');
+  tag_('28','14','s:dp');
+  tag_('29','14','v:dp');
+  tag_('30','14','v:dp');
+
+  tag_('7','15','ltg:g');
+  tag_('8','15','ltg:g');
+  tag_('9','15','ltg:g');
+  tag_('10','15','ltg:g');
+  tag_('15','15','sf:d');
+  tag_('16','15','sf:d');
+  tag_('17','15','sf:d');
+  tag_('18','15','sf:d');
+  tag_('19','15','sf:d');
+  tag_('20','15','sf:d');
+  tag_('21','15','sf:s:d');
+  tag_('22','15','sf:s:d');
+  tag_('23','15','s');
+  tag_('24','15','s');
+  tag_('25','15','s');
+  tag_('26','15','s');
+  tag_('27','15','s');
+  tag_('28','15','s');
+  tag_('29','15','v');
+  tag_('30','15','v');
+  tag_('31','15','v');
+  tag_('32','15','v');
+
+  tag_('7','16','ltg:g');
+  tag_('8','16','ltg:g');
+  tag_('9','16','ltg:g');
+  tag_('10','16','ltg:g');
+  tag_('15','16','sf:d');
+  tag_('16','16','sf:d');
+  tag_('17','16','sf:d');
+  tag_('18','16','sf:d');
+  tag_('19','16','sf:d');
+  tag_('20','16','sf:d');
+  tag_('21','16','sf:s:d');
+  tag_('22','16','sf:s:d');
+  tag_('23','16','s');
+  tag_('24','16','s');
+  tag_('25','16','s');
+  tag_('26','16','s');
+  tag_('27','16','s');
+  tag_('28','16','s');
+  tag_('29','16','v');
+  tag_('30','16','v');
+  tag_('31','16','v');
+  tag_('32','16','v');
+
+  tag_('7','17','ltg:g');
+  tag_('8','17','ltg:g');
+  tag_('9','17','ltg:g');
+  tag_('10','17','ltg:g');
+  tag_('17','17','sf');
+  tag_('18','17','sf');
+  tag_('19','17','sf');
+  tag_('20','17','sf');
+  tag_('21','17','sf:s');
+  tag_('22','17','sf:s');
+  tag_('23','17','');
+  tag_('24','17','');
+  tag_('25','17','b:s');
+  tag_('26','17','b:s');
+  tag_('27','17','b:s');
+  tag_('28','17','b:s');
+  tag_('31','17','b:v');
+  tag_('32','17','b:v');
+
+  tag_('7','18','ltg:g');
+  tag_('8','18','ltg:g');
+  tag_('9','18','ltg:g');
+  tag_('10','18','ltg:g');
+  tag_('17','18','sf');
+  tag_('18','18','sf');
+  tag_('19','18','sf');
+  tag_('20','18','sf');
+  tag_('21','18','sf:s');
+  tag_('22','18','sf:s');
+  tag_('23','18','');
+  tag_('24','18','');
+  tag_('25','18','b:s');
+  tag_('26','18','b:s');
+  tag_('27','18','b:s');
+  tag_('28','18','b:s');
+  tag_('31','18','b:v');
+  tag_('32','18','b:v');
+
+  tag_('15','19','ltg:sf');
+  tag_('16','19','ltg:sf');
+  tag_('17','19','sf');
+  tag_('18','19','sf');
+  tag_('19','19','sf');
+  tag_('20','19','sf');
+  tag_('21','19','sf');
+  tag_('22','19','sf');
+  tag_('23','19','sf:b');
+  tag_('24','19','sf:b');
+  tag_('25','19','b');
+  tag_('26','19','b');
+  tag_('27','19','b');
+  tag_('28','19','b');
+  tag_('29','19','b');
+  tag_('30','19','b');
+
+  tag_('15','20','ltg:sf');
+  tag_('16','20','ltg:sf');
+  tag_('17','20','sf');
+  tag_('18','20','sf');
+  tag_('19','20','sf');
+  tag_('20','20','sf');
+  tag_('21','20','sf');
+  tag_('22','20','sf');
+  tag_('23','20','sf:b');
+  tag_('24','20','sf:b');
+  tag_('25','20','b');
+  tag_('26','20','b');
+  tag_('27','20','b');
+  tag_('28','20','b');
+  tag_('29','20','b');
+  tag_('30','20','b');
+
+  tag_('9','21','ltg');
+  tag_('10','21','ltg');
+  tag_('11','21','ltg');
+  tag_('12','21','ltg');
+  tag_('13','21','ltg');
+  tag_('14','21','ltg');
+  tag_('17','21','ltg:sf');
+  tag_('18','21','ltg:sf');
+  tag_('19','21','sf');
+  tag_('20','21','sf');
+  tag_('21','21','sf');
+  tag_('22','21','sf');
+  tag_('23','21','l:sf');
+  tag_('24','21','l:sf');
+  tag_('27','21','l:b');
+  tag_('28','21','l:b');
+  tag_('29','21','l:b');
+  tag_('30','21','l:b');
+  tag_('31','21','l:b');
+  tag_('32','21','l:b');
+
+  tag_('9','22','ltg');
+  tag_('10','22','ltg');
+  tag_('11','22','ltg');
+  tag_('12','22','ltg');
+  tag_('13','22','ltg');
+  tag_('14','22','ltg');
+  tag_('17','22','ltg:sf');
+  tag_('18','22','ltg:sf');
+  tag_('19','22','sf');
+  tag_('20','22','sf');
+  tag_('21','22','sf');
+  tag_('22','22','sf');
+  tag_('23','22','l:sf');
+  tag_('24','22','l:sf');
+  tag_('27','22','l:b');
+  tag_('28','22','l:b');
+  tag_('29','22','l:b');
+  tag_('30','22','l:b');
+  tag_('31','22','l:b');
+  tag_('32','22','l:b');
+
+  tag_('9','23','ltg');
+  tag_('10','23','ltg');
+  tag_('11','23','ltg');
+  tag_('12','23','ltg');
+  tag_('13','23','ltg');
+  tag_('14','23','ltg');
+  tag_('15','23','ltg');
+  tag_('16','23','ltg');
+  tag_('25','23','l:sf');
+  tag_('26','23','l:sf');
+  tag_('27','23','l');
+  tag_('28','23','l');
+  tag_('29','23','l');
+  tag_('30','23','l');
+  tag_('31','23','l');
+  tag_('32','23','l');
+
+  tag_('9','24','ltg');
+  tag_('10','24','ltg');
+  tag_('11','24','ltg');
+  tag_('12','24','ltg');
+  tag_('13','24','ltg');
+  tag_('14','24','ltg');
+  tag_('15','24','ltg');
+  tag_('16','24','ltg');
+  tag_('25','24','l:sf');
+  tag_('26','24','l:sf');
+  tag_('27','24','l');
+  tag_('28','24','l');
+  tag_('29','24','l');
+  tag_('30','24','l');
+  tag_('31','24','l');
+  tag_('32','24','l');
+
+  tag_('15','25','p:lg');
+  tag_('16','25','p:lg');
+  tag_('17','25','p:lg');
+  tag_('18','25','p:lg');
+  tag_('25','25','p:l');
+  tag_('26','25','p:l');
+  tag_('27','25','p:l');
+  tag_('28','25','p:l');
+
+  tag_('15','26','p:lg');
+  tag_('16','26','p:lg');
+  tag_('17','26','p:lg');
+  tag_('18','26','p:lg');
+  tag_('25','26','p:l');
+  tag_('26','26','p:l');
+  tag_('27','26','p:l');
+  tag_('28','26','p:l');
+
+  tag_('17','27','p:lg');
+  tag_('18','27','p:lg');
+  tag_('21','27','p');
+  tag_('22','27','p');
+  tag_('23','27','p');
+  tag_('24','27','p');
+  tag_('25','27','p');
+  tag_('26','27','p');
+  tag_('27','27','p');
+  tag_('28','27','p');
+  tag_('29','27','p');
+  tag_('30','27','p');
+
+  tag_('17','28','p:lg');
+  tag_('18','28','p:lg');
+  tag_('21','28','p');
+  tag_('22','28','p');
+  tag_('23','28','p');
+  tag_('24','28','p');
+  tag_('25','28','p');
+  tag_('26','28','p');
+  tag_('27','28','p');
+  tag_('28','28','p');
+  tag_('29','28','p');
+  tag_('30','28','p');
+
+  tag_('11','29','(vp)');
+  tag_('12','29','(vp)');
+  tag_('13','29','(vp)');
+  tag_('14','29','(vp)');
+  tag_('15','29','(vp)');
+  tag_('16','29','(vp)');
+  tag_('17','29','(vp)');
+  tag_('18','29','(vp)');
+
+  tag_('11','30','(vp)');
+  tag_('12','30','(vp)');
+  tag_('13','30','(vp)');
+  tag_('14','30','(vp)');
+  tag_('15','30','(vp)');
+  tag_('16','30','(vp)');
+  tag_('17','30','(vp)');
+  tag_('18','30','(vp)');
+  </script>
+</body>
+</html>
