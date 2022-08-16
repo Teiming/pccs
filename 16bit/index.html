@@ -67,6 +67,16 @@
         </svg>
       </div>
     </div>
+    <article class="share">
+      <div id="share_title" class="share-title">방금 본 컬러</div>
+      <div class="share-name">H</div>
+      <span id="value_h" class="share-value">?</span>
+      <div class="share-name">S</div>
+      <span id="value_s" class="share-value">?</span>
+      <div class="share-name">L</div>
+      <span id="value_l" class="share-value">?</span>
+      <button class="share-action" onclick="_share_action()">공유</button>
+    </article>
     <div id="popup"></div>
   </main>
   <footer>
@@ -79,16 +89,48 @@
   const box_controler = document.getElementById('controler');
   const box_indicator = document.getElementById('indicator_');
   const box_popup = document.getElementById('popup');
-  
+  const box_value_h = document.getElementById('value_h');
+  const box_value_s = document.getElementById('value_s');
+  const box_value_l = document.getElementById('value_l');
+  const share_title = document.getElementById('share_title');
+
   var hue = parseInt(new URLSearchParams(location.search).get('hue'));
+  var get_s = parseInt(new URLSearchParams(location.search).get('s'));
+  var get_l = parseInt(new URLSearchParams(location.search).get('l'));
+  var get_s_ = parseInt(new URLSearchParams(location.search).get('s_'));
+  var get_l_ = parseInt(new URLSearchParams(location.search).get('l_'));
+
   if (isNaN(hue)) {
     location.search = "?hue=0";
   }
   if (hue > 360) {
-    location.search = "?hue=" + (hue - 360);
+    location.search = "?hue=" + (hue - 360) + "&s_="+get_s_+"&l_="+get_l_;
   }
   if (hue < 0) {
-    location.search = "?hue=" + (hue + 360);
+    location.search = "?hue=" + (hue + 360) + "&s_="+get_s_+"&l_="+get_l_;
+  }
+
+  value_h.innerText = hue;
+
+  function share_fill(x, y) {
+    value_s.innerText = x;
+    value_l.innerText = y;
+    share_title.style.backgroundColor = "hsl(" + hue + ", " + x + "%, " + y + "%)";
+    if (y < 50) {
+      share_title.style.color = "white";
+    } else {
+      share_title.style.color = "black";
+    }
+  }
+  share_fill(0,0);
+
+  function _share_action() {
+    var t = document.createElement("textarea");
+    document.body.appendChild(t);
+    t.value = location.hostname + location.pathname + "?hue="+hue+"&s="+(value_s.innerText/6.25)+"&l="+(value_l.innerText/6.25);
+    t.select();
+    document.execCommand("Copy");
+    document.body.removeChild(t);
   }
 
   //indicator
@@ -177,46 +219,40 @@
 
   for (var i = 3; i <= 16; i++) {
     for (var j = 2; j < 16; j++) {
-      var v_h = i * 6.25;
-      var v_l = j * 6.25;
-      var h = i.toString(16);
-      var l = j.toString(16);
-      var target = document.getElementById(h+'_'+l);
-      box_popup.innerHTML += "<div id='full_"+h+"_"+l+"' onclick='close_popup(\""+h+"\",\""+l+"\")'></div>";
-      target.style.backgroundColor = "hsl("+hue+","+v_h+"%,"+v_l+"%)";
-      var target_ = document.getElementById('full_'+h+'_'+l);
-      target_.style.backgroundColor = "hsl("+hue+","+v_h+"%,"+v_l+"%)";
-      if (j < 8) {
-        target.style.color = "white";
-        target_.style.color = "white";
+      var i_16 = i.toString(16);
+      var j_16 = j.toString(16);
+      var color_gen = "hsl("+hue+","+(i * 6.25)+"%,"+(j * 6.25)+"%)";
+      var target = document.getElementById(i_16 + '_' + j_16);
+      box_popup.innerHTML += "<div id='full_"+i_16+"_"+j_16+"' onclick='close_popup(\""+i_16+"\",\""+j_16+"\")'></div>";
+      target.style.backgroundColor = color_gen;
+      var target_ = document.getElementById('full_' + i_16 + '_' + j_16);
+      target_.style.backgroundColor = color_gen;
+      if (hue < 180) {
+        if (j < 8) {
+          target.style.color = "white";
+          target_.style.color = "white";
+        }
+      } else {
+        if (j <= 8) {
+          target.style.color = "white";
+          target_.style.color = "white";
+        }
       }
     }
   }
 
   upup.onclick = function() {
-    location.search = "?hue=" + (hue + 10);
+    location.search = "?hue=" + (hue + 10) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
   }
   up.onclick = function() {
-    location.search = "?hue=" + (hue + 5);
+    location.search = "?hue=" + (hue + 5) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
   }
   down.onclick = function() {
-    location.search = "?hue=" + (hue - 5);
+    location.search = "?hue=" + (hue - 5) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
   }
   downdown.onclick = function() {
-    location.search = "?hue=" + (hue - 10);
+    location.search = "?hue=" + (hue - 10) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
   }
-
-  function open_popup(x,y) {
-    var get_popup = document.getElementById('full_'+x+'_'+y);
-    get_popup.style.display = "flex";
-    if (!isNaN(get_popup.innerText)) {
-      get_popup.innerText = "hsl("+hue+", "+(Number.parseInt(x, 16)*6.25)+"%, "+(Number.parseInt(y, 16)*6.25)+"%)";
-    }
-  }
-  function close_popup(x,y) {
-    document.getElementById('full_'+x+'_'+y).style.display = "none";
-  }
-
   function tag_(s,l,c) {
     document.getElementById(s+'_'+l).innerText = c;
     document.getElementById('full_'+s+'_'+l).innerText = c;
@@ -334,6 +370,25 @@
   tag_('7','f','(vp)');
   tag_('8','f','(vp)');
   tag_('9','f','(vp)');
+
+  function open_popup(x,y) {
+    share_fill(Number.parseInt(x, 16)*6.25, Number.parseInt(y, 16)*6.25);
+    var get_popup = document.getElementById('full_'+x+'_'+y);
+    get_popup.style.display = "flex";
+    if (!isNaN(get_popup.innerText)) {
+      // get_popup.innerText = "hsl("+hue+", "+(Number.parseInt(x, 16)*6.25)+"%, "+(Number.parseInt(y, 16)*6.25)+"%)";
+    }
+  }
+  function close_popup(x,y) {
+    document.getElementById('full_'+x+'_'+y).style.display = "none";
+  }
+
+  if (!isNaN(get_s) && !isNaN(get_l)) {
+    open_popup(get_s.toString(16), get_l.toString(16));
+  }
+  if (!isNaN(get_s_) && !isNaN(get_l_)) {
+    share_fill(get_s_*6.25, get_l_*6.25);
+  }
   </script>
 </body>
 </html>

@@ -39,6 +39,52 @@ main.triangle article {
   height: 6rem;
   display: flex;
 }
+main article.share {
+  /* margin-bottom: 1rem; */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+main article.share .share-title {
+  margin: 0;
+  padding: 0.5rem;
+  background-color: deepskyblue;
+  width: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: nowrap;
+}
+main article.share .share-name {
+  background-color: #eee;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main article.share .share-value {
+  display: block;
+  background-color: white;
+  padding: 0.33rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+}
+main article.share .share-action {
+  background-color: darkgray;
+  border: none;
+  padding: 0.5rem;
+  overflow: hidden;
+  word-wrap: nowrap;
+  max-width: 3rem;
+  width: 100%;
+}
+main article.share .share-action:hover {
+  background-color: #333;
+  color: white;
+}
 main.square article {
   display: flex;
   justify-content: center;
