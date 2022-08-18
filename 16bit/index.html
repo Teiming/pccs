@@ -135,7 +135,7 @@
   function _share_action() {
     var t = document.createElement("textarea");
     document.body.appendChild(t);
-    t.value = location.hostname + location.pathname + "?hue="+hue+"&s="+(value_s.innerText/6.25)+"&l="+(value_l.innerText/6.25);
+    t.value = location.origin + location.pathname + "?hue="+hue+"&s="+(value_s.innerText/6.25)+"&l="+(value_l.innerText/6.25);
     t.select();
     document.execCommand("Copy");
     document.body.removeChild(t);

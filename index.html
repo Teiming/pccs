@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="pccs.css">
   <style media="screen">
-  main section {
-    width: 28px !important;
-    height: 28px !important;
-    font-size: 0.66rem;
-    overflow: hidden;
-  }
-  /* main section.main_color {
-  width: 28px !important;
-  height: 28px !important;
-  } */
+    main section {
+      width: 26px !important;
+      height: 26px !important;
+      font-size: 0.5rem;
+      overflow: hidden;
+    }
+    /* main section.main_color {
+      width: 28px !important;
+      height: 28px !important;
+    } */
   </style>
   <title>16bit Square | PCCS Palette</title>
 </head>
@@ -28,372 +28,410 @@
   </header>
   <main id="palette" class="square">
     <script type="text/javascript">
-    for (var i = 3; i <= 16; i++) {
-      document.write("<article>");
-      for (var j = 2; j < 16; j++) {
-        var i_ = i.toString(16);
-        var j_ = j.toString(16);
-        document.write('<section id="'+i_+'_'+j_+'" onclick="open_popup(\''+i_+'\',\''+j_+'\')"></section>');
+      for (var i = 2; i <= 16; i++) {
+        document.write("<article>");
+          for (var j = 1; j < 16; j++) {
+            var i_ = i.toString(16);
+            var j_ = j.toString(16);
+            document.write('<section id="'+i_+'_'+j_+'" onclick="open_popup(\''+i_+'\',\''+j_+'\')"></section>');
+          }
+          document.write("</article>");
+        }
+      </script>
+    </main>
+    <main>
+      <div id="controler" class="" style="max-width: 30rem;margin: auto;margin-top: 1rem;margin-bottom: 1rem;">
+        <div id="upup" class="multi">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+          </svg>
+        </div>
+        <div id="up" style="">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+          </svg>
+        </div>
+        <div id="down" style="">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+          </svg>
+        </div>
+        <div id="downdown" class="multi">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+          </svg>
+        </div>
+      </div>
+      <article class="share">
+        <div id="share_title" class="share-title">방금 본 컬러</div>
+        <div class="share-name">H</div>
+        <span id="value_h" class="share-value">?</span>
+        <div class="share-name">S</div>
+        <span id="value_s" class="share-value">?</span>
+        <div class="share-name">L</div>
+        <span id="value_l" class="share-value">?</span>
+        <button class="share-action" onclick="_share_action()">공유</button>
+      </article>
+      <div id="popup"></div>
+    </main>
+    <footer>
+      <a href="https://gall.dcinside.com/p_color/78192" target="_blank">→ Reference 1</a>
+      <a href="https://gall.dcinside.com/p_color/86472" target="_blank">→ Reference 2</a>
+    </footer>
+    <script type="text/javascript">
+      // 객체 지정
+      const box_title = document.getElementById('title_bar');
+      const box_title_image = document.getElementById('title_image');
+      const box_controler = document.getElementById('controler');
+      const box_indicator = document.getElementById('indicator_');
+      const box_popup = document.getElementById('popup');
+      const box_value_h = document.getElementById('value_h');
+      const box_value_s = document.getElementById('value_s');
+      const box_value_l = document.getElementById('value_l');
+      const share_title = document.getElementById('share_title');
+
+      var hue = parseInt(new URLSearchParams(location.search).get('hue'));
+      var get_s = parseInt(new URLSearchParams(location.search).get('s'));
+      var get_l = parseInt(new URLSearchParams(location.search).get('l'));
+      var get_s_ = parseInt(new URLSearchParams(location.search).get('s_'));
+      var get_l_ = parseInt(new URLSearchParams(location.search).get('l_'));
+
+      if (isNaN(hue)) {
+        location.search = "?hue=0";
       }
-      document.write("</article>");
-    }
+      if (hue > 360) {
+        location.search = "?hue=" + (hue - 360) + "&s_="+get_s_+"&l_="+get_l_;
+      }
+      if (hue < 0) {
+        location.search = "?hue=" + (hue + 360) + "&s_="+get_s_+"&l_="+get_l_;
+      }
+
+      value_h.innerText = hue;
+
+      function share_fill(x, y) {
+        value_s.innerText = x;
+        value_l.innerText = y;
+        share_title.style.backgroundColor = "hsl(" + hue + ", " + x + "%, " + y + "%)";
+        if (hue > 200 && hue < 280) {
+          if (y < 50 + 0.16*x) {
+            share_title.style.color = "white";
+          } else {
+            share_title.style.color = "black";
+          }
+        } else {
+          if (y < 50 - 0.16*x) {
+            share_title.style.color = "white";
+          } else {
+            share_title.style.color = "black";
+          }
+        }
+      }
+      share_fill(0,0);
+
+      function _share_action() {
+        var t = document.createElement("textarea");
+        document.body.appendChild(t);
+        t.value = location.origin + location.pathname + "?hue="+hue+"&s="+(value_s.innerText/6.25)+"&l="+(value_l.innerText/6.25);
+        t.select();
+        document.execCommand("Copy");
+        document.body.removeChild(t);
+        alert("복사됐습니다");
+      }
+
+      function tag_(s,l,c) {
+        document.getElementById(s+'_'+l).innerText = c;
+        document.getElementById('full_'+s+'_'+l).innerText = c;
+      }
+      //indicator
+      function indic(x, y) {
+        if (x > 0) {
+          box_indicator.innerText = y;
+          box_indicator.style.backgroundColor = "deepskyblue";
+        } else {
+          box_indicator.innerText = y;
+          box_indicator.style.backgroundColor = "yellow";
+        }
+      }
+      switch (true) {
+        case (hue < 18):
+        indic(0, "#웜레드");
+        box_title_image.innerText = "W";
+        break;
+        case (hue < 47):
+        indic(0, "#주황");
+        box_title_image.innerText = "N";
+        break;
+        case (hue < 62):
+        indic(0, "#웜노랑");
+        box_title_image.innerText = "W";
+        break;
+        case (hue < 81):
+        indic(1, "#쿨노랑");
+        box_title_image.innerText = "C";
+        break;
+        case (hue < 164):
+        indic(0, "#웜초록");
+        box_title_image.innerText = "W";
+        break;
+        case (hue < 187):
+        indic(1, "#쿨민트");
+        box_title_image.innerText = "C";
+        break;
+        case (hue < 237):
+        indic(0, "#웜파랑");
+        box_title_image.innerText = "W";
+        break;
+        case (hue < 242):
+        indic(0, "#미지근파랑");
+        box_title_image.innerText = "N";
+        break;
+        case (hue < 273):
+        indic(1, "#쿨파랑");
+        box_title_image.innerText = "C";
+        break;
+        case (hue < 290):
+        indic(0, "#웜보라");
+        box_title_image.innerText = "W";
+        break;
+        case (hue < 322):
+        indic(1, "#쿨보라");
+        box_title_image.innerText = "C";
+        break;
+        case (hue < 332):
+        indic(1, "#쿨핑크");
+        box_title_image.innerText = "C";
+        break;
+        case (hue < 341):
+        indic(0, "#웜핑크");
+        box_title_image.innerText = "W";
+        break;
+        case (hue < 351):
+        indic(0, "#미지근마젠타");
+        box_title_image.innerText = "N";
+        break;
+        default:
+        indic(1,"#쿨레드");
+        box_title_image.innerText = "C";
+      }
+
+      // 색상값 설정
+      box_title.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
+      box_title_image.style.backgroundColor = "hsl(" + hue + ", 50%, 20%)";
+      box_title_image.style.color = "hsl(" + hue + ", 50%, 50%)";
+      document.getElementById('title').style.color = "hsl(" + hue + ", 50%, 20%)";
+      box_controler.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
+
+      upup.style.backgroundColor = "hsl(" + (hue + 30) + ", 66%, 66%)";
+      up.style.backgroundColor = "hsl(" + (hue + 15) + ", 66%, 66%)";
+      down.style.backgroundColor = "hsl(" + (hue - 15) + ", 66%, 66%)";
+      downdown.style.backgroundColor = "hsl(" + (hue - 30) + ", 66%, 66%)";
+
+      for (var i = 2; i <= 16; i++) {
+        for (var j = 1; j < 16; j++) {
+          var i_16 = i.toString(16);
+          var j_16 = j.toString(16);
+          var color_gen = "hsl("+hue+","+(i * 6.25)+"%,"+(j * 6.25)+"%)";
+          var target = document.getElementById(i_16 + '_' + j_16);
+          box_popup.innerHTML += "<div id='full_"+i_16+"_"+j_16+"' onclick='close_popup(\""+i_16+"\",\""+j_16+"\")'></div>";
+          target.style.backgroundColor = color_gen;
+          var target_ = document.getElementById('full_' + i_16 + '_' + j_16);
+          target_.style.backgroundColor = color_gen;
+          if (hue > 205 && hue < 290) {
+            if (j < 8 + 0.16*i) {
+              target.style.color = "white";
+              target_.style.color = "white";
+            }
+          } else {
+            if (j < 8 - 0.16*i) {
+              target.style.color = "white";
+              target_.style.color = "white";
+            }
+          }
+          switch (true) {
+            case (Math.pow(i - 5*(16/36), 2) + Math.pow(j - 1,2) < 1):
+            tag_(i_16,j_16,'dkg');
+            break;
+            case (Math.pow(i - 5*(16/36), 2) + Math.pow(j - 5,2) < 1):
+            tag_(i_16,j_16,'g');
+            break;
+            case (Math.pow(i - 5*(16/36), 2) + Math.pow(j - 11,2) < 1):
+            tag_(i_16,j_16,'ltg');
+            break;
+            case (Math.pow(i - 10*(16/36), 2) + Math.pow(1/1.5,2)*Math.pow(j - 14,2) < 1):
+            tag_(i_16,j_16,'p');
+            break;
+            case (Math.pow(i - 18*(16/36), 2) + Math.pow(1/2,2)*Math.pow(j - 3,2) < 1):
+            tag_(i_16,j_16,'dk');
+            break;
+            case (Math.pow(i - 18*(16/36), 2) + Math.pow(1/2.5,2)*Math.pow(j - 6.5,2) < 1):
+            tag_(i_16,j_16,'d');
+            break;
+            case (Math.pow(i - 18*(16/36), 2) + Math.pow(1/2.5,2)*Math.pow(j - 9.5,2) < 1):
+            tag_(i_16,j_16,'sf');
+            break;
+            case (Math.pow(i - 22*(16/36), 2) + Math.pow(1/2.5,2)*Math.pow(j - 11.5,2) < 1):
+            tag_(i_16,j_16,'lt');
+            break;
+            case (Math.pow(i - 30*(16/36), 2) + Math.pow(1/3,2)*Math.pow(j - 10,2) < 1):
+            tag_(i_16,j_16,'b');
+            break;
+            case (Math.pow(i - 30*(16/36), 2) + Math.pow(1/3,2)*Math.pow(j - 5,2) < 1):
+            tag_(i_16,j_16,'dp');
+            break;
+            case (Math.pow(i - 34*(16/36), 2) + Math.pow(1/4.5,2)*Math.pow(j - 8.5,2) < 1):
+            tag_(i_16,j_16,'v');
+            break;
+            default:
+            tag_(i_16,j_16,'');
+          }
+        }
+      }
+
+      upup.onclick = function() {
+        location.search = "?hue=" + (hue + 10) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
+      }
+      up.onclick = function() {
+        location.search = "?hue=" + (hue + 5) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
+      }
+      down.onclick = function() {
+        location.search = "?hue=" + (hue - 5) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
+      }
+      downdown.onclick = function() {
+        location.search = "?hue=" + (hue - 10) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
+      }
+
+      // tag_('4','4','dkg');
+      // tag_('5','4','dkg');
+      // tag_('6','4','dkg');
+      // tag_('7','4','dkg');
+      // tag_('8','4','dkg');
+      // tag_('b','4','dk:dkg');
+      // tag_('c','4','dk:dkg');
+      // tag_('e','4','dk');
+      // tag_('f','4','dk');
+      // tag_('10','4','dk');
+      //
+      // tag_('4','5','g:dkg');
+      // tag_('5','5','g:dkg');
+      // tag_('6','5','g:dkg');
+      // tag_('a','5','d');
+      // tag_('b','5','d');
+      // tag_('c','5','d:dk');
+      // tag_('d','5','d:dk');
+      // tag_('e','5','dp:dk');
+      // tag_('f','5','dp:dk');
+      // tag_('10','5','dp:dk');
+      //
+      // tag_('4','6','g');
+      // tag_('5','6','g');
+      // tag_('6','6','g');
+      // tag_('7','6','g');
+      // tag_('8','6','d:g');
+      // tag_('9','6','d');
+      // tag_('a','6','d');
+      // tag_('b','6','d');
+      // tag_('c','6','d:dp');
+      // tag_('d','6','dp');
+      // tag_('e','6','dp');
+      // tag_('f','6','dp');
+      //
+      // tag_('4','7','g');
+      // tag_('5','7','g');
+      // tag_('6','7','g');
+      // tag_('8','7','d:g');
+      // tag_('9','7','d');
+      // tag_('a','7','d');
+      // tag_('d','7','s:dp');
+      // tag_('e','7','s:dp');
+      // tag_('10','7','v:dp');
+      //
+      // tag_('4','8','ltg:g');
+      // tag_('5','8','ltg:g');//mg 중복
+      // tag_('8','8','sf:d');
+      // tag_('9','8','sf:d');
+      // tag_('a','8','sf:d');
+      // tag_('b','8','sf:s:d');
+      // tag_('c','8','s');
+      // tag_('d','8','s');
+      // tag_('e','8','s');
+      // tag_('f','8','v');
+      // tag_('10','8','v');
+      //
+      // tag_('4','9','ltg:g');//mg 중복
+      // tag_('5','9','ltg:g');//mg 중복
+      // tag_('9','9','sf');
+      // tag_('a','9','sf');
+      // tag_('b','9','sf:s');
+      // tag_('c','9','');
+      // tag_('d','9','b:s');
+      // tag_('e','9','b:s');
+      // tag_('10','9','b:v');
+      //
+      // tag_('8','a','ltg:sf');
+      // tag_('9','a','sf');
+      // tag_('a','a','sf');
+      // tag_('b','a','sf');
+      // tag_('c','a','sf:b');
+      // tag_('d','a','b');
+      // tag_('e','a','b');
+      // tag_('f','a','b');
+      //
+      // tag_('5','b','ltg');
+      // tag_('6','b','ltg');
+      // tag_('7','b','ltg');
+      // tag_('9','b','ltg:sf');
+      // tag_('a','b','sf');
+      // tag_('b','b','sf');
+      // tag_('c','b','l:sf');
+      // tag_('e','b','l:b');
+      // tag_('f','b','l:b');
+      // tag_('10','b','l:b');
+      //
+      // tag_('5','c','ltg');
+      // tag_('6','c','ltg');
+      // tag_('7','c','ltg');
+      // tag_('8','c','ltg');
+      // tag_('d','c','l:sf');
+      // tag_('e','c','l');
+      // tag_('f','c','l');
+      // tag_('10','c','l');
+      //
+      // tag_('8','d','p:lg');
+      // tag_('9','d','p:lg');
+      // tag_('d','d','p:l');
+      // tag_('e','d','p:l');
+      //
+      // tag_('9','e','p:lg');
+      // tag_('b','e','p');
+      // tag_('c','e','p');
+      // tag_('d','e','p');
+      // tag_('e','e','p');
+      // tag_('f','e','p');
+      //
+      // tag_('6','f','(vp)');
+      // tag_('7','f','(vp)');
+      // tag_('8','f','(vp)');
+      // tag_('9','f','(vp)');
+
+      function open_popup(x,y) {
+        share_fill(Number.parseInt(x, 16)*6.25, Number.parseInt(y, 16)*6.25);
+        var get_popup = document.getElementById('full_'+x+'_'+y);
+        get_popup.style.display = "flex";
+        if (!isNaN(get_popup.innerText)) {
+          get_popup.style.fontSize = "1rem";
+          get_popup.innerText = "hsl("+hue+", "+(Number.parseInt(x, 16)*6.25)+"%, "+(Number.parseInt(y, 16)*6.25)+"%)";
+        }
+      }
+      function close_popup(x,y) {
+        document.getElementById('full_'+x+'_'+y).style.display = "none";
+      }
+
+      if (!isNaN(get_s) && !isNaN(get_l)) {
+        open_popup(get_s.toString(16), get_l.toString(16));
+      }
+      if (!isNaN(get_s_) && !isNaN(get_l_)) {
+        share_fill(get_s_*6.25, get_l_*6.25);
+      }
     </script>
-  </main>
-  <main>
-    <div id="controler" class="" style="max-width: 30rem;margin: auto;margin-top: 1rem;margin-bottom: 1rem;">
-      <div id="upup" class="multi">
-        <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-        </svg>
-      </div>
-      <div id="up" style="">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-        </svg>
-      </div>
-      <div id="down" style="">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-        </svg>
-      </div>
-      <div id="downdown" class="multi">
-        <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-        </svg>
-      </div>
-    </div>
-    <article class="share">
-      <div id="share_title" class="share-title">방금 본 컬러</div>
-      <div class="share-name">H</div>
-      <span id="value_h" class="share-value">?</span>
-      <div class="share-name">S</div>
-      <span id="value_s" class="share-value">?</span>
-      <div class="share-name">L</div>
-      <span id="value_l" class="share-value">?</span>
-      <button class="share-action" onclick="_share_action()">공유</button>
-    </article>
-    <div id="popup"></div>
-  </main>
-  <footer>
-    <a href="https://gall.dcinside.com/p_color/78192" target="_blank">→ Reference 1</a>
-    <a href="https://gall.dcinside.com/p_color/86472" target="_blank">→ Reference 2</a>
-  </footer>
-  <script type="text/javascript">
-  const box_title = document.getElementById('title_bar');
-  const box_title_image = document.getElementById('title_image');
-  const box_controler = document.getElementById('controler');
-  const box_indicator = document.getElementById('indicator_');
-  const box_popup = document.getElementById('popup');
-  const box_value_h = document.getElementById('value_h');
-  const box_value_s = document.getElementById('value_s');
-  const box_value_l = document.getElementById('value_l');
-  const share_title = document.getElementById('share_title');
-
-  var hue = parseInt(new URLSearchParams(location.search).get('hue'));
-  var get_s = parseInt(new URLSearchParams(location.search).get('s'));
-  var get_l = parseInt(new URLSearchParams(location.search).get('l'));
-  var get_s_ = parseInt(new URLSearchParams(location.search).get('s_'));
-  var get_l_ = parseInt(new URLSearchParams(location.search).get('l_'));
-
-  if (isNaN(hue)) {
-    location.search = "?hue=0";
-  }
-  if (hue > 360) {
-    location.search = "?hue=" + (hue - 360) + "&s_="+get_s_+"&l_="+get_l_;
-  }
-  if (hue < 0) {
-    location.search = "?hue=" + (hue + 360) + "&s_="+get_s_+"&l_="+get_l_;
-  }
-
-  value_h.innerText = hue;
-
-  function share_fill(x, y) {
-    value_s.innerText = x;
-    value_l.innerText = y;
-    share_title.style.backgroundColor = "hsl(" + hue + ", " + x + "%, " + y + "%)";
-    if (hue > 200 && hue < 280) {
-      if (y < 50 + 0.16*x) {
-        share_title.style.color = "white";
-      } else {
-        share_title.style.color = "black";
-      }
-    } else {
-      if (y < 50 - 0.16*x) {
-        share_title.style.color = "white";
-      } else {
-        share_title.style.color = "black";
-      }
-    }
-  }
-  share_fill(0,0);
-
-  function _share_action() {
-    var t = document.createElement("textarea");
-    document.body.appendChild(t);
-    t.value = location.hostname + location.pathname + "?hue="+hue+"&s="+(value_s.innerText/6.25)+"&l="+(value_l.innerText/6.25);
-    t.select();
-    document.execCommand("Copy");
-    document.body.removeChild(t);
-    alert("복사됐습니다");
-  }
-
-  //indicator
-  function indic(x, y) {
-    if (x > 0) {
-      box_indicator.innerText = y;
-      box_indicator.style.backgroundColor = "deepskyblue";
-    } else {
-      box_indicator.innerText = y;
-      box_indicator.style.backgroundColor = "yellow";
-    }
-  }
-  switch (true) {
-    case (hue < 18):
-    indic(0, "#웜레드");
-    box_title_image.innerText = "W";
-    break;
-    case (hue < 47):
-    indic(0, "#주황");
-    box_title_image.innerText = "N";
-    break;
-    case (hue < 62):
-    indic(0, "#웜노랑");
-    box_title_image.innerText = "W";
-    break;
-    case (hue < 81):
-    indic(1, "#쿨노랑");
-    box_title_image.innerText = "C";
-    break;
-    case (hue < 164):
-    indic(0, "#웜초록");
-    box_title_image.innerText = "W";
-    break;
-    case (hue < 187):
-    indic(1, "#쿨민트");
-    box_title_image.innerText = "C";
-    break;
-    case (hue < 237):
-    indic(0, "#웜파랑");
-    box_title_image.innerText = "W";
-    break;
-    case (hue < 242):
-    indic(0, "#미지근파랑");
-    box_title_image.innerText = "N";
-    break;
-    case (hue < 273):
-    indic(1, "#쿨파랑");
-    box_title_image.innerText = "C";
-    break;
-    case (hue < 290):
-    indic(0, "#웜보라");
-    box_title_image.innerText = "W";
-    break;
-    case (hue < 322):
-    indic(1, "#쿨보라");
-    box_title_image.innerText = "C";
-    break;
-    case (hue < 332):
-    indic(1, "#쿨핑크");
-    box_title_image.innerText = "C";
-    break;
-    case (hue < 341):
-    indic(0, "#웜핑크");
-    box_title_image.innerText = "W";
-    break;
-    case (hue < 351):
-    indic(0, "#미지근마젠타");
-    box_title_image.innerText = "N";
-    break;
-    default:
-    indic(1,"#쿨레드");
-    box_title_image.innerText = "C";
-  }
-
-  // 색상값 설정
-  box_title.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
-  box_title_image.style.backgroundColor = "hsl(" + hue + ", 50%, 20%)";
-  box_title_image.style.color = "hsl(" + hue + ", 50%, 50%)";
-  document.getElementById('title').style.color = "hsl(" + hue + ", 50%, 20%)";
-  box_controler.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
-
-  upup.style.backgroundColor = "hsl(" + (hue + 30) + ", 66%, 66%)";
-  up.style.backgroundColor = "hsl(" + (hue + 15) + ", 66%, 66%)";
-  down.style.backgroundColor = "hsl(" + (hue - 15) + ", 66%, 66%)";
-  downdown.style.backgroundColor = "hsl(" + (hue - 30) + ", 66%, 66%)";
-
-  for (var i = 3; i <= 16; i++) {
-    for (var j = 2; j < 16; j++) {
-      var i_16 = i.toString(16);
-      var j_16 = j.toString(16);
-      var color_gen = "hsl("+hue+","+(i * 6.25)+"%,"+(j * 6.25)+"%)";
-      var target = document.getElementById(i_16 + '_' + j_16);
-      box_popup.innerHTML += "<div id='full_"+i_16+"_"+j_16+"' onclick='close_popup(\""+i_16+"\",\""+j_16+"\")'></div>";
-      target.style.backgroundColor = color_gen;
-      var target_ = document.getElementById('full_' + i_16 + '_' + j_16);
-      target_.style.backgroundColor = color_gen;
-      if (hue > 205 && hue < 290) {
-        if (j < 8 + 0.16*i) {
-          target.style.color = "white";
-          target_.style.color = "white";
-        }
-      } else {
-        if (j < 8 - 0.16*i) {
-          target.style.color = "white";
-          target_.style.color = "white";
-        }
-      }
-    }
-  }
-
-  upup.onclick = function() {
-    location.search = "?hue=" + (hue + 10) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
-  }
-  up.onclick = function() {
-    location.search = "?hue=" + (hue + 5) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
-  }
-  down.onclick = function() {
-    location.search = "?hue=" + (hue - 5) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
-  }
-  downdown.onclick = function() {
-    location.search = "?hue=" + (hue - 10) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
-  }
-  function tag_(s,l,c) {
-    document.getElementById(s+'_'+l).innerText = c;
-    document.getElementById('full_'+s+'_'+l).innerText = c;
-  }
-
-  tag_('4','4','dkg');
-  tag_('5','4','dkg');
-  tag_('6','4','dkg');
-  tag_('7','4','dkg');
-  tag_('8','4','dkg');
-  tag_('b','4','dk:dkg');
-  tag_('c','4','dk:dkg');
-  tag_('e','4','dk');
-  tag_('f','4','dk');
-  tag_('10','4','dk');
-
-  tag_('4','5','g:dkg');
-  tag_('5','5','g:dkg');
-  tag_('6','5','g:dkg');
-  tag_('a','5','d');
-  tag_('b','5','d');
-  tag_('c','5','d:dk');
-  tag_('d','5','d:dk');
-  tag_('e','5','dp:dk');
-  tag_('f','5','dp:dk');
-  tag_('10','5','dp:dk');
-
-  tag_('4','6','g');
-  tag_('5','6','g');
-  tag_('6','6','g');
-  tag_('7','6','g');
-  tag_('8','6','d:g');
-  tag_('9','6','d');
-  tag_('a','6','d');
-  tag_('b','6','d');
-  tag_('c','6','d:dp');
-  tag_('d','6','dp');
-  tag_('e','6','dp');
-  tag_('f','6','dp');
-
-  tag_('4','7','g');
-  tag_('5','7','g');
-  tag_('6','7','g');
-  tag_('8','7','d:g');
-  tag_('9','7','d');
-  tag_('a','7','d');
-  tag_('d','7','s:dp');
-  tag_('e','7','s:dp');
-  tag_('10','7','v:dp');
-
-  tag_('4','8','ltg:g');
-  tag_('5','8','ltg:g');//mg 중복
-  tag_('8','8','sf:d');
-  tag_('9','8','sf:d');
-  tag_('a','8','sf:d');
-  tag_('b','8','sf:s:d');
-  tag_('c','8','s');
-  tag_('d','8','s');
-  tag_('e','8','s');
-  tag_('f','8','v');
-  tag_('10','8','v');
-
-  tag_('4','9','ltg:g');//mg 중복
-  tag_('5','9','ltg:g');//mg 중복
-  tag_('9','9','sf');
-  tag_('a','9','sf');
-  tag_('b','9','sf:s');
-  tag_('c','9','');
-  tag_('d','9','b:s');
-  tag_('e','9','b:s');
-  tag_('10','9','b:v');
-
-  tag_('8','a','ltg:sf');
-  tag_('9','a','sf');
-  tag_('a','a','sf');
-  tag_('b','a','sf');
-  tag_('c','a','sf:b');
-  tag_('d','a','b');
-  tag_('e','a','b');
-  tag_('f','a','b');
-
-  tag_('5','b','ltg');
-  tag_('6','b','ltg');
-  tag_('7','b','ltg');
-  tag_('9','b','ltg:sf');
-  tag_('a','b','sf');
-  tag_('b','b','sf');
-  tag_('c','b','l:sf');
-  tag_('e','b','l:b');
-  tag_('f','b','l:b');
-  tag_('10','b','l:b');
-
-  tag_('5','c','ltg');
-  tag_('6','c','ltg');
-  tag_('7','c','ltg');
-  tag_('8','c','ltg');
-  tag_('d','c','l:sf');
-  tag_('e','c','l');
-  tag_('f','c','l');
-  tag_('10','c','l');
-
-  tag_('8','d','p:lg');
-  tag_('9','d','p:lg');
-  tag_('d','d','p:l');
-  tag_('e','d','p:l');
-
-  tag_('9','e','p:lg');
-  tag_('b','e','p');
-  tag_('c','e','p');
-  tag_('d','e','p');
-  tag_('e','e','p');
-  tag_('f','e','p');
-
-  tag_('6','f','(vp)');
-  tag_('7','f','(vp)');
-  tag_('8','f','(vp)');
-  tag_('9','f','(vp)');
-
-  function open_popup(x,y) {
-    share_fill(Number.parseInt(x, 16)*6.25, Number.parseInt(y, 16)*6.25);
-    var get_popup = document.getElementById('full_'+x+'_'+y);
-    get_popup.style.display = "flex";
-    if (!isNaN(get_popup.innerText)) {
-      get_popup.style.fontSize = "1rem";
-      get_popup.innerText = "hsl("+hue+", "+(Number.parseInt(x, 16)*6.25)+"%, "+(Number.parseInt(y, 16)*6.25)+"%)";
-    }
-  }
-  function close_popup(x,y) {
-    document.getElementById('full_'+x+'_'+y).style.display = "none";
-  }
-
-  if (!isNaN(get_s) && !isNaN(get_l)) {
-    open_popup(get_s.toString(16), get_l.toString(16));
-  }
-  if (!isNaN(get_s_) && !isNaN(get_l_)) {
-    share_fill(get_s_*6.25, get_l_*6.25);
-  }
-  </script>
-</body>
-</html>
+  </body>
+  </html>
