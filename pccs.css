@@ -28,12 +28,47 @@ header #title_image {
 main {
   max-width: 30rem;
   margin: auto;
+  margin-bottom: 1rem;
   overflow: hidden;
 }
 main.square {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+main.palette-grid {
+  display: grid;
+  /* align-items: center; */
+  justify-items: center;
+  justify-content: center;
+  font-size: 0.66rem;
+}
+.palette-grid.x14 {
+  grid-template-columns: repeat(14, 27px);
+}
+.palette-grid.x15 {
+  grid-template-columns: repeat(15, 27px);
+}
+.palette-grid.y12 {
+  grid-template-rows: repeat(12, 27px);
+}
+.palette-grid.y18 {
+  grid-template-rows: repeat(18, 27px);
+}
+.palette-grid.y20 {
+  grid-template-rows: repeat(20, 27px);
+}
+.palette-grid.y24 {
+  grid-template-rows: repeat(24, 27px);
+}
+main.palette-grid div {
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 main.triangle article {
   height: 6rem;
@@ -114,7 +149,7 @@ footer {
   align-items: center;
   max-width: 30rem;
   margin: auto;
-  padding: 1rem;
+  margin-bottom: 6rem;
 }
 footer a {
   text-decoration: none;
@@ -124,10 +159,11 @@ footer a {
   display: flex;
   padding: 0.5rem;
   background-color: #666;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
   justify-content: space-around;
   align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 #controler div {
   width: 3rem;
