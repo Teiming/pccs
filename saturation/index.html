@@ -5,95 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../pccs.css">
   <style media="screen">
-  .palette-grid-lightness {
-    grid-template: repeat(24, 28px) / repeat(17, 28px);
-    direction: rtl;
+  .palette-grid-saturation {
+    overflow: scroll;
+    grid-template: repeat(17, 28px) / repeat(24, 28px);
+    /* direction: rtl; */
+    grid-auto-flow: column;
+    max-width: 100%;
   }
   .h_ {
     opacity: 50%;
   }
-  div.x20 {
-    display: none;
-  }
-  @media ( max-height: 750px ) {
-    div.x15 {
-      display: none;
-    }
-    div.x20 {
-      display: flex;
-    }
-    .palette-grid-lightness {
-      grid-template-rows: repeat(18, 28px);
-    }
-  }
-  @media ( max-width: 504px ) {
-    .s16 {
-      display: none !important;
-    }
-    .palette-grid-lightness {
-      grid-template-columns: repeat(16, 28px);
-    }
-  }
-  @media ( max-width: 476px ) {
-    .s1 {
-      display: none !important;
-    }
-    .palette-grid-lightness {
-      grid-template-columns: repeat(15, 28px);
-    }
-  }
-  @media ( max-width: 448px ) {
-    .s2 {
-      display: none !important;
-    }
-    .palette-grid-lightness {
-      grid-template-columns: repeat(14, 28px);
-    }
-  }
-  @media ( max-width: 420px ) {
-    .s3 {
-      display: none !important;
-    }
-    .palette-grid-lightness {
-      grid-template-columns: repeat(13, 28px);
-    }
-  }
   </style>
-  <title>명도 조절 | PCCS Palette</title>
+  <title>채도 조절 | PCCS Palette</title>
 </head>
 <body>
   <header id="title_bar">
-    <div id="title_image">N</div>
-    <div id="title">PCCS Palette [명도 조절]</div>
+    <div id="title_image">DC</div>
+    <div id="title">PCCS Palette [채도 조절]</div>
     <div id="indicator">
       <span id="indicator_" style="display: none;"></span>
     </div>
   </header>
-  <main class="palette-grid palette-grid-lightness">
+  <main class="palette-grid palette-grid-saturation">
     <script type="text/javascript">
-    for (var h = 0; h < 72; h++) {
-      var h_360 = h * 5;
-      if (!(h_360 % 60) && !(h_360 % 20)) {
-        document.write('<div id="h'+h+'" class="h_ x60"></div>');
-        for (var s = 0; s < 16; s++) {
-          var h_ = h;
-          var s_ = 16 - s;
-          document.write('<div id="h'+h_+'_s'+s_+'" class="x60 s'+s_+'"onclick="open_popup(\''+h_+'\',\''+s_+'\')"></div>');
-        }
-      } else if (!(h_360 % 20) && (h_360 % 15)) {
-        document.write('<div id="h'+h+'" class="h_ x20"></div>');
-        for (var s = 0; s < 16; s++) {
-          var h_ = h;
-          var s_ = 16 - s;
-          document.write('<div id="h'+h_+'_s'+s_+'" class="x20 s'+s_+'"onclick="open_popup(\''+h_+'\',\''+s_+'\')"></div>');
-        }
-      } else if ((h_360 % 20) && !(h_360 % 15)) {
-        document.write('<div id="h'+h+'" class="h_ x15"></div>');
-        for (var s = 0; s < 16; s++) {
-          var h_ = h;
-          var s_ = 16 - s;
-          document.write('<div id="h'+h_+'_s'+s_+'" class="x15 s'+s_+'"onclick="open_popup(\''+h_+'\',\''+s_+'\')"></div>');
-        }
+    for (var h = 0; h < 24; h++) {
+      var h_360 = h * 15;
+      document.write('<div id="h'+h+'" class="h_"></div>');
+      for (var l = 0; l < 16; l++) {
+        var h_ = h;
+        var l_ = 16 - l;
+        document.write('<div id="h'+h_+'_l'+l_+'" class="l'+l_+'"onclick="open_popup(\''+h_+'\',\''+l_+'\')"></div>');
       }
     }
     </script>
@@ -124,11 +65,11 @@
     <article class="share">
       <div id="share_title" class="share-title">방금 본 컬러</div>
       <div class="share-name">H</div>
-      <span id="value_h" class="share-value">?</span>
+      <span id="value_h" class="share-value">0</span>
       <div class="share-name">S</div>
-      <span id="value_s" class="share-value">?</span>
+      <span id="value_s" class="share-value">50</span>
       <div class="share-name">L</div>
-      <span id="value_l" class="share-value">?</span>
+      <span id="value_l" class="share-value">50</span>
       <button class="share-action" onclick="_share_action()">공유</button>
     </article>
     <div id="popup"></div>
@@ -154,33 +95,34 @@
   var get_l = parseInt(new URLSearchParams(location.search).get('l'));
   var get_h_ = parseInt(new URLSearchParams(location.search).get('h_'));
   var get_s_ = parseInt(new URLSearchParams(location.search).get('s_'));
+  var get_l_ = parseInt(new URLSearchParams(location.search).get('l_'));
 
-  if (isNaN(get_l)) {
-    location.search = "?l=50";
+  if (isNaN(get_s)) {
+    location.search = "?s=50";
   }
-  if (get_l > 100) {
-    location.search = "?l=100";
+  if (get_s > 100) {
+    location.search = "?s=100";
   }
-  if (get_l < 0) {
-    location.search = "?l=0";
+  if (get_s < 0) {
+    location.search = "?s=0";
   }
 
-  value_l.innerText = get_l;
+  value_s.innerText = get_s;
 
-  function share_fill(h, s) {
-    var h_360 = h*5;
-    var s_100 = s*6.25;
+  function share_fill(h, l) {
+    var h_360 = h * 5;
+    var l_100 = l * 6.25;
     value_h.innerText = h_360;
-    value_s.innerText = s_100;
-    share_title.style.backgroundColor = "hsl(" + h_360 + ", " + s_100 + "%, " + get_l + "%)";
+    value_l.innerText = l_100;
+    share_title.style.backgroundColor = "hsl(" + h_360 + ", " + get_s + "%, " + l_100 + "%)";
     if (h_360 > 200 && h_360 < 300) {
-      if (get_l < 50 + 0.16*s_100) {
+      if (l_100 < 50 + 0.16*get_s) {
         share_title.style.color = "white";
       } else {
         share_title.style.color = "black";
       }
     } else {
-      if (get_l < 50 - 0.16*s_100) {
+      if (l_100 < 50 - 0.16*get_s) {
         share_title.style.color = "white";
       } else {
         share_title.style.color = "black";
@@ -192,7 +134,7 @@
   function _share_action() {
     var t = document.createElement("textarea");
     document.body.appendChild(t);
-    t.value = location.origin + location.pathname + "?h="+value_h.innerText/20+"&s="+value_s.innerText/6.25+"&l="+get_l;
+    t.value = location.origin + location.pathname + "?h="+value_h.innerText/5+"&s="+get_s+"&l="+value_l.innerText/6.25;
     t.select();
     document.execCommand("Copy");
     document.body.removeChild(t);
@@ -212,49 +154,38 @@
 
   // 색상값 설정
   box_title.style.backgroundColor = "black";
-  box_title_image.style.backgroundColor = "hsl(0, 0%, " + get_l + "%)";
+  box_title_image.style.backgroundColor = "hsl(0, " + get_s + "%, 50%)";
   box_title_image.style.color = "black";
-  document.getElementById('title').style.color = "hsl(0, 0%, " + get_l + "%)";
-  box_controler.style.backgroundColor = "hsl(0, 0%, " + get_l + "%)";
+  document.getElementById('title').style.color = "hsl(0, " + get_s + "%, 50%)";
+  box_controler.style.backgroundColor = "hsl(0, " + get_s + "%, 50%)";
 
-  upup.style.backgroundColor = "hsl(0, 0%, " + (get_l + 10) + "%)";
-  up.style.backgroundColor = "hsl(0, 0%, " + (get_l + 5) + "%)";
-  down.style.backgroundColor = "hsl(0, 0%, " + (get_l - 5) + "%)";
-  downdown.style.backgroundColor = "hsl(0, 0%, " + (get_l - 10) + "%)";
+  upup.style.backgroundColor = "hsl(0, " + (get_s + 10) + "%, 50%)";
+  up.style.backgroundColor = "hsl(0, " + (get_s + 5) + "%, 50%)";
+  down.style.backgroundColor = "hsl(0, " + (get_s - 5) + "%, 50%)";
+  downdown.style.backgroundColor = "hsl(0, " + (get_s - 10) + "%, 50%)";
 
-  if (get_l < 50) {
-    upup.style.color = "white";
-    up.style.color = "white";
-    down.style.color = "white";
-    downdown.style.color = "white";
-  }
+  // if (get_s < 50) {
+  //   upup.style.color = "white";
+  //   up.style.color = "white";
+  //   down.style.color = "white";
+  //   downdown.style.color = "white";
+  // }
 
-  for (var h = 0; h < 72; h++) {
+  for (var h = 0; h < 24; h++) {
     var h_ = h;
-    var h_360 = h * 5;
-    for (var s = 0; s < 16; s++) {
-      var s_ = 16 - s;
-      var s_100 = s_ * 6.25;
-      var color_gen = "hsl(" + h_360 + ", " + s_100 + "%, " + get_l + "%)";
+    var h_360 = h * 15;
+    var box_h_ = document.getElementById('h'+h_);
+    box_h_.style.backgroundColor = "hsl("+h_360+", 50%, 50%)"
+    for (var l = 0; l < 16; l++) {
+      var l_ = 16 - l;
+      var l_100 = l_ * 6.25;
+      var color_gen = "hsl(" + h_360 + ", " + get_s + "%, " + l_100 + "%)";
       if ((!(h_360 % 60) && !(h_360 % 20)) || (!(h_360 % 20) && (h_360 % 15)) || ((h_360 % 20) && !(h_360 % 15))) {
-        var box_h_ = document.getElementById('h'+h_);
-        box_h_.style.backgroundColor = "hsl("+h_360+", 50%, 50%)"
-        var target = document.getElementById('h'+h_+'_s'+s_);
-        box_popup.innerHTML += "<div id='full_h"+h_+"_s"+s_+"' onclick='close_popup(\""+h_+"\",\""+s_+"\")'></div>";
+        var target = document.getElementById('h'+h_+'_l'+l_);
+        box_popup.innerHTML += "<div id='full_h"+h_+"_l"+l_+"' onclick='close_popup(\""+l_+"\",\""+l_+"\")'></div>";
         target.style.backgroundColor = color_gen;
-        var target_ = document.getElementById('full_h' + h_ + '_s' + s_);
+        var target_ = document.getElementById('full_h' + h_ + '_l' + l_);
         target_.style.backgroundColor = color_gen;
-      }
-      if (h_360 > 200 && h_360 < 300) {
-        if (get_l < 50 + 0.16*s_100) {
-          target.style.color = "white";
-          target_.style.color = "white";
-        }
-      } else {
-        if (get_l < 50 - 0.16*s_100) {
-          target.style.color = "white";
-          target_.style.color = "white";
-        }
       }
     }
     switch (true) {
@@ -321,165 +252,161 @@
   }
 
   upup.onclick = function() {
-    location.search = "?h_="+value_h.innerText/20+"&l=" + (get_l + 10) + "&s_=" + value_s.innerText/6.25;
+    location.search = "?h_="+value_h.innerText/5+"&s=" + (get_s + 10) + "&l_=" + value_l.innerText/6.25;
   }
   up.onclick = function() {
-    location.search = "?h_="+value_h.innerText/20+"&l=" + (get_l + 5) + "&s_=" + value_s.innerText/6.25;
+    location.search = "?h_="+value_h.innerText/5+"&s=" + (get_s + 5) + "&l_=" + value_l.innerText/6.25;
   }
   down.onclick = function() {
-    location.search = "?h_="+value_h.innerText/20+"&l=" + (get_l - 5) + "&s_=" + value_s.innerText/6.25;
+    location.search = "?h_="+value_h.innerText/5+"&s=" + (get_s - 5) + "&l_=" + value_l.innerText/6.25;
   }
   downdown.onclick = function() {
-    location.search = "?h_="+value_h.innerText/20+"&l=" + (get_l - 10) + "&s_=" + value_s.innerText/6.25;
+    location.search = "?h_="+value_h.innerText/5+"&s=" + (get_s - 10) + "&l_=" + value_l.innerText/6.25;
   }
 
-  function tag_(s,c) {
+  function tag_(l,c) {
     var s_ = parseInt(s, 16);
     for (var h = 0; h < 72; h++) {
       var h_360 = h * 5;
       if ((!(h_360 % 60) && !(h_360 % 20)) || (!(h_360 % 20) && (h_360 % 15)) || ((h_360 % 20) && !(h_360 % 15))) {
-        document.getElementById('h'+h+'_s'+s_).innerText = c;
-        document.getElementById('full_h'+h+'_s'+s_).innerText = c;
+        document.getElementById('h'+h+'_l'+l_).innerText = c;
+        document.getElementById('full_h'+h+'_l'+l_).innerText = c;
       }
     }
   }
 
-  var get_l_16 = get_l*0.16;
+  var get_s_16 = get_s*0.16;
 
-  switch (true) {
-    case (get_l_16 < 4):
-    break;
-    case (get_l_16 < 5):
-    tag_('4','dkg');
-    tag_('5','dkg');
-    tag_('6','dkg');
-    tag_('7','dkg');
-    tag_('8','dkg');
-    tag_('b','dk:dkg');
-    tag_('c','dk:dkg');
-    tag_('e','dk');
-    tag_('f','dk');
-    tag_('10','dk');
-    break;
-    case (get_l_16 < 6):
-    tag_('4','g:dkg');
-    tag_('5','g:dkg');
-    tag_('6','g:dkg');
-    tag_('a','d');
-    tag_('b','d');
-    tag_('c','d:dk');
-    tag_('d','d:dk');
-    tag_('e','dp:dk');
-    tag_('f','dp:dk');
-    tag_('10','dp:dk');
-    break;
-    case (get_l_16 < 7):
-    tag_('4','g');
-    tag_('5','g');
-    tag_('6','g');
-    tag_('7','g');
-    tag_('8','d:g');
-    tag_('9','d');
-    tag_('a','d');
-    tag_('b','d');
-    tag_('c','d:dp');
-    tag_('d','dp');
-    tag_('e','dp');
-    tag_('f','dp');
-    break;
-    case (get_l_16 < 8):
-    tag_('4','g');
-    tag_('5','g');
-    tag_('6','g');
-    tag_('8','d:g');
-    tag_('9','d');
-    tag_('a','d');
-    tag_('d','s:dp');
-    tag_('e','s:dp');
-    tag_('10','v:dp');
-    break;
-    case (get_l_16 < 9):
-    tag_('4','ltg:g');
-    tag_('5','ltg:g');
-    tag_('8','sf:d');
-    tag_('9','sf:d');
-    tag_('a','sf:d');
-    tag_('b','sf:s:d');
-    tag_('c','s');
-    tag_('d','s');
-    tag_('e','s');
-    tag_('f','v');
-    tag_('10','v');
-    break;
-    case (get_l_16 < 10):
-    tag_('4','ltg:g');
-    tag_('5','ltg:g');
-    tag_('9','sf');
-    tag_('a','sf');
-    tag_('b','sf:s');
-    tag_('c','');
-    tag_('d','b:s');
-    tag_('e','b:s');
-    tag_('10','b:v');
-    break;
-    case (get_l_16 < 11):
-    tag_('8','ltg:sf');
-    tag_('9','sf');
-    tag_('a','sf');
-    tag_('b','sf');
-    tag_('c','sf:b');
-    tag_('d','b');
-    tag_('e','b');
-    tag_('f','b');
-    break;
-    case (get_l_16 < 12):
-    tag_('5','ltg');
-    tag_('6','ltg');
-    tag_('7','ltg');
-    tag_('9','ltg:sf');
-    tag_('a','sf');
-    tag_('b','sf');
-    tag_('c','l:sf');
-    tag_('e','l:b');
-    tag_('f','l:b');
-    tag_('10','l:b');
-    break;
-    case (get_l_16 < 13):
-    tag_('5','ltg');
-    tag_('6','ltg');
-    tag_('7','ltg');
-    tag_('8','ltg');
-    tag_('d','l:sf');
-    tag_('e','l');
-    tag_('f','l');
-    tag_('10','l');
-    break;
-    case (get_l_16 < 14):
-    tag_('8','p:lg');
-    tag_('9','p:lg');
-    tag_('d','p:l');
-    tag_('e','p:l');
-    break;
-    case (get_l_16 < 15):
-    tag_('9','p:lg');
-    tag_('b','p');
-    tag_('c','p');
-    tag_('d','p');
-    tag_('e','p');
-    tag_('f','p');
-    break;
-    case (get_l_16 < 16):
-    tag_('6','(vp)');
-    tag_('7','(vp)');
-    tag_('8','(vp)');
-    tag_('9','(vp)');
-    break;
-    default:
-  }
-
-
-  //
-  //
+  // switch (true) {
+  //   case (get_l_16 < 4):
+  //   break;
+  //   case (get_l_16 < 5):
+  //   tag_('4','dkg');
+  //   tag_('5','dkg');
+  //   tag_('6','dkg');
+  //   tag_('7','dkg');
+  //   tag_('8','dkg');
+  //   tag_('b','dk:dkg');
+  //   tag_('c','dk:dkg');
+  //   tag_('e','dk');
+  //   tag_('f','dk');
+  //   tag_('10','dk');
+  //   break;
+  //   case (get_l_16 < 6):
+  //   tag_('4','g:dkg');
+  //   tag_('5','g:dkg');
+  //   tag_('6','g:dkg');
+  //   tag_('a','d');
+  //   tag_('b','d');
+  //   tag_('c','d:dk');
+  //   tag_('d','d:dk');
+  //   tag_('e','dp:dk');
+  //   tag_('f','dp:dk');
+  //   tag_('10','dp:dk');
+  //   break;
+  //   case (get_l_16 < 7):
+  //   tag_('4','g');
+  //   tag_('5','g');
+  //   tag_('6','g');
+  //   tag_('7','g');
+  //   tag_('8','d:g');
+  //   tag_('9','d');
+  //   tag_('a','d');
+  //   tag_('b','d');
+  //   tag_('c','d:dp');
+  //   tag_('d','dp');
+  //   tag_('e','dp');
+  //   tag_('f','dp');
+  //   break;
+  //   case (get_l_16 < 8):
+  //   tag_('4','g');
+  //   tag_('5','g');
+  //   tag_('6','g');
+  //   tag_('8','d:g');
+  //   tag_('9','d');
+  //   tag_('a','d');
+  //   tag_('d','s:dp');
+  //   tag_('e','s:dp');
+  //   tag_('10','v:dp');
+  //   break;
+  //   case (get_l_16 < 9):
+  //   tag_('4','ltg:g');
+  //   tag_('5','ltg:g');
+  //   tag_('8','sf:d');
+  //   tag_('9','sf:d');
+  //   tag_('a','sf:d');
+  //   tag_('b','sf:s:d');
+  //   tag_('c','s');
+  //   tag_('d','s');
+  //   tag_('e','s');
+  //   tag_('f','v');
+  //   tag_('10','v');
+  //   break;
+  //   case (get_l_16 < 10):
+  //   tag_('4','ltg:g');
+  //   tag_('5','ltg:g');
+  //   tag_('9','sf');
+  //   tag_('a','sf');
+  //   tag_('b','sf:s');
+  //   tag_('c','');
+  //   tag_('d','b:s');
+  //   tag_('e','b:s');
+  //   tag_('10','b:v');
+  //   break;
+  //   case (get_l_16 < 11):
+  //   tag_('8','ltg:sf');
+  //   tag_('9','sf');
+  //   tag_('a','sf');
+  //   tag_('b','sf');
+  //   tag_('c','sf:b');
+  //   tag_('d','b');
+  //   tag_('e','b');
+  //   tag_('f','b');
+  //   break;
+  //   case (get_l_16 < 12):
+  //   tag_('5','ltg');
+  //   tag_('6','ltg');
+  //   tag_('7','ltg');
+  //   tag_('9','ltg:sf');
+  //   tag_('a','sf');
+  //   tag_('b','sf');
+  //   tag_('c','l:sf');
+  //   tag_('e','l:b');
+  //   tag_('f','l:b');
+  //   tag_('10','l:b');
+  //   break;
+  //   case (get_l_16 < 13):
+  //   tag_('5','ltg');
+  //   tag_('6','ltg');
+  //   tag_('7','ltg');
+  //   tag_('8','ltg');
+  //   tag_('d','l:sf');
+  //   tag_('e','l');
+  //   tag_('f','l');
+  //   tag_('10','l');
+  //   break;
+  //   case (get_l_16 < 14):
+  //   tag_('8','p:lg');
+  //   tag_('9','p:lg');
+  //   tag_('d','p:l');
+  //   tag_('e','p:l');
+  //   break;
+  //   case (get_l_16 < 15):
+  //   tag_('9','p:lg');
+  //   tag_('b','p');
+  //   tag_('c','p');
+  //   tag_('d','p');
+  //   tag_('e','p');
+  //   tag_('f','p');
+  //   break;
+  //   case (get_l_16 < 16):
+  //   tag_('6','(vp)');
+  //   tag_('7','(vp)');
+  //   tag_('8','(vp)');
+  //   tag_('9','(vp)');
+  //   break;
+  //   default:
+  // }
 
   function open_popup(h,s) {
     share_fill(h,s);
