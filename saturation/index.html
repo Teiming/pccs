@@ -165,13 +165,11 @@
       var l_ = 16 - l;
       var l_100 = l_ * 6.25;
       var color_gen = "hsl(" + h_360 + ", " + get_s + "%, " + l_100 + "%)";
-      if ((!(h_360 % 60) && !(h_360 % 20)) || (!(h_360 % 20) && (h_360 % 15)) || ((h_360 % 20) && !(h_360 % 15))) {
-        var target = document.getElementById('h'+h_+'_l'+l_);
-        box_popup.innerHTML += "<div id='full_h"+h_+"_l"+l_+"' onclick='close_popup(\""+h_+"\",\""+l_+"\")'></div>";
-        target.style.backgroundColor = color_gen;
-        var target_ = document.getElementById('full_h' + h_ + '_l' + l_);
-        target_.style.backgroundColor = color_gen;
-      }
+      var target = document.getElementById('h'+h_+'_l'+l_);
+      box_popup.innerHTML += "<div id='full_h"+h_+"_l"+l_+"' onclick='close_popup(\""+h_+"\",\""+l_+"\")'></div>";
+      target.style.backgroundColor = color_gen;
+      var target_ = document.getElementById('full_h' + h_ + '_l' + l_);
+      target_.style.backgroundColor = color_gen;
     }
     switch (true) {
       case (h_360 < 18):
