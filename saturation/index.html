@@ -375,22 +375,24 @@
 
   function open_popup(h, l) {
     share_fill(h, l);
+    var h_360 = h * 15;
+    var l_100 = l * 6.25;
     var get_popup = document.getElementById('full_h'+h+'_l'+l);
     get_popup.style.display = "flex";
     if (!isNaN(get_popup.innerText)) {
       get_popup.style.fontSize = "1rem";
-      get_popup.innerText = "hsl("+h*15+", "+get_s+"%, "+(l*6.25)+"%)";
+      get_popup.innerText = "hsl("+h_360+", "+get_s+"%, "+l_100+"%)";
     }
   }
   function close_popup(h, l) {
     document.getElementById('full_h'+h+'_l'+l).style.display = "none";
   }
 
-  if (!isNaN(get_h) && !isNaN(get_s)) {
-    open_popup(get_h, get_s);
+  if (!isNaN(get_h) && !isNaN(get_l)) {
+    open_popup(get_h, get_l);
   }
-  if (!isNaN(get_h_) && !isNaN(get_s_)) {
-    share_fill(get_h_, get_s_);
+  if (!isNaN(get_h_) && !isNaN(get_l_)) {
+    share_fill(get_h_, get_l_);
   }
   </script>
 </body>
