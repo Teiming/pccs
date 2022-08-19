@@ -170,3 +170,12 @@ footer a {
   font-size: 2rem;
   font-style: italic;
 }
+#developer {
+  margin: auto;
+  margin-right: 0.5rem;
+  padding: 0.5rem;
+  background-color: gray;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: white;
+}
