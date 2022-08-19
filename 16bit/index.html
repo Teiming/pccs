@@ -5,22 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../pccs.css">
   <style media="screen">
-  main section {
-    width: 27px !important;
-    height: 27px !important;
-    font-size: 0.66rem;
-    overflow: hidden;
+  @media ( max-width: 459px ) {
+    .s1, .l1 {
+      display: none !important;
+    }
+    .palette-grid {
+      grid-template-columns: repeat(15, 28px);
+      grid-template-rows: repeat(15, 28px);
+    }
   }
-  /* main section.main_color {
-  width: 28px !important;
-  height: 28px !important;
-  } */
+  @media ( max-width: 432px ) {
+    .s16, .l16 {
+      display: none !important;
+    }
+    .palette-grid {
+      grid-template-columns: repeat(14, 28px);
+      grid-template-rows: repeat(14, 28px);
+    }
+  }
+  @media ( max-width: 405px ) {
+    .s2, .l2 {
+      display: none !important;
+    }
+    .palette-grid {
+      grid-template-columns: repeat(13, 28px);
+      grid-template-rows: repeat(13, 28px);
+    }
+  }
+  @media ( max-width: 378px ) {
+    .s3, .l3 {
+      display: none !important;
+    }
+    .palette-grid {
+      grid-template-columns: repeat(12, 28px);
+      grid-template-rows: repeat(12, 28px);
+    }
+  }
   </style>
   <title>16bit Square | PCCS Palette</title>
 </head>
 <body>
   <script type="text/javascript">
-  if (window.innerWidth > 28*32) {
+  if (window.innerWidth > 27*32) {
     location.href = "../32bit";
   }
   </script>
@@ -31,16 +57,16 @@
       <span id="indicator_"></span>
     </div>
   </header>
-  <main id="palette" class="square">
+  <main id="palette" class="palette-grid">
     <script type="text/javascript">
-    for (var i = 3; i <= 16; i++) {
-      document.write("<article>");
-      for (var j = 2; j < 16; j++) {
-        var i_ = i.toString(16);
-        var j_ = j.toString(16);
-        document.write('<section id="'+i_+'_'+j_+'" onclick="open_popup(\''+i_+'\',\''+j_+'\')"></section>');
+    for (var l = 0; l < 16; l++) {
+      for (var s = 0; s < 16; s++) {
+        var s_ = s + 1;
+        var l_ = 16 - l;
+        var s_16 = s_.toString(16);
+        var l_16 = l_.toString(16);
+        document.write('<div id="'+s_16+'_'+l_16+'" class="s'+s_+' l'+l_+'" onclick="open_popup(\''+s_16+'\',\''+l_16+'\')"></div>');
       }
-      document.write("</article>");
     }
     </script>
   </main>
@@ -226,23 +252,25 @@
   down.style.backgroundColor = "hsl(" + (hue - 15) + ", 66%, 66%)";
   downdown.style.backgroundColor = "hsl(" + (hue - 30) + ", 66%, 66%)";
 
-  for (var i = 3; i <= 16; i++) {
-    for (var j = 2; j < 16; j++) {
-      var i_16 = i.toString(16);
-      var j_16 = j.toString(16);
-      var color_gen = "hsl("+hue+","+(i * 6.25)+"%,"+(j * 6.25)+"%)";
+  for (var i = 0; i < 16; i++) {
+    for (var j = 0; j < 16; j++) {
+      var i_ = i + 1;
+      var j_ = 16 - j;
+      var i_16 = i_.toString(16);
+      var j_16 = j_.toString(16);
+      var color_gen = "hsl("+hue+","+(i_ * 6.25)+"%,"+(j_ * 6.25)+"%)";
       var target = document.getElementById(i_16 + '_' + j_16);
       box_popup.innerHTML += "<div id='full_"+i_16+"_"+j_16+"' onclick='close_popup(\""+i_16+"\",\""+j_16+"\")'></div>";
       target.style.backgroundColor = color_gen;
       var target_ = document.getElementById('full_' + i_16 + '_' + j_16);
       target_.style.backgroundColor = color_gen;
       if (hue > 205 && hue < 290) {
-        if (j < 8 + 0.16*i) {
+        if (j_ < 8 + 0.16*i_) {
           target.style.color = "white";
           target_.style.color = "white";
         }
       } else {
-        if (j < 8 - 0.16*i) {
+        if (j_ < 8 - 0.16*i_) {
           target.style.color = "white";
           target_.style.color = "white";
         }

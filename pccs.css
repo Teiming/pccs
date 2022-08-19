@@ -31,37 +31,15 @@ main {
   margin-bottom: 1rem;
   overflow: hidden;
 }
-main.square {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-main.palette-grid {
+.palette-grid {
   display: grid;
-  /* align-items: center; */
   justify-items: center;
   justify-content: center;
   font-size: 0.66rem;
+  grid-template-columns: repeat(16, 28px);
+  grid-template-rows: repeat(16, 28px);
 }
-.palette-grid.x14 {
-  grid-template-columns: repeat(14, 27px);
-}
-.palette-grid.x15 {
-  grid-template-columns: repeat(15, 27px);
-}
-.palette-grid.y12 {
-  grid-template-rows: repeat(12, 27px);
-}
-.palette-grid.y18 {
-  grid-template-rows: repeat(18, 27px);
-}
-.palette-grid.y20 {
-  grid-template-rows: repeat(20, 27px);
-}
-.palette-grid.y24 {
-  grid-template-rows: repeat(24, 27px);
-}
-main.palette-grid div {
+.palette-grid div {
   height: 100%;
   width: 100%;
   border-radius: 100%;
@@ -69,13 +47,14 @@ main.palette-grid div {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  font-size: 0.66rem;
+  font-style: italic;
 }
 main.triangle article {
   height: 6rem;
   display: flex;
 }
 main article.share {
-  /* margin-bottom: 1rem; */
   display: flex;
   justify-content: center;
   width: 100%;
@@ -120,12 +99,6 @@ main article.share .share-action:hover {
   background-color: #333;
   color: white;
 }
-main.square article {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column-reverse;
-}
 main article section {
   display: flex;
   align-items: center;
@@ -136,12 +109,6 @@ main.triangle article section {
   margin: 6px;
   width: 100%;
   font-size: 1.5rem;
-}
-main.square article section {
-  width: 42px;
-  height: 42px;
-  font-family: serif;
-  font-style: italic;
 }
 footer {
   display: flex;
@@ -191,16 +158,6 @@ footer a {
   padding: 0.25rem;
   border-radius: 0.5rem;
 }
-/* #popup {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-} */
 #popup div {
   width: 100%;
   height: 100%;
