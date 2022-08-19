@@ -9,7 +9,6 @@
     overflow: scroll;
     grid-template: repeat(17, 28px) / repeat(24, 28px);
     grid-auto-flow: column;
-    max-width: 100%;
     justify-content: flex-start;
   }
   .h_ {
@@ -22,9 +21,6 @@
   <header id="title_bar">
     <div id="title_image">DC</div>
     <div id="title">PCCS Palette [채도 조절]</div>
-    <div id="indicator">
-      <span id="indicator_" style="display: none;"></span>
-    </div>
     <a id="developer" href="mailto:05frill_whirl@icloud.com">제작자</a>
   </header>
   <main class="palette-grid palette-grid-saturation">
@@ -84,7 +80,6 @@
   const box_title = document.getElementById('title_bar');
   const box_title_image = document.getElementById('title_image');
   const box_controler = document.getElementById('controler');
-  const box_indicator = document.getElementById('indicator_');
   const box_popup = document.getElementById('popup');
   const box_value_h = document.getElementById('value_h');
   const box_value_s = document.getElementById('value_s');
@@ -142,17 +137,6 @@
     alert("복사됐습니다");
   }
 
-  //indicator
-  function indic(x, y) {
-    // if (x > 0) {
-    //   box_indicator.innerText = y;
-    //   box_indicator.style.backgroundColor = "deepskyblue";
-    // } else {
-    //   box_indicator.innerText = y;
-    //   box_indicator.style.backgroundColor = "yellow";
-    // }
-  }
-
   // 색상값 설정
   box_title.style.backgroundColor = "black";
   box_title_image.style.backgroundColor = "hsl(0, " + get_s + "%, 50%)";
@@ -183,7 +167,7 @@
       var color_gen = "hsl(" + h_360 + ", " + get_s + "%, " + l_100 + "%)";
       if ((!(h_360 % 60) && !(h_360 % 20)) || (!(h_360 % 20) && (h_360 % 15)) || ((h_360 % 20) && !(h_360 % 15))) {
         var target = document.getElementById('h'+h_+'_l'+l_);
-        box_popup.innerHTML += "<div id='full_h"+h_+"_l"+l_+"' onclick='close_popup(\""+l_+"\",\""+l_+"\")'></div>";
+        box_popup.innerHTML += "<div id='full_h"+h_+"_l"+l_+"' onclick='close_popup(\""+h_+"\",\""+l_+"\")'></div>";
         target.style.backgroundColor = color_gen;
         var target_ = document.getElementById('full_h' + h_ + '_l' + l_);
         target_.style.backgroundColor = color_gen;
@@ -191,63 +175,48 @@
     }
     switch (true) {
       case (h_360 < 18):
-      indic(0, "#웜레드");
       box_h_.innerText = "W";
       break;
       case (h_360 < 47):
-      indic(0, "#주황");
       box_h_.innerText = "N";
       break;
       case (h_360 < 62):
-      indic(0, "#웜노랑");
       box_h_.innerText = "W";
       break;
       case (h_360 < 81):
-      indic(1, "#쿨노랑");
       box_h_.innerText = "C";
       break;
       case (h_360 < 164):
-      indic(0, "#웜초록");
       box_h_.innerText = "W";
       break;
       case (h_360 < 187):
-      indic(1, "#쿨민트");
       box_h_.innerText = "C";
       break;
       case (h_360 < 237):
-      indic(0, "#웜파랑");
       box_h_.innerText = "W";
       break;
       case (h_360 < 242):
-      indic(0, "#미지근파랑");
       box_h_.innerText = "N";
       break;
       case (h_360 < 273):
-      indic(1, "#쿨파랑");
       box_h_.innerText = "C";
       break;
       case (h_360 < 290):
-      indic(0, "#웜보라");
       box_h_.innerText = "W";
       break;
       case (h_360 < 322):
-      indic(1, "#쿨보라");
       box_h_.innerText = "C";
       break;
       case (h_360 < 332):
-      indic(1, "#쿨핑크");
       box_h_.innerText = "C";
       break;
       case (h_360 < 341):
-      indic(0, "#웜핑크");
       box_h_.innerText = "W";
       break;
       case (h_360 < 351):
-      indic(0, "#미지근마젠타");
       box_h_.innerText = "N";
       break;
       default:
-      indic(1,"#쿨레드");
       box_h_.innerText = "C";
     }
   }
@@ -266,160 +235,157 @@
   }
 
   function tag_(l,c) {
-    var s_ = parseInt(s, 16);
-    for (var h = 0; h < 72; h++) {
-      var h_360 = h * 5;
-      if ((!(h_360 % 60) && !(h_360 % 20)) || (!(h_360 % 20) && (h_360 % 15)) || ((h_360 % 20) && !(h_360 % 15))) {
-        document.getElementById('h'+h+'_l'+l_).innerText = c;
-        document.getElementById('full_h'+h+'_l'+l_).innerText = c;
-      }
+    var l_ = parseInt(l, 16);
+    for (var h = 0; h < 24; h++) {
+      var h_360 = h * 15;
+      document.getElementById('h'+h+'_l'+l_).innerText = c;
+      document.getElementById('full_h'+h+'_l'+l_).innerText = c;
     }
   }
 
   var get_s_16 = get_s*0.16;
 
-  // switch (true) {
-  //   case (get_l_16 < 4):
-  //   break;
-  //   case (get_l_16 < 5):
-  //   tag_('4','dkg');
-  //   tag_('5','dkg');
-  //   tag_('6','dkg');
-  //   tag_('7','dkg');
-  //   tag_('8','dkg');
-  //   tag_('b','dk:dkg');
-  //   tag_('c','dk:dkg');
-  //   tag_('e','dk');
-  //   tag_('f','dk');
-  //   tag_('10','dk');
-  //   break;
-  //   case (get_l_16 < 6):
-  //   tag_('4','g:dkg');
-  //   tag_('5','g:dkg');
-  //   tag_('6','g:dkg');
-  //   tag_('a','d');
-  //   tag_('b','d');
-  //   tag_('c','d:dk');
-  //   tag_('d','d:dk');
-  //   tag_('e','dp:dk');
-  //   tag_('f','dp:dk');
-  //   tag_('10','dp:dk');
-  //   break;
-  //   case (get_l_16 < 7):
-  //   tag_('4','g');
-  //   tag_('5','g');
-  //   tag_('6','g');
-  //   tag_('7','g');
-  //   tag_('8','d:g');
-  //   tag_('9','d');
-  //   tag_('a','d');
-  //   tag_('b','d');
-  //   tag_('c','d:dp');
-  //   tag_('d','dp');
-  //   tag_('e','dp');
-  //   tag_('f','dp');
-  //   break;
-  //   case (get_l_16 < 8):
-  //   tag_('4','g');
-  //   tag_('5','g');
-  //   tag_('6','g');
-  //   tag_('8','d:g');
-  //   tag_('9','d');
-  //   tag_('a','d');
-  //   tag_('d','s:dp');
-  //   tag_('e','s:dp');
-  //   tag_('10','v:dp');
-  //   break;
-  //   case (get_l_16 < 9):
-  //   tag_('4','ltg:g');
-  //   tag_('5','ltg:g');
-  //   tag_('8','sf:d');
-  //   tag_('9','sf:d');
-  //   tag_('a','sf:d');
-  //   tag_('b','sf:s:d');
-  //   tag_('c','s');
-  //   tag_('d','s');
-  //   tag_('e','s');
-  //   tag_('f','v');
-  //   tag_('10','v');
-  //   break;
-  //   case (get_l_16 < 10):
-  //   tag_('4','ltg:g');
-  //   tag_('5','ltg:g');
-  //   tag_('9','sf');
-  //   tag_('a','sf');
-  //   tag_('b','sf:s');
-  //   tag_('c','');
-  //   tag_('d','b:s');
-  //   tag_('e','b:s');
-  //   tag_('10','b:v');
-  //   break;
-  //   case (get_l_16 < 11):
-  //   tag_('8','ltg:sf');
-  //   tag_('9','sf');
-  //   tag_('a','sf');
-  //   tag_('b','sf');
-  //   tag_('c','sf:b');
-  //   tag_('d','b');
-  //   tag_('e','b');
-  //   tag_('f','b');
-  //   break;
-  //   case (get_l_16 < 12):
-  //   tag_('5','ltg');
-  //   tag_('6','ltg');
-  //   tag_('7','ltg');
-  //   tag_('9','ltg:sf');
-  //   tag_('a','sf');
-  //   tag_('b','sf');
-  //   tag_('c','l:sf');
-  //   tag_('e','l:b');
-  //   tag_('f','l:b');
-  //   tag_('10','l:b');
-  //   break;
-  //   case (get_l_16 < 13):
-  //   tag_('5','ltg');
-  //   tag_('6','ltg');
-  //   tag_('7','ltg');
-  //   tag_('8','ltg');
-  //   tag_('d','l:sf');
-  //   tag_('e','l');
-  //   tag_('f','l');
-  //   tag_('10','l');
-  //   break;
-  //   case (get_l_16 < 14):
-  //   tag_('8','p:lg');
-  //   tag_('9','p:lg');
-  //   tag_('d','p:l');
-  //   tag_('e','p:l');
-  //   break;
-  //   case (get_l_16 < 15):
-  //   tag_('9','p:lg');
-  //   tag_('b','p');
-  //   tag_('c','p');
-  //   tag_('d','p');
-  //   tag_('e','p');
-  //   tag_('f','p');
-  //   break;
-  //   case (get_l_16 < 16):
-  //   tag_('6','(vp)');
-  //   tag_('7','(vp)');
-  //   tag_('8','(vp)');
-  //   tag_('9','(vp)');
-  //   break;
-  //   default:
-  // }
+  switch (true) {
+    case (get_s_16 > 15):
+    tag_('4','dk');
+    tag_('5','dp:dk');
+    tag_('7','v:dp');
+    tag_('8','v');
+    tag_('9','b:v');
+    tag_('b','l:b');
+    tag_('c','l');
+    break;
+    case (get_s_16 > 14):
+    tag_('4','dk');
+    tag_('5','dp:dk');
+    tag_('6','dp');
+    tag_('8','v');
+    tag_('a','b');
+    tag_('b','l:b');
+    tag_('c','l');
+    tag_('e','p');
+    break;
+    case (get_s_16 > 13):
+    tag_('4','dk');
+    tag_('5','dp:dk');
+    tag_('6','dp');
+    tag_('7','s:dp');
+    tag_('8','s');
+    tag_('9','b:s');
+    tag_('a','b');
+    tag_('b','l:b');
+    tag_('c','l');
+    tag_('d','p:l');
+    tag_('e','p');
+    break;
+    case (get_s_16 > 12):
+    tag_('5','d:dk');
+    tag_('6','dp');
+    tag_('7','s:dp');
+    tag_('8','s');
+    tag_('9','b:s');
+    tag_('a','b');
+    tag_('c','l:sf');
+    tag_('d','p:l');
+    tag_('e','p');
+    break;
+    case (get_s_16 > 11):
+    tag_('4','dk:dkg');
+    tag_('5','d:dk');
+    tag_('6','d:dp');
+    tag_('8','s');
+    tag_('a','sf:b');
+    tag_('b','l:sf');
+    tag_('e','p');
+    break;
+    case (get_s_16 > 10):
+    tag_('4','dk:dkg');
+    tag_('5','d');
+    tag_('6','d');
+    tag_('8','sf:s:d');
+    tag_('9','sf:s');
+    tag_('a','sf');
+    tag_('b','sf');
+    tag_('e','p');
+    break;
+    case (get_s_16 > 9):
+    tag_('5','d');
+    tag_('6','d');
+    tag_('7','d');
+    tag_('8','sf:d');
+    tag_('9','sf');
+    tag_('a','sf');
+    tag_('b','sf');
+    break;
+    case (get_s_16 > 8):
+    tag_('6','d');
+    tag_('7','d');
+    tag_('8','sf:d');
+    tag_('9','sf');
+    tag_('a','sf');
+    tag_('b','ltg:sf');
+    tag_('d','p:lg');
+    tag_('e','p:lg');
+    tag_('f','(vp)');
+    break;
+    case (get_s_16 > 7):
+    tag_('4','dkg');
+    tag_('6','d:g');
+    tag_('7','d:g');
+    tag_('8','sf:d');
+    tag_('a','ltg:sf');
+    tag_('c','ltg');
+    tag_('d','p:lg');
+    tag_('f','(vp)');
+    break;
+    case (get_s_16 > 6):
+    tag_('4','dkg');
+    tag_('6','g');
+    tag_('b','ltg');
+    tag_('c','ltg');
+    tag_('f','(vp)');
+    break;
+    case (get_s_16 > 5):
+    tag_('4','dkg');
+    tag_('5','g:dkg');
+    tag_('6','g');
+    tag_('7','g');
+    tag_('b','ltg');
+    tag_('c','ltg');
+    tag_('f','(vp)');
+    break;
+    case (get_s_16 > 4):
+    tag_('4','dkg');
+    tag_('5','g:dkg');
+    tag_('6','g');
+    tag_('7','g');
+    tag_('8','ltg:g');
+    tag_('9','ltg:g');
+    tag_('b','ltg');
+    tag_('c','ltg');
+    break;
+    case (get_s_16 > 3):
+    tag_('4','dkg');
+    tag_('5','g:dkg');
+    tag_('6','g');
+    tag_('7','g');
+    tag_('8','ltg:g');
+    tag_('9','ltg:g');
+    break;
+    default:
+  }
 
-  function open_popup(h,s) {
-    share_fill(h,s);
-    var get_popup = document.getElementById('full_h'+h+'_s'+s);
+  function open_popup(h, l) {
+    share_fill(h, l);
+    var get_popup = document.getElementById('full_h'+h+'_l'+l);
     get_popup.style.display = "flex";
     if (!isNaN(get_popup.innerText)) {
       get_popup.style.fontSize = "1rem";
-      get_popup.innerText = "hsl("+h*15+", "+s*6.25+"%, "+get_l+"%)";
+      get_popup.innerText = "hsl("+h*15+", "+get_s+"%, "+(l*6.25)+"%)";
     }
   }
-  function close_popup(h,s) {
-    document.getElementById('full_h'+h+'_s'+s).style.display = "none";
+  function close_popup(h, l) {
+    document.getElementById('full_h'+h+'_l'+l).style.display = "none";
   }
 
   if (!isNaN(get_h) && !isNaN(get_s)) {
