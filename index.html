@@ -4,326 +4,66 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="pccs.css">
-
   <style media="screen">
-  @media ( max-width: 459px ) {
-    .s1, .l1 {
-      display: none !important;
-    }
-    .palette-grid {
-      grid-template-columns: repeat(15, 28px);
-      grid-template-rows: repeat(15, 28px);
-    }
+  main {
+    display: flex;
+    justify-content: center;
   }
-  @media ( max-width: 432px ) {
-    .s16, .l16 {
-      display: none !important;
+    table {
+      border-radius: 0.5rem;
+      background-color: lightgray
+
     }
-    .palette-grid {
-      grid-template-columns: repeat(14, 28px);
-      grid-template-rows: repeat(14, 28px);
+    table th {
+      width: 5rem;
+      height: 2rem;
+      padding: 0.5rem;
     }
-  }
-  @media ( max-width: 405px ) {
-    .s2, .l2 {
-      display: none !important;
+    table a {
+      text-decoration: none;
+      color: lightblue;
+      background-color: gray;
+      border-radius: 0.33rem;
+      padding: 8px;
     }
-    .palette-grid {
-      grid-template-columns: repeat(13, 28px);
-      grid-template-rows: repeat(13, 28px);
-    }
-  }
-  @media ( max-width: 378px ) {
-    .s3, .l3 {
-      display: none !important;
-    }
-    .palette-grid {
-      grid-template-columns: repeat(12, 28px);
-      grid-template-rows: repeat(12, 28px);
-    }
-  }
   </style>
-  <title>PCCS Palette</title>
+  <title>INDEX | PCCS Palette</title>
 </head>
 <body>
-  <header id="title_bar">
-    <div id="title_image">DC</div>
-    <div id="title">PCCS Palette [16bit]</div>
-    <a id="developer" href="mailto:05frill_whirl@icloud.com">제작자</a>
+  <header id="title_bar" style="background-color: lightgray">
+    <div id="title_image" style="background-color: gray;color: lightgray">DC</div>
+    <div id="title" style="color: gray">PCCS Palette</div>
+    <a id="developer" href="mailto:05frill_whirl@icloud.com" style="color: gray;">제작자</a>
   </header>
-  <main class="palette-grid">
-    <script type="text/javascript">
-    for (var l = 0; l < 16; l++) {
-      for (var s = 0; s < 16; s++) {
-        var s_ = s + 1;
-        var l_ = 16 - l;
-        var s_16 = s_.toString(16);
-        var l_16 = l_.toString(16);
-        document.write('<div id="'+s_16+'_'+l_16+'" class="s'+s_+' l'+l_+'" onclick="open_popup(\''+s_16+'\',\''+l_16+'\')"></div>');
-      }
-    }
-    </script>
-  </main>
   <main>
-    <div id="controler" style="max-width: 30rem;margin: auto;">
-      <div id="downdown" class="multi">
-        <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-        </svg>
-      </div>
-      <div id="down" style="">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-        </svg>
-      </div>
-      <div id="temperature" style="width: 2rem;height: 2rem;font-size: 1rem;"></div>
-      <div id="up" style="">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-        </svg>
-      </div>
-      <div id="upup" class="multi">
-        <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-        </svg>
-      </div>
-    </div>
-    <article class="share">
-      <div id="share_title" class="share-title">방금 본 컬러</div>
-      <div class="share-name">H</div>
-      <span id="value_h" class="share-value">?</span>
-      <div class="share-name">S</div>
-      <span id="value_s" class="share-value">?</span>
-      <div class="share-name">L</div>
-      <span id="value_l" class="share-value">?</span>
-      <button class="share-action" onclick="_share_action()">공유</button>
-    </article>
-    <div id="popup"></div>
+    <table>
+      <thead class="">
+        <tr>
+          <th></th>
+          <th>Ver. 1</th>
+          <th>Ver. 2</th>
+          <th>Ver. 3</th>
+        </tr>
+      </thead>
+      <tbody class="">
+        <tr>
+          <th>Hue</th>
+          <td><a href="16bit" target="_blank">16 x 16</a></td>
+          <td><a href="16bit/official" target="_blank"></a></td>
+          <td><a href="hue" target="_blank">(제작중)</a></td>
+        </tr>
+        <tr>
+          <th>Saturation</th>
+          <td><a href="saturation" target="_blank">24 x 16</a></td>
+        </tr>
+        <tr>
+          <th>Lightness</th>
+          <td><a href="lightness" target="_blank">기본형</a></td>
+        </tr>
+      </tbody>
+    </table>
   </main>
   <footer>
-    <a href="https://gall.dcinside.com/p_color/78192" target="_blank">→ Reference 1</a>
-    <a href="https://gall.dcinside.com/p_color/86472" target="_blank">→ Reference 2</a>
   </footer>
-  <script type="text/javascript">
-  // 객체 지정
-  const box_title = document.getElementById('title_bar');
-  const box_controler = document.getElementById('controler');
-  const box_popup = document.getElementById('popup');
-  const box_value_h = document.getElementById('value_h');
-  const box_value_s = document.getElementById('value_s');
-  const box_value_l = document.getElementById('value_l');
-  const share_title = document.getElementById('share_title');
-
-  var hue = parseInt(new URLSearchParams(location.search).get('hue'));
-  var get_s = parseInt(new URLSearchParams(location.search).get('s'));
-  var get_l = parseInt(new URLSearchParams(location.search).get('l'));
-  var get_s_ = parseInt(new URLSearchParams(location.search).get('s_'));
-  var get_l_ = parseInt(new URLSearchParams(location.search).get('l_'));
-
-  if (isNaN(hue)) {
-    location.search = "?hue=0";
-  }
-  if (hue > 360) {
-    location.search = "?hue=" + (hue - 360) + "&s_="+get_s_+"&l_="+get_l_;
-  }
-  if (hue < 0) {
-    location.search = "?hue=" + (hue + 360) + "&s_="+get_s_+"&l_="+get_l_;
-  }
-
-  value_h.innerText = hue;
-
-  function share_fill(x, y) {
-    value_s.innerText = x;
-    value_l.innerText = y;
-    share_title.style.backgroundColor = "hsl(" + hue + ", " + x + "%, " + y + "%)";
-    if (hue > 200 && hue < 280) {
-      if (y < 50 + 0.16*x) {
-        share_title.style.color = "white";
-      } else {
-        share_title.style.color = "black";
-      }
-    } else {
-      if (y < 50 - 0.16*x) {
-        share_title.style.color = "white";
-      } else {
-        share_title.style.color = "black";
-      }
-    }
-  }
-  share_fill(0,0);
-
-  function _share_action() {
-    var t = document.createElement("textarea");
-    document.body.appendChild(t);
-    t.value = location.origin + location.pathname + "?hue="+hue+"&s="+(value_s.innerText/6.25)+"&l="+(value_l.innerText/6.25);
-    t.select();
-    document.execCommand("Copy");
-    document.body.removeChild(t);
-    alert("복사됐습니다");
-  }
-
-  function tag_(s,l,c) {
-    document.getElementById(s+'_'+l).innerText = c;
-    document.getElementById('full_'+s+'_'+l).innerText = c;
-  }
-  switch (true) {
-    case (hue < 18):
-    temperature.innerText = "W";
-    break;
-    case (hue < 47):
-    temperature.innerText = "N";
-    break;
-    case (hue < 62):
-    temperature.innerText = "W";
-    break;
-    case (hue < 81):
-    temperature.innerText = "C";
-    break;
-    case (hue < 164):
-    temperature.innerText = "W";
-    break;
-    case (hue < 187):
-    temperature.innerText = "C";
-    break;
-    case (hue < 237):
-    temperature.innerText = "W";
-    break;
-    case (hue < 242):
-    temperature.innerText = "N";
-    break;
-    case (hue < 273):
-    temperature.innerText = "C";
-    break;
-    case (hue < 290):
-    temperature.innerText = "W";
-    break;
-    case (hue < 322):
-    temperature.innerText = "C";
-    break;
-    case (hue < 332):
-    temperature.innerText = "C";
-    break;
-    case (hue < 341):
-    temperature.innerText = "W";
-    break;
-    case (hue < 351):
-    temperature.innerText = "N";
-    break;
-    default:
-    temperature.innerText = "C";
-  }
-
-  // 색상값 설정
-  box_title.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
-  title_image.style.backgroundColor = "hsl(" + hue + ", 50%, 66%)";
-  // title_image.style.color = "hsl(" + hue + ", 50%, 50%)";
-  document.getElementById('title').style.color = "hsl(" + hue + ", 50%, 20%)";
-
-  box_controler.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
-  temperature.style.backgroundColor = "hsl(" + hue + ", 50%, 66%)";
-  // temperature.style.color = "hsl(" + hue + ", 50%, 50%)";
-
-  upup.style.backgroundColor = "hsl(" + (hue + 30) + ", 66%, 66%)";
-  up.style.backgroundColor = "hsl(" + (hue + 15) + ", 66%, 66%)";
-  down.style.backgroundColor = "hsl(" + (hue - 15) + ", 66%, 66%)";
-  downdown.style.backgroundColor = "hsl(" + (hue - 30) + ", 66%, 66%)";
-
-  for (var s = 0; s < 16; s++) {
-    for (var l = 0; l < 16; l++) {
-      var s_ = s + 1;
-      var l_ = 16 - l;
-      var s_16 = s_.toString(16);
-      var l_16 = l_.toString(16);
-      var s_100 = s_ * 6.25;
-      var l_100 = l_ * 6.25;
-      var color_gen = "hsl("+hue+"," + s_100 + "%," + l_100 + "%)";
-      var target = document.getElementById(s_16 + '_' + l_16);
-      box_popup.innerHTML += "<div id='full_"+s_16+"_"+l_16+"' onclick='close_popup(\""+s_16+"\",\""+l_16+"\")'></div>";
-      target.style.backgroundColor = color_gen;
-      var target_ = document.getElementById('full_' + s_16 + '_' + l_16);
-      target_.style.backgroundColor = color_gen;
-      if (hue > 200 && hue < 300) {
-        if (l_100 < 50 + 0.16*s_100) {
-          target.style.color = "white";
-          target_.style.color = "white";
-        }
-      } else {
-        if (l_100 < 50 - 0.16*s_100) {
-          target.style.color = "white";
-          target_.style.color = "white";
-        }
-      }
-      switch (true) {
-        case (Math.pow(s_ - 5*(16/36), 2) + Math.pow(l_ - 1,2) < 1):
-        tag_(s_16,l_16,'dkg');
-        break;
-        case (Math.pow(s_ - 5*(16/36), 2) + Math.pow(l_ - 5,2) < 1):
-        tag_(s_16,l_16,'g');
-        break;
-        case (Math.pow(s_ - 5*(16/36), 2) + Math.pow(l_ - 11,2) < 1):
-        tag_(s_16,l_16,'ltg');
-        break;
-        case (Math.pow(s_ - 10*(16/36), 2) + Math.pow(1/1.5,2)*Math.pow(l_ - 14,2) < 1):
-        tag_(s_16,l_16,'p');
-        break;
-        case (Math.pow(s_ - 18*(16/36), 2) + Math.pow(1/2,2)*Math.pow(l_ - 3,2) < 1):
-        tag_(s_16,l_16,'dk');
-        break;
-        case (Math.pow(s_ - 18*(16/36), 2) + Math.pow(1/2.5,2)*Math.pow(l_ - 6.5,2) < 1):
-        tag_(s_16,l_16,'d');
-        break;
-        case (Math.pow(s_ - 18*(16/36), 2) + Math.pow(1/2.5,2)*Math.pow(l_ - 9.5,2) < 1):
-        tag_(s_16,l_16,'sf');
-        break;
-        case (Math.pow(s_ - 22*(16/36), 2) + Math.pow(1/2.5,2)*Math.pow(l_ - 11.5,2) < 1):
-        tag_(s_16,l_16,'lt');
-        break;
-        case (Math.pow(s - 30*(16/36), 2) + Math.pow(1/3,2)*Math.pow(l - 10,2) < 1):
-        tag_(s_16,l_16,'b');
-        break;
-        case (Math.pow(s - 30*(16/36), 2) + Math.pow(1/3,2)*Math.pow(l - 5,2) < 1):
-        tag_(s_16,l_16,'dp');
-        break;
-        case (Math.pow(s - 34*(16/36), 2) + Math.pow(1/4.5,2)*Math.pow(l - 8.5,2) < 1):
-        tag_(s_16,l_16,'v');
-        break;
-        default:
-      }
-    }
-  }
-
-  upup.onclick = function() {
-    location.search = "?hue=" + (hue + 10) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
-  }
-  up.onclick = function() {
-    location.search = "?hue=" + (hue + 5) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
-  }
-  down.onclick = function() {
-    location.search = "?hue=" + (hue - 5) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
-  }
-  downdown.onclick = function() {
-    location.search = "?hue=" + (hue - 10) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
-  }
-
-  function open_popup(x,y) {
-    share_fill(Number.parseInt(x, 16)*6.25, Number.parseInt(y, 16)*6.25);
-    var get_popup = document.getElementById('full_'+x+'_'+y);
-    get_popup.style.display = "flex";
-    if (!isNaN(get_popup.innerText)) {
-      get_popup.style.fontSize = "1rem";
-      get_popup.innerText = "hsl("+hue+", "+(Number.parseInt(x, 16)*6.25)+"%, "+(Number.parseInt(y, 16)*6.25)+"%)";
-    }
-  }
-  function close_popup(s, l) {
-    document.getElementById('full_'+s+'_'+l).style.display = "none";
-  }
-
-  if (!isNaN(get_s) && !isNaN(get_l)) {
-    open_popup(get_s.toString(16), get_l.toString(16));
-  }
-  if (!isNaN(get_s_) && !isNaN(get_l_)) {
-    share_fill(get_s_*6.25, get_l_*6.25);
-  }
-  </script>
 </body>
 </html>

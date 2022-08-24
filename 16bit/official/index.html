@@ -3,64 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../pccs.css">
+  <link rel="stylesheet" href="../../pccs.css">
   <style media="screen">
-  @media ( max-width: 459px ) {
-    .s1, .l1 {
-      display: none !important;
-    }
-    .palette-grid {
-      grid-template-columns: repeat(15, 28px);
-      grid-template-rows: repeat(15, 28px);
-    }
-  }
-  @media ( max-width: 432px ) {
-    .s16, .l16 {
-      display: none !important;
-    }
-    .palette-grid {
-      grid-template-columns: repeat(14, 28px);
-      grid-template-rows: repeat(14, 28px);
-    }
-  }
-  @media ( max-width: 405px ) {
-    .s2, .l2 {
-      display: none !important;
-    }
-    .palette-grid {
-      grid-template-columns: repeat(13, 28px);
-      grid-template-rows: repeat(13, 28px);
-    }
-  }
-  @media ( max-width: 378px ) {
-    .s3, .l3 {
-      display: none !important;
-    }
-    .palette-grid {
-      grid-template-columns: repeat(12, 28px);
-      grid-template-rows: repeat(12, 28px);
-    }
+  .palette-grid {
+    overflow: scroll;
+    justify-content: flex-start;
+    grid-template: repeat(20, 28px) / repeat(20, 28px);
   }
   </style>
-  <title>16x16 Square | PCCS Palette</title>
+  <title>20x20 Square | PCCS Palette</title>
 </head>
 <body>
-  <script type="text/javascript">
-  if (window.innerWidth > 27*32) {
-    location.href = "../32bit";
-  }
-  </script>
   <header id="title_bar">
     <div id="title_image">N</div>
-    <div id="title">PCCS Palette [16x16]</div>
+    <div id="title">PCCS Palette [20x20]</div>
     <a id="developer" href="mailto:05frill_whirl@icloud.com">제작자</a>
   </header>
-  <main id="palette" class="palette-grid">
+  <main class="palette-grid">
     <script type="text/javascript">
-    for (var l = 0; l < 16; l++) {
-      for (var s = 0; s < 16; s++) {
-        var s_ = s + 1;
-        var l_ = 16 - l;
+    for (var l = 0; l < 20; l++) {
+      for (var s = 0; s < 20; s++) {
+        var s_ = s;
+        var l_ = 20 - l;
         var s_16 = s_.toString(16);
         var l_16 = l_.toString(16);
         document.write('<div id="'+s_16+'_'+l_16+'" class="s'+s_+' l'+l_+'" onclick="open_popup(\''+s_16+'\',\''+l_16+'\')"></div>');
@@ -104,11 +68,11 @@
     <div id="popup"></div>
   </main>
   <footer>
-    <a href="https://gall.dcinside.com/p_color/78192" target="_blank">→ Reference 1</a>
-    <a href="https://gall.dcinside.com/p_color/99569" target="_blank">→ Reference 2</a>
+    <a href="https://gall.dcinside.com/p_color/99569" target="_blank">→ 웜/쿨 참조</a>
   </footer>
   <script type="text/javascript">
   const box_title = document.getElementById('title_bar');
+  const box_title_image = document.getElementById('title_image');
   const box_controler = document.getElementById('controler');
   const box_popup = document.getElementById('popup');
   const box_value_h = document.getElementById('value_h');
@@ -125,7 +89,7 @@
   if (isNaN(hue)) {
     location.search = "?hue=0";
   }
-  if (hue > 360) {
+  if (hue >= 360) {
     location.search = "?hue=" + (hue - 360) + "&s_="+get_s_+"&l_="+get_l_;
   }
   if (hue < 0) {
@@ -138,7 +102,7 @@
     value_s.innerText = x;
     value_l.innerText = y;
     share_title.style.backgroundColor = "hsl(" + hue + ", " + x + "%, " + y + "%)";
-    if (hue > 200 && hue < 280) {
+    if (hue >= 200 && hue < 300) {
       if (y < 50 + 0.16*x) {
         share_title.style.color = "white";
       } else {
@@ -163,6 +127,7 @@
     document.body.removeChild(t);
     alert("복사됐습니다");
   }
+
   switch (true) {
     case (hue < 55):
     title_image.innerText = "W";
@@ -194,8 +159,8 @@
 
   // 색상값 설정
   box_title.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
-  title_image.style.backgroundColor = "hsl(" + hue + ", 50%, 20%)";
-  title_image.style.color = "hsl(" + hue + ", 50%, 50%)";
+  box_title_image.style.backgroundColor = "hsl(" + hue + ", 50%, 20%)";
+  box_title_image.style.color = "hsl(" + hue + ", 50%, 50%)";
   document.getElementById('title').style.color = "hsl(" + hue + ", 50%, 20%)";
   box_controler.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
 
@@ -204,28 +169,103 @@
   down.style.backgroundColor = "hsl(" + (hue - 15) + ", 66%, 66%)";
   downdown.style.backgroundColor = "hsl(" + (hue - 30) + ", 66%, 66%)";
 
-  for (var i = 0; i < 16; i++) {
-    for (var j = 0; j < 16; j++) {
-      var i_ = i + 1;
-      var j_ = 16 - j;
-      var i_16 = i_.toString(16);
-      var j_16 = j_.toString(16);
-      var color_gen = "hsl("+hue+","+(i_ * 6.25)+"%,"+(j_ * 6.25)+"%)";
-      var target = document.getElementById(i_16 + '_' + j_16);
-      box_popup.innerHTML += "<div id='full_"+i_16+"_"+j_16+"' onclick='close_popup(\""+i_16+"\",\""+j_16+"\")'></div>";
+  for (var s = 0; s < 20; s++) {
+    for (var l = 0; l < 20; l++) {
+      var s_ = s;
+      var l_ = 20 - l;
+      var s_16 = s_.toString(16);
+      var l_16 = l_.toString(16);
+      // var s_100 = s_ * 6.25;
+      var s_100 = s_ * 5;
+      // var l_100 = l_ * 6.25;
+      var l_100 = l_ * 5;
+      var color_gen = "hsl("+hue+","+s_100+"%,"+l_100+"%)";
+      var target = document.getElementById(s_16 + '_' + l_16);
       target.style.backgroundColor = color_gen;
-      var target_ = document.getElementById('full_' + i_16 + '_' + j_16);
+      box_popup.innerHTML += "<div id='full_"+s_16+"_"+l_16+"' onclick='close_popup(\""+s_16+"\",\""+l_16+"\")'></div>";
+      var target_ = document.getElementById('full_' + s_16 + '_' + l_16);
       target_.style.backgroundColor = color_gen;
+      // if (s == 0) {
+      // target.innerText = l_100;
+      // }
+      // if (l == 0) {
+      // target.innerText = s_100;
+      // }
       if (hue > 205 && hue < 290) {
-        if (j_ < 8 + 0.16*i_) {
+        if (l_ < 8 + 0.16*s_) {
           target.style.color = "white";
           target_.style.color = "white";
         }
       } else {
-        if (j_ < 8 - 0.16*i_) {
+        if (l_ < 8 - 0.16*s_) {
           target.style.color = "white";
           target_.style.color = "white";
         }
+      }
+      switch (true) {
+        case (hue < 36):
+        switch (true) {
+          case (s_100 >= 44) && (s_100 <= 51) && (l_100 >= 80) && (l_100 <= 85):
+          target.innerText = 'p';
+          target_.innerText = 'pale';
+          break;
+          case (s_100 >= 14) && (s_100 <= 19) && (l_100 >= 70) && (l_100 <= 70):
+          target.innerText = 'ltg';
+          target_.innerText = 'light grayish';
+          break;
+          case (s_100 >= 5) && (s_100 <= 11) && (l_100 >= 39) && (l_100 <= 46):
+          target.innerText = 'g';
+          target_.innerText = 'grayish';
+          break;
+          case (s_100 >= 5) && (s_100 <= 13) && (l_100 >= 24) && (l_100 <= 30):
+          target.innerText = 'dkg';
+          target_.innerText = 'dark grayish';
+          break;
+          case (s_100 >= 20) && (s_100 <= 85) && (l_100 >= 55) && (l_100 <= 77):
+          target.innerText = 'lt';
+          target_.innerText = 'light';
+          break;
+          case (s_100 >= 12) && (s_100 <= 52) && (l_100 >= 53) && (l_100 <= 67):
+          target.innerText = 'sf';
+          target_.innerText = 'soft';
+          break;
+          case (s_100 >= 13) && (s_100 <= 34) && (l_100 >= 38) && (l_100 <= 53):
+          target.innerText = 'd';
+          target_.innerText = 'dull';
+          break;
+          case (s_100 >= 16) && (s_100 <= 44) && (l_100 >= 24) && (l_100 <= 35):
+          target.innerText = 'dk';
+          target_.innerText = 'dark';
+          break;
+          default:
+        }
+        break;
+        case (hue < 72):
+
+        break;
+        case (hue < 108):
+
+        break;
+        case (hue < 144):
+
+        break;
+        case (hue < 180):
+
+        break;
+        case (hue < 216):
+
+        break;
+        case (hue < 252):
+
+        break;
+        case (hue < 288):
+
+        break;
+        case (hue < 324):
+
+        break;
+        default:
+
       }
     }
   }
@@ -242,131 +282,23 @@
   downdown.onclick = function() {
     location.search = "?hue=" + (hue - 10) + "&s_="+value_s.innerText/6.25+"&l_=" + value_l.innerText/6.25;
   }
+
   function tag_(s,l,c) {
     document.getElementById(s+'_'+l).innerText = c;
     document.getElementById('full_'+s+'_'+l).innerText = c;
   }
 
-  tag_('4','4','dkg');
-  tag_('5','4','dkg');
-  tag_('6','4','dkg');
-  tag_('7','4','dkg');
-  tag_('8','4','dkg');
-  tag_('b','4','dk:dkg');
-  tag_('c','4','dk:dkg');
-  tag_('e','4','dk');
-  tag_('f','4','dk');
-  tag_('10','4','dk');
-
-  tag_('4','5','g:dkg');
-  tag_('5','5','g:dkg');
-  tag_('6','5','g:dkg');
-  tag_('a','5','d');
-  tag_('b','5','d');
-  tag_('c','5','d:dk');
-  tag_('d','5','d:dk');
-  tag_('e','5','dp:dk');
-  tag_('f','5','dp:dk');
-  tag_('10','5','dp:dk');
-
-  tag_('4','6','g');
-  tag_('5','6','g');
-  tag_('6','6','g');
-  tag_('7','6','g');
-  tag_('8','6','d:g');
-  tag_('9','6','d');
-  tag_('a','6','d');
-  tag_('b','6','d');
-  tag_('c','6','d:dp');
-  tag_('d','6','dp');
-  tag_('e','6','dp');
-  tag_('f','6','dp');
-
-  tag_('4','7','g');
-  tag_('5','7','g');
-  tag_('6','7','g');
-  tag_('8','7','d:g');
-  tag_('9','7','d');
-  tag_('a','7','d');
-  tag_('d','7','s:dp');
-  tag_('e','7','s:dp');
-  tag_('10','7','v:dp');
-
-  tag_('4','8','ltg:g');
-  tag_('5','8','ltg:g');
-  tag_('8','8','sf:d');
-  tag_('9','8','sf:d');
-  tag_('a','8','sf:d');
-  tag_('b','8','sf:s:d');
-  tag_('c','8','s');
-  tag_('d','8','s');
-  tag_('e','8','s');
-  tag_('f','8','v');
-  tag_('10','8','v');
-
-  tag_('4','9','ltg:g');
-  tag_('5','9','ltg:g');
-  tag_('9','9','sf');
-  tag_('a','9','sf');
-  tag_('b','9','sf:s');
-  tag_('c','9','');
-  tag_('d','9','b:s');
-  tag_('e','9','b:s');
-  tag_('10','9','b:v');
-
-  tag_('8','a','ltg:sf');
-  tag_('9','a','sf');
-  tag_('a','a','sf');
-  tag_('b','a','sf');
-  tag_('c','a','sf:b');
-  tag_('d','a','b');
-  tag_('e','a','b');
-  tag_('f','a','b');
-
-  tag_('5','b','ltg');
-  tag_('6','b','ltg');
-  tag_('7','b','ltg');
-  tag_('9','b','ltg:sf');
-  tag_('a','b','sf');
-  tag_('b','b','sf');
-  tag_('c','b','l:sf');
-  tag_('e','b','l:b');
-  tag_('f','b','l:b');
-  tag_('10','b','l:b');
-
-  tag_('5','c','ltg');
-  tag_('6','c','ltg');
-  tag_('7','c','ltg');
-  tag_('8','c','ltg');
-  tag_('d','c','l:sf');
-  tag_('e','c','l');
-  tag_('f','c','l');
-  tag_('10','c','l');
-
-  tag_('8','d','p:lg');
-  tag_('9','d','p:lg');
-  tag_('d','d','p:l');
-  tag_('e','d','p:l');
-
-  tag_('9','e','p:lg');
-  tag_('b','e','p');
-  tag_('c','e','p');
-  tag_('d','e','p');
-  tag_('e','e','p');
-  tag_('f','e','p');
-
-  tag_('6','f','(vp)');
-  tag_('7','f','(vp)');
-  tag_('8','f','(vp)');
-  tag_('9','f','(vp)');
-
-  function open_popup(x,y) {
-    share_fill(Number.parseInt(x, 16)*6.25, Number.parseInt(y, 16)*6.25);
-    var get_popup = document.getElementById('full_'+x+'_'+y);
+  function open_popup(s, l) {
+    var s_ = Number.parseInt(s, 16);
+    var l_ = Number.parseInt(l, 16);
+    var s_100 = s_ * 5;
+    var l_100 = l_ * 5;
+    share_fill(s_100, l_100);
+    var get_popup = document.getElementById('full_'+s+'_'+l);
     get_popup.style.display = "flex";
     if (!isNaN(get_popup.innerText)) {
       get_popup.style.fontSize = "1rem";
-      get_popup.innerText = "hsl("+hue+", "+(Number.parseInt(x, 16)*6.25)+"%, "+(Number.parseInt(y, 16)*6.25)+"%)";
+      get_popup.innerText = "hsl("+hue+", "+s_100+"%, "+l_100+"%)";
     }
   }
   function close_popup(x,y) {
